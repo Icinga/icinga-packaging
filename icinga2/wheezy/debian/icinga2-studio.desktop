@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Icinga 2 Studio
+Comment=API viewer for Icinga 2
+TryExec=icinga-studio
+Exec=icinga-studio
+Icon=/usr/share/icinga2-studio/icinga.ico
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GTK;Utility;
+Keywords=Monitoring;

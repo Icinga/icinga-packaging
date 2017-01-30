@@ -1,0 +1,8 @@
+debian/config/apt.conf        etc/icinga2/conf.d
+debian/tmp/etc/icinga2
+debian/tmp/etc/logrotate.d
+tools/syntax/nano/icinga2.nanorc usr/share/nano
+usr/share/icinga2
+etc/sysconfig/icinga2 usr/lib/icinga2
+usr/lib/icinga2/prepare-dirs
+usr/lib/icinga2/safe-reload

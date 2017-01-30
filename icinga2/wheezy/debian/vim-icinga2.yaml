@@ -1,0 +1,5 @@
+addon: icinga2
+description: "Syntax highlighting for Icinga 2"
+files:
+  - ftdetect/icinga2.vim
+  - syntax/icinga2.vim

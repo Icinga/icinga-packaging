@@ -1,0 +1,315 @@
+Source: icinga2
+Section: admin
+Priority: extra
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Uploaders: Markus Frosch <lazyfrosch@debian.org>,
+           Jan Wagner <waja@cyconet.org>,
+           Alexander Wirt <formorer@debian.org>
+Build-Depends: bash-completion,
+               bison,
+               cmake (>= 2.8.7),
+               pkg-config,
+               debhelper (>= 9),
+               flex,
+               g++ (>= 1.96),
+               libboost-dev,
+               libboost-program-options-dev,
+               libboost-regex-dev,
+               libboost-system-dev,
+               libboost-test-dev,
+               libboost-thread-dev,
+               libmysqlclient-dev,
+               libpq-dev,
+               libssl-dev,
+               libyajl-dev,
+               libedit-dev,
+# not on wheezy:               libwxgtk3.0-dev,
+               make (>= 3.81),
+               po-debconf
+Standards-Version: 3.9.8
+Homepage: http://www.icinga.org
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-nagios/pkg-icinga2.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-nagios/pkg-icinga2.git
+
+Package: icinga2
+Architecture: any
+Depends: icinga2-bin (= ${binary:Version}),
+         icinga2-common (= ${source:Version}),
+         ${misc:Depends}
+Recommends: icinga2-doc (= ${binary:Version}), monitoring-plugins-basic | nagios-plugins-basic, libreadline6
+Suggests: icinga2-studio, vim-icinga2
+Description: host and network monitoring system
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This is the metapackage to install all Icinga 2 features.
+
+Package: icinga2-common
+Architecture: all
+Replaces: python-icinga2
+Conflicts: python-icinga2
+Provides: python-icinga2
+Depends:
+    adduser,
+    lsb-release,
+    lsb-base,
+    ${misc:Depends}
+Recommends: logrotate
+Description: host and network monitoring system - common files
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides configuration and some basic helper scripts.
+
+Package: icinga2-bin
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: icinga2-common (= ${source:Version}),
+         libicinga2 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Description: host and network monitoring system - daemon
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides the Icinga 2 daemon.
+
+Package: icinga2-doc
+Architecture: all
+Section: doc
+Depends: ${misc:Depends}
+Description: host and network monitoring system - documentation
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides the Icinga 2 documentation.
+
+Package: icinga2-classicui
+Architecture: all
+Pre-Depends: dpkg (>= 1.15.7.2)
+Depends: apache2-utils,
+         icinga-cgi-bin (>= 1.11.5~),
+         icinga2-bin (>= 2.2.0~),
+         icinga2-common (= ${source:Version}),
+         ${misc:Depends}
+Recommends: apache2 | httpd
+Description: host and network monitoring system - classic UI
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides support for the Icinga Classic User Interface.
+
+Package: icinga2-ido-mysql
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Conflicts: icinga2-ido-pgsql
+Depends: dbconfig-common,
+         icinga2-bin (= ${binary:Version}),
+         icinga2-common (= ${source:Version}),
+         ucf,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: default-mysql-client | mysql-client | virtual-mysql-client
+Suggests: default-mysql-server | mysql-server
+Description: host and network monitoring system - MySQL support
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides the IDO module for the MySQL database.
+
+Package: icinga2-ido-pgsql
+Architecture: any
+Conflicts: icinga2-ido-mysql
+Pre-Depends: ${misc:Pre-Depends}
+Depends: dbconfig-common,
+         icinga2-bin (= ${binary:Version}),
+         icinga2-common (= ${source:Version}),
+         ucf,
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: postgresql-client
+Suggests: postgresql
+Description: host and network monitoring system - PostgreSQL support
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides the IDO module for the PostgreSQL database.
+
+Package: icinga2-dbg
+Architecture: any
+Section: debug
+Depends: icinga2-bin (= ${binary:Version}),
+         libicinga2 (= ${binary:Version}),
+         ${misc:Depends}
+Description: host and network monitoring system - debug symbols
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides debug symbols for Icinga 2.
+
+Package: libicinga2
+Architecture: any
+Section: libs
+Breaks: icinga2-bin (<< 2.4.0-1~)
+Replaces: icinga2-bin (<< 2.4.0-1~)
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: host and network monitoring system - internal libraries
+ Icinga 2 is a general-purpose monitoring application to fit the needs of
+ any size of network. Icinga 1.x was a Nagios fork; this new generation
+ has been rewritten from scratch in C++, with multi-threading and cluster
+ support.
+ .
+ Features:
+  * all standard features of Icinga and Nagios;
+  * much faster and more scalable than Icinga 1 and Nagios;
+  * new, more intuitive, template-based configuration format;
+  * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+    SMTP, etc.) by executing checks (see monitoring-plugins*);
+  * any small script following the Nagios plugin API can be used as a
+    check plugin;
+  * notifications about alerts for any custom script (with examples);
+  * native support for Livestatus and Graphite.
+ .
+ This package provides internal libraries for the daemon or studio.
+
+# Package: icinga2-studio
+# Architecture: any
+# Pre-Depends: ${misc:Pre-Depends}
+# Depends: libicinga2 (= ${binary:Version}),
+#          ${misc:Depends},
+#          ${shlibs:Depends}
+# Description: host and network monitoring system - studio API GUI
+#  Icinga 2 is a general-purpose monitoring application to fit the needs of
+#  any size of network. Icinga 1.x was a Nagios fork; this new generation
+#  has been rewritten from scratch in C++, with multi-threading and cluster
+#  support.
+#  .
+#  Features:
+#   * all standard features of Icinga and Nagios;
+#   * much faster and more scalable than Icinga 1 and Nagios;
+#   * new, more intuitive, template-based configuration format;
+#   * monitoring services on ICMP (ping) or TCP ports (HTTP, NNTP, POP3,
+#     SMTP, etc.) by executing checks (see monitoring-plugins*);
+#   * any small script following the Nagios plugin API can be used as a
+#     check plugin;
+#   * notifications about alerts for any custom script (with examples);
+#   * native support for Livestatus and Graphite.
+#  .
+#  This package provides a GUI for the Icinga 2 API.
+
+Package: vim-icinga2
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: vim-addon-manager
+Description: syntax highlighting for Icinga 2 config files in VIM
+ The vim-icinga2 package provides filetype detection and syntax
+ highlighting for Icinga 2 config files.
+ .
+ As per the Debian vim policy, installed addons are not activated
+ automatically, but the "vim-addon-manager" tool can be used for this
+ purpose.

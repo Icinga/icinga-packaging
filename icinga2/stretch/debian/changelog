@@ -1,0 +1,486 @@
+icinga2 (2.6.0-2) unstable; urgency=medium
+
+  * [e0f34e4] Add patch 41_ido_mysql57 - for compatibility with MySQL 5.7
+  * [6512d11] Remove obsolete patch 30_use_libmysql (empty)
+  * [16e341b] Recommend default-mysql-{server,client}
+  * [749f1fa] Adding missing dependency on lsb-base
+  * [4ed1e10] Update initscript to ignore SIGPIPE in daemon
+  * [5c10b76] Add patch 42_mips_boost_bind_workaround
+  * [86a23e5] makeshlibs: no scripts, we don't export shared libraries
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 19 Dec 2016 16:13:45 +0100
+
+icinga2 (2.6.0-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [4e44b28] New upstream version 2.6.0
+    - Fix unittests (Closes: #838358)
+
+  [ Gunnar Beutner ]
+  * [de73edf] Add support for versioned private libraries
+
+ -- Alexander Wirt <formorer@debian.org>  Tue, 13 Dec 2016 13:11:05 +0100
+
+icinga2 (2.5.4-3) unstable; urgency=medium
+
+  * [e09f7d4] Link against libmysqlclient (Closes: #825079)
+
+ -- Alexander Wirt <formorer@debian.org>  Sat, 26 Nov 2016 17:00:09 +0100
+
+icinga2 (2.5.4-2) unstable; urgency=medium
+
+  * [f749f15] Disable unity builds for arm
+  * [33face7] Disable unity builds for mips and mipsel 
+    (Closes: #836589)
+
+ -- Alexander Wirt <formorer@debian.org>  Fri, 09 Sep 2016 08:59:57 +0200
+
+icinga2 (2.5.4-1) unstable; urgency=medium
+
+  * [7cf17d9] Recommend specific icinga-doc version
+  * [d2c5d89] New upstream version 2.5.4
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 31 Aug 2016 10:31:34 +0200
+
+icinga2 (2.5.3-1) unstable; urgency=medium
+
+  * [6cd83c4] Imported Upstream version 2.5.3
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 25 Aug 2016 13:11:20 +0200
+
+icinga2 (2.5.1-1) unstable; urgency=medium
+
+  [ Markus Frosch ]
+  * [4dd5a4c] Update source TODO
+
+  [ Alexander Wirt ]
+  * [7225af7] Include environment file
+  * [15c6c98] Imported Upstream version 2.5.0
+              Fix FTBFS with OpenSSL 1.1.0 (Closes: #828347)
+  * [990c22b] Add swedish po templates (Closes: #822101)
+  * [d0a6d59] Explicitly set permissions on /etc/icinga2/pki (Closes: #824482)
+  * [ee12097] Add a stricter umask to service file (Closes: #827338)
+  * [0ad33c8] Add enviromentfile from /usr/lib (Closes: #831794)
+  * [063c582] Add build-dep for pkg-config to ease backporting (Closes: #831357)
+  * [792b520] Imported Upstream version 2.5.1
+
+ -- Alexander Wirt <alexander.wirt@credativ.de>  Tue, 23 Aug 2016 17:17:24 +0200
+
+icinga2 (2.4.10-1) unstable; urgency=medium
+
+  * [c5525bc] Imported Upstream version 2.4.10
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 19 May 2016 13:41:17 +0200
+
+icinga2 (2.4.9-1) unstable; urgency=medium
+
+  * [71d8006] Imported Upstream version 2.4.9
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 19 May 2016 11:30:53 +0200
+
+icinga2 (2.4.8-1) unstable; urgency=medium
+
+  * [c734d9e] Imported Upstream version 2.4.8
+
+ -- Alexander Wirt <alexander.wirt@credativ.de>  Tue, 17 May 2016 13:23:10 +0200
+
+icinga2 (2.4.7-1) unstable; urgency=medium
+
+  * Imported Upstream version 2.4.7
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 21 Apr 2016 18:35:07 +0200
+
+icinga2 (2.4.6-1) unstable; urgency=medium
+
+  * Imported Upstream version 2.4.6
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 20 Apr 2016 18:57:22 +0200
+
+icinga2 (2.4.5-1) unstable; urgency=medium
+
+  * [26a7374] Imported Upstream version 2.4.5
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 20 Apr 2016 13:09:03 +0200
+
+icinga2 (2.4.4-1) unstable; urgency=medium
+
+  * [a2d01fb] Imported Upstream version 2.4.4
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 16 Mar 2016 12:10:49 +0100
+
+icinga2 (2.4.3-1) unstable; urgency=medium
+
+  * [39ba8d6] Imported Upstream version 2.4.3
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Wed, 24 Feb 2016 16:13:18 +0100
+
+icinga2 (2.4.2-1) unstable; urgency=medium
+
+  * [3584c36] Imported Upstream version 2.4.2
+  * [89ee45e] Bump standards version to 3.9.7
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 23 Feb 2016 16:30:32 +0100
+
+icinga2 (2.4.1-2) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [09024ca] Fail on reload if daemon isn't running
+
+  [ Markus Frosch ]
+  * [dafe178] Fix rules for binary-{arch,indep} (Closes: #806623)
+  * [522fca2] Add vim-icinga2 syntax package
+  * [9261421] Don't install all the syntax files with icinga2-common
+  * [b4f5917] Install nanorc properly with icinga2-common
+  * [89b3a4a] Move bash-completion to /usr/share
+  * [53e9965] Remove obsolete menu file for icinga2-studio
+  * [108f078] Update lintian-overrides for icinga2-classicui
+  * [5a824b1] Update VCS URLs to secure
+  * [6222da3] Update copyright
+  * [ee74d47] Remove features-enabled on purge
+  * [ccb8bbe] Enable verbose cmake output for build log validation
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Thu, 04 Feb 2016 16:55:46 +0100
+
+icinga2 (2.4.1-1) unstable; urgency=medium
+
+  * [9725e3c] Add proper conflicts and replaces from icinga2-bin to libicinga2
+    (Closes: #806146)
+  * [7b31eda] Imported Upstream version 2.4.1
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 26 Nov 2015 12:51:07 +0100
+
+icinga2 (2.4.0-1) unstable; urgency=medium
+
+  [ Gunnar Beutner ]
+  * Add Build-Depends for libedit and add Recommends for libreadline6
+  * Revert "Run 'api setup' in post install task for icinga2-bin"
+
+  [ Michael Friedrich ]
+  * Run 'api setup' in post install task for icinga2-bin
+
+  [ Markus Frosch ]
+  * Add icinga2-studio package for Icinga 2.4
+
+  [ Alexander Wirt ]
+  * change application name for icinga studio
+  * Imported Upstream version 2.4.0
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 16 Nov 2015 11:25:14 +0100
+
+icinga2 (2.3.11-1) unstable; urgency=medium
+
+  * [b9e26af] Change ido database name/user to icinga2 for new installations
+  * [6d4fa9d] Imported Upstream version 2.3.11
+
+ -- Alexander Wirt <formorer@debian.org>  Tue, 20 Oct 2015 09:08:18 +0200
+
+icinga2 (2.3.10-1) unstable; urgency=medium
+
+  * [129f6ea] Imported Upstream version 2.3.10
+  * [173da67] Merge systemd service file with upstreams implementation
+
+ -- Alexander Wirt <formorer@debian.org>  Sun, 06 Sep 2015 21:29:12 +0200
+
+icinga2 (2.3.9-1) unstable; urgency=medium
+
+  * [a03c364] Imported Upstream version 2.3.9
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 27 Aug 2015 12:30:21 +0200
+
+icinga2 (2.3.8-1) unstable; urgency=medium
+
+  * [0f463b5] Imported Upstream version 2.3.8
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 20 Jul 2015 21:24:42 +0200
+
+icinga2 (2.3.7-1) unstable; urgency=medium
+
+  * [c4d8f2b] Really enable ido-pgsql if we have to
+  * [35c654e] Allow nagios group to write/remove perfdata
+  * [0fff36a] Imported Upstream version 2.3.7
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 15 Jul 2015 11:41:51 +0200
+
+icinga2 (2.3.6-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [7eaa5f9] Imported Upstream version 2.3.6
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 08 Jul 2015 10:57:35 +0200
+
+icinga2 (2.3.5-1) unstable; urgency=medium
+
+  * [64334db] Imported Upstream version 2.3.5
+  * [afffeeb] Remove obsolete patches
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 17 Jun 2015 14:48:59 +0200
+
+icinga2 (2.3.4-3) unstable; urgency=medium
+
+  * [392a0bf] Add patch to fix broken postrotate script
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 22 Apr 2015 09:42:11 +0200
+
+icinga2 (2.3.4-2) unstable; urgency=medium
+
+  * [54904c5] Fix upstream version in icinga2 --version
+  * [3bb3712] Add first autopkgtest (dep8) support
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 20 Apr 2015 17:19:39 +0200
+
+icinga2 (2.3.4-1) unstable; urgency=medium
+
+  [ Achim Ledermüller ]
+  * [8009d66] Specify pidfile for status_of_proc in the init script
+
+  [ Alexander Wirt ]
+  * [2a5d1cb] Remove obsolete logrotate_use_service patch
+  * [43b9dd6] Imported Upstream version 2.3.4
+  * [be9777c] Recommend logrotate in icinga2-common
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 20 Apr 2015 13:16:16 +0200
+
+icinga2 (2.3.3-1) unstable; urgency=medium
+
+  * [8870a28] Imported Upstream version 2.3.3
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 26 Mar 2015 11:43:11 +0100
+
+icinga2 (2.3.2-1) unstable; urgency=medium
+
+  * [d4e0ec3] Imported Upstream version 2.3.2
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 12 Mar 2015 16:05:24 +0100
+
+icinga2 (2.3.1-1) unstable; urgency=medium
+
+  * [2927737] Create /var/log/icinga2/crash
+  * [730bfc7] Imported Upstream version 2.3.1
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 12 Mar 2015 15:05:34 +0100
+
+icinga2 (2.3.0-1) unstable; urgency=medium
+
+  [ Gunnar Beutner ]
+  * [bbd4107] Add the PIDFile setting to the systemd unit file
+
+  [ Alexander Wirt ]
+  * [739d013] Use service instead of killall in logrotate snippet
+    (Closes: #778892)
+  * [92c6b16] Imported Upstream version 2.3.0
+  * [57d4676] Use kill -USR1 instead of service.
+
+ -- Alexander Wirt <formorer@debian.org>  Tue, 10 Mar 2015 10:38:18 +0100
+
+icinga2 (2.2.4-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [9f05d5b] Imported Upstream version 2.2.4
+  * [7cfdc48] Update dutch debconf translation (Closes: #775782)
+  * [2a36397] Alternate to virtual-mysql-client in ido-mysql package
+    (Closes: #769278)
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 05 Feb 2015 16:05:57 +0100
+
+icinga2 (2.2.3-1) unstable; urgency=medium
+
+  * [c33e9ae] Imported Upstream version 2.2.3
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 12 Jan 2015 10:38:27 +0100
+
+icinga2 (2.2.2-2) unstable; urgency=medium
+
+  * [ec8d305] Fix binary-only builds
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Sun, 28 Dec 2014 17:24:06 +0100
+
+icinga2 (2.2.2-1) unstable; urgency=medium
+
+  * [89b506f] Imported Upstream version 2.2.2
+  * [b04381a] Let icinga2-classicui depend on icinga2-bin (Closes: #770534)
+  * [8928097] Add dutch debconf translation (Closes: #766173)
+  * [7973e4e] Remove unsupported options from default file
+  * [d8e832f] Also install upgrade files to /usr/share
+  * [3b08f9d] Remove obsolete configuration option
+  * [adde104] Fix intendation in rules file
+  * [bb53657] python-icinga2 is no more, cleanup copyright and gitignore file
+  * [a1478f3] Remove some debug from icinga2-classicui.postinst
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 18 Dec 2014 13:11:04 +0100
+
+icinga2 (2.2.1-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [e73d057] Links are tested with -L
+  * [d605522] Just to be safe, use -e to check for the old apache configfile.
+    (Closes: #770743)
+  * [05f8f54] Move enable-feature to icinga2-bin (Closes: #770534)
+  * [c6fd841] Imported Upstream version 2.2.1
+  * [1135583] Add is_fresh_install to icinga2-bin postinst
+  * [1deb08b] icinga2-prepare-dirs was renamed to prepare-dirs
+
+  [ Gunnar Beutner ]
+  * [c3d13b5] Fix support for Apache 2.4
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 01 Dec 2014 20:48:59 +0100
+
+icinga2 (2.2.0-2) unstable; urgency=medium
+
+  * [cf28c7d] Fix indentation in apache config
+  * [d608338] Lower needed dpkg version in pre-depends
+  * [b42c495] Let icinga2-common depend on icinga2-bin (Closes: #770534)
+
+ -- Alexander Wirt <formorer@debian.org>  Sat, 22 Nov 2014 13:29:20 +0100
+
+icinga2 (2.2.0-1) unstable; urgency=medium
+
+  [ Jan Wagner ]
+  * [cc6aad5] Fixing threshold for snmp-load check command
+
+  [ Alexander Wirt ]
+  * [9a53b6f] Imported Upstream version 2.2.0
+  * [74a5438] Remove obsolete snmp threshold patch
+  * [cd0954a] Fix path of sql upgrade files
+  * [0609016] Move sql files to a new location
+  * [dced984] The python package does not exist anymore
+  * [945985d] Reflect the new icinga cli tool
+  * [418ba11] Python is no more
+  * [5f880bb] dh-python is not needed anymore
+  * [e3c6d8d] Bump standards version (no changes)
+  * [5db6146] Update example configuration
+  * [cd040c6] Build-depend on libyajl-dev
+  * [f004624] Add yajl license
+  * [62b4c4b] Update initscript to new cli command style
+  * [f7183e3] Change filename of apt.conf and install bash-completion 
+              for new cli
+  * [87415d0] Update postinst script to new cli command style
+  * [8dd43b4] Allow the nagios user to write to /etc/icinga2
+  * [ea389c7] Use new cli command style
+  * [42e1c2d] Use new command line style interface for debconf templates
+  * [4833cee] Use new commandline interface in classicui postinst
+  * [6c4485d] Allow parallel builds
+  * [4723043] Update translations for new command
+  * [83a2c2a] Add support for systemd
+  * [e104007] Enhance apache 2.4 support
+  * [4fecd7b] Fix apache config with 2.4
+  * [27bc54b] Move icinga2-classicui to its own configuration directory.
+  * [e6fe02e] Replace python-icinga2
+  * [434cbef] Add a pre-depends to dpkg for dpkg-maintscript-helper
+  * [28e9995] Fix indenting in apache config
+  * [eaec113] Replace/Break/Conflict with deprecated python-icinga2
+
+ -- Alexander Wirt <formorer@debian.org>  Fri, 21 Nov 2014 13:48:18 +0100
+
+icinga2 (2.1.1-1) unstable; urgency=medium
+
+  * [4a0350e] Imported Upstream version 2.1.1
+  * [81a704c] gnu_hurd.patch is now upstream
+  * [e5709e4] pipe_ENOSYS.patch is now upstream
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 18 Sep 2014 08:00:44 +0200
+
+icinga2 (2.1.0-3) unstable; urgency=medium
+
+  * [dd04e8c] Fix build problem with CMake libdir on Hurd and kFreeBSD
+              Using dist version of GNUInstallDirs.cmake
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 08 Sep 2014 16:39:23 +0200
+
+icinga2 (2.1.0-2) unstable; urgency=medium
+
+  [ Markus Frosch ]
+  * [26e4092] Update copyright for python embed
+  * [f9dd427] Fixed typo in copyright
+  * [f236eb4] Include all existing manpages
+  * [280f892] Adding patches for arch problems on Hurd and FreeBSD
+  * [ba59e9c] Fix lintian warning in copyright
+
+  [ Christian Perrier ]
+  * Debconf templates and debian/control reviewed by the debian-l10n-
+    english team as part of the Smith review project. Closes: #755248
+  * [Debconf translation updates]
+  * Portuguese (Américo Monteiro).  Closes: #758573
+  * Russian (Yuri Kozlov).  Closes: #758790
+  * German (Chris Leick).  Closes: #759364
+  * Brazilian Portuguese ().  Closes: #759599
+  * Danish (Joe Hansen).  Closes: #759778
+  * Japanese (victory).  Closes: #760094
+  * Spanish; (Matías A. Bellone).  Closes: #760115
+  * Czech (Michal Simunek).  Closes: #760145
+  * Polish (Michał Kułach).  Closes: #760180
+  * Italian (Beatrice Torracca).  Closes: #760300
+  * Turkish (Mert Dirik).  Closes: #760329
+  * French (Steve Petruzzello).  Closes: #760600
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 08 Sep 2014 14:03:13 +0200
+
+icinga2 (2.1.0-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [e1b3b50] Prefer monitoring-plugins over nagios-plugins
+
+  [ Markus Frosch ]
+  * [e192c30] Imported Upstream version 2.1.0
+  * [4e08221] Added python-icinga2 and updates for list-objects
+  * [4bd22b4] Update maintainer mail and copyright
+  * [cd79431] Add missing Python dependency macros
+  * [63d5bfb] Update gitignore
+  * [42a8707] Update lintian ignores
+  * [33ca186] Add patch 21_config_changes to change default mail
+              (Closes: #759011)
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Fri, 29 Aug 2014 14:07:28 +0200
+
+icinga2 (2.0.2-1) unstable; urgency=medium
+
+  [ Jan Wagner ]
+  * [e6fec86] Adding me to the Uploaders
+
+  [ Alexander Wirt ]
+  * [aef20e1] Imported Upstream version 2.0.2
+  * [2b1d87f] README is now README.md
+  * [ac7b2ba] Reenable Make snippet for installing upgrade files
+  * [f66aa0e] Fix dep on icinga-cgi-bin
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 07 Aug 2014 14:42:05 +0200
+
+icinga2 (2.0.1-2) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [93ca878] Fix dependency on apache2-utils and take care cgi is loaded
+
+  [ Jan Wagner ]
+  * [63fb799] Adding Vcs-headers
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 30 Jul 2014 19:36:09 +0200
+
+icinga2 (2.0.1-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [1fc2d37] Wrap and sort
+  * [37d2d90] Recommend nagios-plugins in meta package
+  * [5b33ec5] Adapt url_cgi_path in cgi.cfg, so that icinga2-classic 
+              doesn't trigger csrf protection
+  * [3639615] Add dbcconfig-common to ido-pg depends
+  * [2f7dcb6] Imported Upstream version 2.0.1
+  * [0842ae8] let the ido packages epend on ucf
+
+  [ Markus Frosch ]
+  * [5aaa17c] Fix some lintian warnings
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 14 Jul 2014 20:33:58 +0200
+
+icinga2 (2.0.0-1) unstable; urgency=low
+
+  [ Markus Frosch ]
+  * Initial Debian packaging for the Icinga 2 betas (Closes: #751509)
+
+  [ Alexander Wirt ]
+  * [f4e1a77] Run check_run only in do_start()
+  * [d4bc561] Add support for dbconfig-common and enabling ido* via debconf
+  * [b5829a8] Don't install static configuration file
+  * [edd86d2] Remove enabled symlink on package purge
+  * [4c69aaa] Let those ido modules conflict for now
+  * [a6ccd18] Imported Upstream version 2.0.0
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 16 Jun 2014 12:22:43 +0200

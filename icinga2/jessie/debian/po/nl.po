@@ -1,0 +1,127 @@
+# Dutch translation of icinga2 debconf templates.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the icinga2 package.
+# Frans Spiesschaert <Frans.Spiesschaert@yucom.be>, 2014, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: icinga2\n"
+"Report-Msgid-Bugs-To: icinga2@packages.debian.org\n"
+"POT-Creation-Date: 2014-08-18 15:18+0200\n"
+"PO-Revision-Date: 2015-01-04 15:52+0100\n"
+"Last-Translator: Frans Spiesschaert <Frans.Spiesschaert@yucom.be>\n"
+"Language-Team: Debian Dutch l10n Team <debian-l10n-dutch@lists.debian.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#. Type: password
+#. Description
+#: ../icinga2-classicui.templates:2001
+msgid "Icinga 2 ClassicUI administration password:"
+msgstr "Beheerderswachtwoord voor Icinga 2 ClassicUI:"
+
+#. Type: password
+#. Description
+#: ../icinga2-classicui.templates:2001
+msgid ""
+"Please provide the password to be created with the \"icingaadmin\" user."
+msgstr ""
+"Gelieve het wachtwoord op te geven voor de aan te maken gebruiker "
+"\"icingaadmin\"."
+
+#. Type: password
+#. Description
+#: ../icinga2-classicui.templates:2001
+msgid ""
+"This is the username and password to use when connecting to the Icinga "
+"server after completing the configuration. If you do not provide a password, "
+"you will have to configure access to Icinga manually later on."
+msgstr ""
+"Deze gebruikersnaam en het wachtwoord moeten gebruikt worden om verbinding "
+"te maken met de Icinga-server na het voltooien van de configuratie. Indien u "
+"geen wachtwoord opgeeft, zult u later de toegang tot Icinga handmatig moeten "
+"instellen."
+
+#. Type: password
+#. Description
+#: ../icinga2-classicui.templates:3001
+msgid "Re-enter password to verify:"
+msgstr "Voer ter controle het wachtwoord nogmaals in:"
+
+#. Type: password
+#. Description
+#: ../icinga2-classicui.templates:3001
+msgid ""
+"Please enter the same user password again to verify you have typed it "
+"correctly."
+msgstr ""
+"Geef hetzelfde gebruikerswachtwoord nogmaals in om een mogelijke tikfout uit "
+"te sluiten."
+
+#. Type: error
+#. Description
+#: ../icinga2-classicui.templates:4001
+msgid "Password input error"
+msgstr "Fout bij het invoeren van het wachtwoord"
+
+#. Type: error
+#. Description
+#: ../icinga2-classicui.templates:4001
+msgid "The two passwords you entered were not the same. Please try again."
+msgstr ""
+"De twee ingevoerde wachtwoorden zijn niet identiek. Gelieve opnieuw te "
+"proberen."
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-mysql.templates:2001
+msgid "Enable Icinga 2's ido-mysql feature?"
+msgstr "De ido-mysql-functionaliteit van Icinga 2 activeren?"
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-mysql.templates:2001
+msgid "Please specify whether Icinga 2 should use MySQL."
+msgstr "Specificeer of Icinga 2 gebruik moet maken van MySQL."
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-mysql.templates:2001
+#| msgid ""
+#| "You may later disable the feature by using the \"icinga2-disable-feature "
+#| "ido-mysql\" command."
+msgid ""
+"You may later disable the feature by using the \"icinga2 feature disable ido-"
+"mysql\" command."
+msgstr ""
+"U kunt later deze functionaliteit uitschakelen met het commando \"icinga2 "
+"feature disable ido-mysql\"."
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-pgsql.templates:2001
+msgid "Enable Icinga 2's ido-pgsql feature?"
+msgstr "De ido-pgsql van Icinga 2 activeren?"
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-pgsql.templates:2001
+msgid "Please specify whether Icinga 2 should use PostgreSQL."
+msgstr "Specificeer of Icinga 2 gebruik moet maken van PostgreSQL."
+
+#. Type: boolean
+#. Description
+#: ../icinga2-ido-pgsql.templates:2001
+#| msgid ""
+#| "You may later disable the feature by using the \"icinga2-disable-feature "
+#| "ido-pgsql\" command."
+msgid ""
+"You may later disable the feature by using the \"icinga2 feature disable ido-"
+"pgsql\" command."
+msgstr ""
+"U kunt later deze functionaliteit uitschakelen met het commando \"icinga2 "
+"feature disable ido-pgsql\"."

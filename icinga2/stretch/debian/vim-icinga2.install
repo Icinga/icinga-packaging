@@ -1,0 +1,3 @@
+debian/vim-icinga2.yaml usr/share/vim/registry
+tools/syntax/vim/ftdetect/icinga2.vim usr/share/vim/addons/ftdetect
+tools/syntax/vim/syntax/icinga2.vim usr/share/vim/addons/syntax

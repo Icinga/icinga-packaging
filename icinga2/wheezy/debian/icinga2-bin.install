@@ -1,0 +1,3 @@
+usr/sbin/icinga2
+usr/lib/*/icinga2/sbin
+usr/share/man/man8/icinga2.8

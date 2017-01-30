@@ -1,0 +1,3 @@
+# default settings for icinga2's initscript
+
+#DAEMON_ARGS="-e /var/log/icinga2/icinga2.err"

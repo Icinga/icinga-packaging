@@ -1,0 +1,3 @@
+usr/bin/icinga-studio
+icinga-studio/icinga.ico /usr/share/icinga2-studio
+debian/icinga2-studio.desktop /usr/share/applications
