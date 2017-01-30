@@ -1,0 +1,66 @@
+Description: Revert DOMPDF update
+ Upstream uses DOMPDF 0.7.0, which is not really compatible in terms of namespaces.
+Author: Eric Lippmann <eric.lippmann@icinga.com>
+Origin: upstream
+Reviewed-by: Markus Frosch <lazyfrosch@debian.org>
+Last-Update: 2016-12-13
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+diff --git a/library/Icinga/File/Pdf.php b/library/Icinga/File/Pdf.php
+index 7bb370c..51a1007 100644
+--- a/library/Icinga/File/Pdf.php
++++ b/library/Icinga/File/Pdf.php
+@@ -3,16 +3,28 @@
+ 
+ namespace Icinga\File;
+ 
+-use Dompdf\Dompdf;
+-use Dompdf\Options;
++use DOMPDF;
++use DOMDocument;
++use DOMXPath;
++use Font_Metrics;
+ use Icinga\Application\Icinga;
+-use Icinga\Exception\ProgrammingError;
++use Icinga\Web\StyleSheet;
+ use Icinga\Web\Url;
++use Icinga\Exception\ProgrammingError;
+ 
+-require_once 'dompdf/autoload.inc.php';
++require_once 'dompdf/dompdf_config.inc.php';
++require_once 'dompdf/include/autoload.inc.php';
+ 
+-class Pdf
++class Pdf extends DOMPDF
+ {
++    public $paginateTable = false;
++
++    public function __construct()
++    {
++        $this->set_paper('A4', 'portrait');
++        parent::__construct();
++    }
++
+     protected function assertNoHeadersSent()
+     {
+         if (headers_sent()) {
+@@ -38,15 +50,12 @@ class Pdf
+         $html = $layout->render();
+         $imgDir = Url::fromPath('img');
+         $html = preg_replace('~src="' . $imgDir . '/~', 'src="' . Icinga::app()->getBootstrapDirectory() . '/img/', $html);
+-        $options = new Options();
+-        $options->set('defaultPaperSize', 'A4');
+-        $dompdf = new Dompdf($options);
+-        $dompdf->loadHtml($html);
+-        $dompdf->render();
++        $this->load_html($html);
++        $this->render();
+         $request = $controller->getRequest();
+-        $dompdf->stream(
++        $this->stream(
+             sprintf(
+-                '%s-%s-%d',
++                '%s-%s-%d.pdf',
+                 $request->getControllerName(),
+                 $request->getActionName(),
+                 time()

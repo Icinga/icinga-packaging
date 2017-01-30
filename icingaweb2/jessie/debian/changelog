@@ -1,0 +1,218 @@
+icingaweb2 (2.4.1-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Fri, 20 Jan 2017 14:28:11 +0100
+
+icingaweb2 (2.4.1-1) unstable; urgency=medium
+
+  * [21444ed] Add patch 10_revert_dompdf_update
+              to allow use of DOMPDF 0.6.x
+  * [9bd86b8] New upstream version 2.4.1
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Fri, 20 Jan 2017 14:24:33 +0100
+
+icingaweb2 (2.4.0-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 13 Dec 2016 15:48:39 +0100
+
+icingaweb2 (2.4.0-1) unstable; urgency=medium
+
+  * [d17f5af] uglify: Fix rule order for older versions of GNU make
+  * [36e1fe4] uglify: Don't care about a header
+  * [310d027] uglify: Require at least version 2
+  * [9aff116] New upstream version 2.4.0
+  * [9608ebe] Embed forked version of ZF1 (Closes: #814143)
+
+    ZF1 has been forked as a minimal base library inside Icingaweb2.
+
+    It is maintained as part of Icingaweb2. See README for reference:
+    /usr/share/doc/php-icinga/README-ZF1.md
+
+  * [1827003] Minimal icon font installation
+  * [dcdfdcf] Move bash-completion to /usr
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 13 Dec 2016 15:37:14 +0100
+
+icingaweb2 (2.3.4+fix-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 08 Aug 2016 14:23:12 +0200
+
+icingaweb2 (2.3.4+fix-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [7fa211e] Imported Upstream version 2.3.4
+
+  [ Markus Frosch ]
+  * [f2d0189] Fix merged base for 2.3.4
+  * [4c547d8] Include test module into distribution
+  * [a9493cd] Fix icingacli breaking dependency for bash-completion update
+  * [3f6ff8a] Add proper Javascript minification with uglifyjs
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 08 Aug 2016 14:15:06 +0200
+
+icingaweb2 (2.3.4-2~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Alexander Wirt <formorer@debian.org>  Sun, 17 Jul 2016 10:26:27 +0200
+
+icingaweb2 (2.3.4-2) unstable; urgency=medium
+
+  * [a7f069b] Re-add www-data to icingaweb2 group (Closes: #831530)
+  * [3c63052] Recommend some optional modules (Closes: #831440)
+  * [cc5c7b5] Move bash completion to icingacli package (Closes: #830938)
+  * [5a3d014] Fix group and permissions of modules directory
+
+ -- Alexander Wirt <formorer@debian.org>  Sun, 17 Jul 2016 10:13:36 +0200
+
+icingaweb2 (2.3.4-1) unstable; urgency=medium
+
+  * Imported Upstream version 2.3.4
+
+ -- Alexander Wirt <formorer@debian.org>  Mon, 20 Jun 2016 19:57:23 +0200
+
+icingaweb2 (2.3.3-1) unstable; urgency=medium
+
+  * [6c8a309] Imported Upstream version 2.3.3
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Fri, 10 Jun 2016 11:06:50 +0200
+
+icingaweb2 (2.3.2-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Thu, 28 Apr 2016 18:25:14 +0200
+
+icingaweb2 (2.3.2-1) unstable; urgency=medium
+
+  * [c1aee5d] Imported Upstream version 2.3.2
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Thu, 28 Apr 2016 18:19:00 +0200
+
+icingaweb2 (2.3.1-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * [7c18e45] Revert "Depend on php-xml for DOM handling modules"
+  * [a5dbcc2] Revert "Update dependencies for PHP 7.0"
+  * Rebuild for debmon-jessie.
+
+ -- Alexander Wirt <formorer@debian.org>  Tue, 19 Apr 2016 22:41:32 +0200
+
+icingaweb2 (2.3.1-1) unstable; urgency=medium
+
+  * [3c80e44] Imported Upstream version 2.3.1
+  * [462f48e] Update dependencies for PHP 7.0 (Closes: #821579, #821680)
+  * [38bfc08] Depend on php-xml for DOM handling modules
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 19 Apr 2016 22:27:28 +0200
+
+icingaweb2 (2.2.0-1~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 01 Mar 2016 10:04:26 +0100
+
+icingaweb2 (2.2.0-1) unstable; urgency=medium
+
+  * [1d4af5c] Imported Upstream version 2.2.0
+  * [fc7c95e] iframe module is now included in icingaweb2 base
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 01 Mar 2016 09:58:40 +0100
+
+icingaweb2 (2.1.2-3) unstable; urgency=medium
+
+  * [a95a3f5] Update copyright for php dompdf shipped fonts
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Tue, 23 Feb 2016 11:32:40 +0100
+
+icingaweb2 (2.1.2-2~debmon8+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie.
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 22 Feb 2016 13:07:57 +0100
+
+icingaweb2 (2.1.2-2) unstable; urgency=medium
+
+  * [672fcae] Split out icingacli and icingaweb2-common as packages
+  * [5927c7e] Include translation module
+  * [71eca67] Remove 10_html_purifier patch
+  * [a0ef32a] Test php-htmlpurifier loading, allow from version 4.3
+  * [a029ff6] Update VCS URLs
+  * [4de17c5] Remove duplicate adduser in postinst
+  * [0f4f2ac] Bump standards version to 3.9.7
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 22 Feb 2016 13:02:00 +0100
+
+icingaweb2 (2.1.2-1~debmon80+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Wed, 23 Dec 2015 15:25:58 +0100
+
+icingaweb2 (2.1.2-1) unstable; urgency=medium
+
+  * [92126c1] Imported Upstream version 2.1.1
+  * [bac2ae7] Update html_purifier patch for downwards compatibility
+  * [a488312] Update copyright
+  * [6abcf98] Imported Upstream version 2.1.2
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Wed, 23 Dec 2015 15:15:40 +0100
+
+icingaweb2 (2.1.0-2~debmon80+1) debmon-jessie; urgency=medium
+
+  * Rebuild for debmon-jessie
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 18 Nov 2015 11:54:29 +0100
+
+icingaweb2 (2.1.0-2) unstable; urgency=medium
+
+  [ Markus Frosch ]
+  * [ac348b1] Add patch for HTMLPurifier path loading
+
+ -- Alexander Wirt <formorer@debian.org>  Wed, 18 Nov 2015 11:53:08 +0100
+
+icingaweb2 (2.1.0-1) unstable; urgency=medium
+
+  [ Alexander Wirt ]
+  * [44344a0] Its zend-framework on precise
+  * [1b1956d] zend version on precise is too old, remove the alternative
+
+  [ Markus Frosch ]
+  * [58169fb] Imported Upstream version 2.1.0
+  * [f65e92d] Add iframe module
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Mon, 16 Nov 2015 16:29:42 +0100
+
+icingaweb2 (2.0.0-1) unstable; urgency=medium
+
+  [ Markus Frosch ]
+  * [bd9e401] Ship empty modules directory in main package
+  * [8a9396a] Move setup code into core module
+
+  [ Alexander Wirt ]
+  * [a42beb9] Imported Upstream version 2.0.0
+
+ -- Alexander Wirt <formorer@debian.org>  Fri, 02 Oct 2015 14:35:07 +0200
+
+icingaweb2 (2.0.0~rc1-1) unstable; urgency=medium
+
+  * [0ef8c38] Imported Upstream version 2.0.0~rc1
+
+ -- Alexander Wirt <formorer@debian.org>  Fri, 19 Jun 2015 20:37:23 +0200
+
+icingaweb2 (2.0.0~beta3-1) unstable; urgency=low
+
+  [ Markus Frosch ]
+  * Initial Debian packaging
+  * [d8df5df] Take care about minification of vendor javascripts
+  * [458cd2e] Use the yui-compressor for backwards compatibility
+  * [6cb0061] Merge icingaweb2-common and icingacli in icingaweb2
+
+  [ Alexander Wirt ]
+  * [fa8e336] Imported Upstream version 2.0.0~beta3
+
+ -- Alexander Wirt <formorer@debian.org>  Thu, 19 Mar 2015 20:22:16 +0100

@@ -1,0 +1,6 @@
+icingaweb2 Debian source TODO
+=============================
+
+* embedded jquery + addons: public/js/vendor
+* embedded font: application/fonts
+* embedded PHP libraries: library/vendor/{Parsedown,JShrink,lessphp}

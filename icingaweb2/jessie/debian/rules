@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --with bash_completion
+
+override_dh_auto_clean:
+	dh_auto_clean
+	cd debian/uglify && $(MAKE) clean
+
+override_dh_install:
+	dh_install -X.min.js -X.min.map -XSOURCE
+	cp -r debian/uglify/*.min.* debian/icingaweb2/usr/share/icingaweb2/public/js/vendor/
+	mkdir -p debian/php-icinga/usr/share/doc/php-icinga
+	cp library/vendor/Zend/README.md debian/php-icinga/usr/share/doc/php-icinga/README-ZF1.md
+
+override_dh_auto_test:
+	dh_auto_test
+	# test if php-htmlpurifier can be loaded
+	php debian/test/php-htmlpurifier.php
+
+override_dh_auto_build:
+	dh_auto_build
+	cd debian/uglify && $(MAKE) all
+
+# vi: ts=4 sw=4 noexpandtab :

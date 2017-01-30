@@ -1,0 +1,121 @@
+Source: icingaweb2
+Section: admin
+Priority: extra
+Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Uploaders:
+ Markus Frosch <lazyfrosch@debian.org>
+Build-Depends:
+ bash-completion,
+ debhelper (>= 9),
+ php5-cli,
+ php-htmlpurifier (>= 4.3),
+ node-uglify (>= 2) | yui-compressor, node-source-map | yui-compressor
+Standards-Version: 3.9.8
+Homepage: https://www.icinga.org
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-nagios/pkg-icingaweb2.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-nagios/pkg-icingaweb2.git
+
+Package: icingaweb2
+Architecture: all
+Depends:
+ icingaweb2-common (= ${source:Version}),
+ php-htmlpurifier (>= 4.3),
+ php-dompdf (>= 0.6.1),
+# php-parsedown,
+# php-lessphp,
+# php-jshrink,
+ ${misc:Depends}
+Recommends:
+ apache2 | httpd,
+ php5 (>= 5.3.2),
+ php5-cli (>= 5.3.2),
+ php5-ldap,
+ icingacli,
+ icingaweb2-module-monitoring,
+ icingaweb2-module-doc
+Description: simple and responsive web interface for Icinga
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ The software will give you a web frontend for your monitoring solution, and
+ can run additional modules, extending monitoring data, or even supplying
+ something new to the webinterface.
+ .
+ This package installs the web interface with all needed dependencies.
+
+Package: icingaweb2-common
+Architecture: all
+Depends:
+ adduser,
+ php-icinga (= ${source:Version}),
+ ${misc:Depends}
+Replaces: icingaweb2-module-setup, icingaweb2 (<< 2.1.2-2~)
+Conflicts: icingaweb2-module-setup
+Breaks: icingaweb2 (<< 2.1.2-2~)
+Description: simple and responsive web interface for Icinga - common files
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ The software will give you a web frontend for your monitoring solution, and
+ can run additional modules, extending monitoring data, or even supplying
+ something new to the webinterface.
+ .
+ This package contains common files for the web interface, and the CLI tool.
+
+Package: icingaweb2-module-monitoring
+Architecture: all
+Depends: icingaweb2 (= ${source:Version}), ${misc:Depends}
+Description: simple and responsive web interface for Icinga - monitoring module
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ This module adds the Icinga monitoring frontend to the web interface.
+
+Package: icingaweb2-module-doc
+Section: doc
+Architecture: all
+Depends: icingaweb2 (= ${source:Version}), ${misc:Depends}
+Description: simple and responsive web interface for Icinga - documentation module
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ This module adds the documentation viewer of Icinga Web 2, which can also
+ display the documentation of other modules.
+
+Package: php-icinga
+Section: php
+Architecture: all
+Depends:
+ php5 (>= 5.3.2),
+ ${misc:Depends}
+Recommends:
+ php5-mysql | php5-mysqlnd | php5-pgsql,
+ php5-json
+Description: PHP library to communicate with and use Icinga
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ Icinga is a PHP library providing a PHP API to interact with Icinga's data
+ and other core parts of Icinga web 2 that may be used by modules.
+ .
+ This library is mainly used by Icinga Web 2 to get its data.
+
+Package: icingacli
+Architecture: all
+Depends:
+ adduser,
+ php-icinga (= ${source:Version}),
+ ${misc:Depends}
+Recommends:
+ php5-cli (>= 5.3.2)
+Suggests:
+ icingaweb2-module-monitoring
+Replaces: icingaweb2 (<< 2.3.4-2~)
+Breaks: icingaweb2 (<< 2.3.4-2~)
+Description: simple CLI tool for Icingaweb2 and its modules
+ Icinga Web 2 is a very modular, fast and simple web interface for your Icinga
+ monitoring environment.
+ .
+ `icingacli` is a command line utility, allowing the admin to configure Icinga
+ Web 2 and provides the possibility to query Icinga data from your shell.
+ All modules of Icingaweb2 can add additional commands to the icingacli.

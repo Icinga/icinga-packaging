@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -e
+
+setperm() {
+    user="$1"
+    group="$2"
+    mode="$3"
+    file="$4"
+    shift 4
+    # only do something when no setting exists
+    if ! dpkg-statoverride --list "$file" >/dev/null 2>&1; then
+      chown "$user":"$group" "$file"
+      chmod "$mode" "$file"
+    fi
+}
+
+case "$1" in
+    configure)
+        if ! getent group icingaweb2 > /dev/null ; then
+            echo 'Adding system-group for icingaweb2' 1>&2
+            addgroup --system icingaweb2 >/dev/null
+        fi
+        # allow www-data to write icingaweb2 config
+        if ! getent group icingaweb2 | grep -q www-data; then
+            adduser www-data icingaweb2
+        fi
+        # secure configuration directory and allow config access
+        setperm root icingaweb2 2770 /etc/icingaweb2
+        setperm root icingaweb2 2770 /etc/icingaweb2/modules
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

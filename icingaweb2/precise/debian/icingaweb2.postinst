@@ -1,0 +1,43 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure)
+        COMMON_STATE=$(dpkg-query -f '${Status}' -W 'apache2.2-common' 2>/dev/null | awk '{print $3}' || true)
+
+        # NEW method for Apache >= 2.4
+        if [ -e /usr/share/apache2/apache2-maintscript-helper ]; then
+            . /usr/share/apache2/apache2-maintscript-helper
+
+            apache2_invoke enmod rewrite
+            apache2_invoke enconf icingaweb2
+
+            # remove OLD Apache 2.2 link
+            [ -L /etc/apache2/conf.d/icingaweb2.conf ] && rm /etc/apache2/conf.d/icingaweb2.conf
+
+        # OLD methods for Apache < 2.4
+        elif [ "$COMMON_STATE" = "installed" ] || [ "$COMMON_STATE" = "unpacked" ] ; then
+            # enable mod rewrite
+            [ -e /etc/apache2/mods-enabled/rewrite.load ] || a2enmod rewrite
+
+            # create symlink if not existing
+            [ -e /etc/apache2/conf.d/icingaweb2.conf ] || ln -vs ../conf-available/icingaweb2.conf /etc/apache2/conf.d/icingaweb2.conf
+
+            # reload webserver
+            [ -x $(which invoke-rc.d) ] && invoke-rc.d apache2 reload
+        fi
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

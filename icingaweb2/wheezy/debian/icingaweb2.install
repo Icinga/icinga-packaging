@@ -1,0 +1,18 @@
+public doc                       usr/share/icingaweb2
+
+application/controllers          usr/share/icingaweb2/application
+# TODO: embedded font here
+application/fonts                usr/share/icingaweb2/application
+application/forms                usr/share/icingaweb2/application
+application/layouts              usr/share/icingaweb2/application
+application/views                usr/share/icingaweb2/application
+
+etc/schema                       usr/share/icingaweb2/etc
+
+packages/files/public/index.php  usr/share/icingaweb2/public
+debian/icingaweb2.conf           etc/apache2/conf-available
+
+# TODO: vendor libraries - should be moved to a proper package
+library/vendor/JShrink/*.php     usr/share/icingaweb2/library/vendor/JShrink
+library/vendor/Parsedown/*.php   usr/share/icingaweb2/library/vendor/Parsedown
+library/vendor/lessphp/*.php     usr/share/icingaweb2/library/vendor/lessphp

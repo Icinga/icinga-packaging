@@ -1,0 +1,9 @@
+application/locale               usr/share/icingaweb2/application
+
+modules/setup                    usr/share/icingaweb2/modules
+modules/test                     usr/share/icingaweb2/modules
+modules/translation              usr/share/icingaweb2/modules
+
+test                             usr/share/icingaweb2
+
+packages/files/config/modules/translation/config.ini etc/icingaweb2/modules/translation

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper rm_conffile \
+   "/etc/bash_completion.d/icingacli" "2.4.0-1~" -- "$@"
+
+#DEBHELPER#
+
+exit 0

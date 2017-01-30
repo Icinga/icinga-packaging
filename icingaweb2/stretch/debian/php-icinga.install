@@ -1,0 +1,7 @@
+library/Icinga        usr/share/php
+
+# embedded fork of ZendFramework 1
+# see library/vendor/Zend/README.md
+# Maintained as part of Icingaweb2 upstream!
+library/vendor/Zend/*.php usr/share/icingaweb2/library/vendor/Zend
+library/vendor/Zend/*/    usr/share/icingaweb2/library/vendor/Zend

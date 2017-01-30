@@ -1,0 +1,12 @@
+files
+*.debhelper.log
+*substvars
+icingacli/
+icingaweb2-common/
+icingaweb2-module-doc/
+icingaweb2-module-monitoring/
+icingaweb2-module-setup/
+icingaweb2/
+php-icinga/
+.*.sw[op]
+minify/
