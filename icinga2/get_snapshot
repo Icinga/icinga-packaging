@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -e
+
+while getopts ":p:U:b:" opt
+do
+    case "$opt" in
+    p)
+        PROJECT="$OPTARG"
+        ;;
+    U)
+        UPSTREAM_GIT_URL="$OPTARG"
+        ;;
+    b)
+        UPSTREAM_GIT_BRANCH="$OPTARG"
+        ;;
+    \?)
+        echo "Unknown argument: $OPTARG" >&2
+        exit 1
+        ;;
+    esac
+done
+
+: ${PROJECT:=icinga2}
+: ${UPSTREAM_GIT_URL:=https://github.com/Icinga/$PROJECT.git}
+: ${UPSTREAM_GIT_BRANCH:=master}
+
+workdir=`pwd`
+
+set -x
+
+if [ -d "${PROJECT}.git/" ]; then
+    cd "${PROJECT}.git"
+    if [ ! -d .git ]; then
+        echo "This is not a GIT repository: $(pwd)" >&2
+        exit 1
+    fi
+    git fetch origin -p
+    git reset --hard "origin/${UPSTREAM_GIT_BRANCH}"
+    git clean -fdx
+else
+    git clone -b "${UPSTREAM_GIT_BRANCH}" "${UPSTREAM_GIT_URL}" "${PROJECT}.git/"
+    cd "${PROJECT}.git"
+fi
+
+git_version=$(git describe --tags HEAD)
+package_version=$(echo "$git_version" | sed -e 's/^v//' -e 's/-/+/' -e 's/-/./g')
+tarball="${workdir}/${PROJECT}_${package_version}.orig.tar"
+
+git archive --format=tar --prefix="${PROJECT}_${package_version}/" -o "${tarball}" HEAD
+
+# creating version file for tarball
+echo "#define VERSION \"$git_version\"" > icinga-version.h.force
+# TODO: do we need this?
+#touch -d`date +%Y%m%d` icinga-version.h.force
+tar --append -f "${tarball}" --transform "s@^@${PROJECT}_${package_version}/@" icinga-version.h.force
+
+# pack tarball
+gzip -vf9 "${tarball}"
+sha256sum "${tarball}.gz"
+
+# store package version for build scripts
+echo -e "${package_version}\t$(git rev-parse HEAD)\t$(basename "${tarball}.gz")" > "${workdir}/${PROJECT}.version"

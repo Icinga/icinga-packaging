@@ -1,0 +1,7 @@
+# Tarball
+*.tar
+*.tar.*
+
+# Fragments from snapshots
+*.version
+*.git/
