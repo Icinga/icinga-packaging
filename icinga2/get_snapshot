@@ -37,7 +37,11 @@ if [ -d "${PROJECT}.git/" ]; then
         echo "This is not a GIT repository: $(pwd)" >&2
         exit 1
     fi
-    git fetch origin -p
+    if [ "$(git config remote.origin.url)" != "${UPSTREAM_GIT_URL}" ]; then
+        git remote set-url origin "${UPSTREAM_GIT_URL}"
+    fi
+     git fetch origin -p
+    git checkout -f "${UPSTREAM_GIT_BRANCH}"
     git reset --hard "origin/${UPSTREAM_GIT_BRANCH}"
     git clean -fdx
 else
