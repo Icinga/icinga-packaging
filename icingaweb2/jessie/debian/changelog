@@ -1,3 +1,9 @@
+icingaweb2 (2.4.1-1~debmon8+2) UNRELEASED; urgency=medium
+
+  * Disable patch 10_revert_dompdf_update and use embedded dompdf
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Thu, 09 Feb 2017 17:58:59 +0100
+
 icingaweb2 (2.4.1-1~debmon8+1) debmon-jessie; urgency=medium
 
   * Rebuild for debmon-jessie.

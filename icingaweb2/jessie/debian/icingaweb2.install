@@ -14,4 +14,5 @@ debian/icingaweb2.conf           etc/apache2/conf-available
 # TODO: vendor libraries - should be moved to a proper package
 library/vendor/JShrink/*.php     usr/share/icingaweb2/library/vendor/JShrink
 library/vendor/Parsedown/*.php   usr/share/icingaweb2/library/vendor/Parsedown
+library/vendor/dompdf/{*.php,lib,src} usr/share/icingaweb2/library/vendor/dompdf
 library/vendor/lessphp/*.php     usr/share/icingaweb2/library/vendor/lessphp

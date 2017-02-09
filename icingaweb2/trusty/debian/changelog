@@ -1,3 +1,10 @@
+icingaweb2 (2.4.1-1~ppa1404+1.1) UNRELEASED; urgency=medium
+
+  * Non-maintainer upload.
+  * Disable patch 10_revert_dompdf_update and use embedded dompdf
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Thu, 09 Feb 2017 17:58:59 +0100
+
 icingaweb2 (2.4.1-1~ppa1404+1) trusty; urgency=medium
 
   * Rebuild for Ubuntu trusty.

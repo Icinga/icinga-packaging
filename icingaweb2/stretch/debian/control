@@ -20,7 +20,7 @@ Architecture: all
 Depends:
  icingaweb2-common (= ${source:Version}),
  php-htmlpurifier (>= 4.3),
- php-dompdf (>= 0.6.1),
+# php-dompdf (>= 0.6.1),
  php-xml,
 # php-parsedown,
 # php-lessphp,
