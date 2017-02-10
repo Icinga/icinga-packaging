@@ -1,6 +1,6 @@
 [Unit]
 Description=Icinga host/service/network monitoring system
-After=postgresql.service mariadb.service carbon-cache.service mysql.service yslog.target
+After=postgresql.service mariadb.service carbon-cache.service mysql.service syslog.target network.target
 
 [Service]
 Type=simple
