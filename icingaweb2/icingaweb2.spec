@@ -235,7 +235,7 @@ do
   install -p -m 644 icingaweb2.pp.${selinuxvariant} %{buildroot}%{_datadir}/selinux/${selinuxvariant}/icingaweb2.pp
 done
 cd -
-/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
 %endif
 
 %pre

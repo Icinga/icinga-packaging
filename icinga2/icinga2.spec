@@ -371,7 +371,7 @@ do
 done
 cd -
 
-/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
 %endif
 
 %if 0%{?fedora}
