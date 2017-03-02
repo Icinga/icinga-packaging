@@ -16,4 +16,4 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-unauthenticated -y i
 
 sudo icinga2 feature list
 
-sudo icinga2 deamon -C
+sudo icinga2 daemon -C
