@@ -1,10 +1,5 @@
 #!/bin/bash
 
-set -xe
-
-sudo yum clean all
-
-sudo yum install -y yum-plugin-ovl
 sudo yum install -y createrepo 
 
 createrepo $WORKSPACE/archive
@@ -20,7 +15,8 @@ EOF"
 sudo yum update -y
 sudo yum install -y icingaweb2
 
-sudo apache2ctl start || echo "apache2ctl start failed"
+sudo apache2ctl start || sudo apachectl start || sudo /sbin/service httpd start ||  echo "Failed to start apache" && false
+sleep 5
 
 RSTATUS=$(curl -s -w %{http_code} http://localhost/icingaweb2/authentication/login -o /dev/null)
 if [ "200" != "$RSTATUS" ]; then
