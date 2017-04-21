@@ -3,17 +3,15 @@
 
 install_package icingaweb2
 
-if [ -x /usr/sbin/apachectl ]; then
-  apache_command="apachectl start"
+if [ -x /usr/sbin/httpd ]; then
+  sudo httpd -t
+  sudo httpd -k start
+elif [ -x /usr/sbin/apache2 ]; then
+  sudo apache2 -t
+  sudo apache2 -k start
 else
   echo "Can not detect how to start Apache!" >&2
   exit 1
-fi
-
-echo "Starting Apache httpd..."
-if ! sudo $apache_command; then
-    echo "Failed to start httpd..." >&2
-    exit 1
 fi
 
 sleep 5
