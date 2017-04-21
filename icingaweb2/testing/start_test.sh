@@ -3,6 +3,18 @@
 
 install_package icingaweb2
 
+# set timezone for PHP
+if [ -d /etc/php.d ]; then
+  php_d=/etc/php.d
+elif [ -d /etc/php5/conf.d ]; then
+  php_d=/etc/php5/conf.d
+else
+  echo "Can not set PHP timezone!" >&2
+  exit 1
+fi
+echo "date.timezone = UTC" >${php_d}/timezone.ini
+
+# Start apache in background
 if [ -x /usr/sbin/httpd ]; then
   sudo httpd -t
   sudo httpd -k start
