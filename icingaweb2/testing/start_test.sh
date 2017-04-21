@@ -15,7 +15,7 @@ fi
 sudo sh -c "echo 'date.timezone = UTC' >${php_d}/timezone.ini"
 
 # Start apache in background
-if [ -x /usr/sbin/start_apache2 ]; then
+if [ -e /usr/sbin/start_apache2 ]; then
   # newer SUSE
   sudo a2enmod rewrite
   sudo a2enmod php5
