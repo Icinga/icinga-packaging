@@ -1,28 +1,42 @@
 #!/bin/bash
+# this script runs in the rpm_test environment
 
-sudo yum install -y createrepo 
+install_package icingaweb2
 
-createrepo $WORKSPACE/archive
+if [ -x /usr/sbin/apachectl ]; then
+  apache_command="apachectl start"
+else
+  echo "Can not detect how to start Apache!" >&2
+  exit 1
+fi
 
-sudo -E su -c "cat << EOF > /etc/yum.repos.d/local.repo
-[local]
-name=Nyarlathotep
-baseurl=file://$WORKSPACE/archive
-enabled=1
-gpgcheck=0
-EOF"
+echo "Starting Apache httpd..."
+if ! sudo $apache_command; then
+    echo "Failed to start httpd..." >&2
+    exit 1
+fi
 
-sudo yum update -y
-sudo yum install -y icingaweb2
-
-sudo apache2ctl start || sudo apachectl start || sudo /sbin/service httpd start ||  echo "Failed to start apache" && false
 sleep 5
 
-RSTATUS=$(curl -s -w %{http_code} http://localhost/icingaweb2/authentication/login -o /dev/null)
-if [ "200" != "$RSTATUS" ]; then
-  echo "Http exit code was not ok!"
-  exit 1
+output=`mktemp`
+
+if curl -v http://localhost/icingaweb2/authentication/login -o "$output"; then
+  if grep -q '<div id="login"' "$output"; then
+    echo "Login page available"
+    exit 0
+  else
+    echo "Didn't get a logon page from the webserver!"
+    echo
+    echo "Output of the page is:"
+    echo "====================================="
+    cat "$output"
+    exit 1
+  fi
 else
-  echo "All's well!"
-  exit 0
+  echo "Request for login page failed!"
+  echo
+  echo "Output of the page is:"
+  echo "====================================="
+  cat "$output"
+  exit 1
 fi

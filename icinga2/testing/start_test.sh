@@ -1,18 +1,8 @@
 #!/bin/bash
+# this script runs in the rpm_test environment
 
-sudo yum install -y createrepo 
+# TODO: database?
 
-createrepo $WORKSPACE/archive
-
-sudo -E su -c "cat << EOF > /etc/yum.repos.d/local.repo
-[local]
-name=Nyarlathotep
-baseurl=file://$WORKSPACE/archive
-enabled=1
-gpgcheck=0
-EOF"
-
-sudo yum update -y
-sudo yum install -y icinga2 mariadb-server icinga2-ido-mysql
+install_package icinga2 icinga2-ido-mysql icinga2-ido-pgsql
 
 sudo icinga2 daemon -C
