@@ -12,7 +12,7 @@ else
   echo "Can not set PHP timezone!" >&2
   exit 1
 fi
-echo "date.timezone = UTC" >${php_d}/timezone.ini
+sudo sh -c "echo 'date.timezone = UTC' >${php_d}/timezone.ini"
 
 # Start apache in background
 if [ -x /usr/sbin/httpd ]; then
