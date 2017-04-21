@@ -56,10 +56,10 @@ tarball="${workdir}/${PROJECT}-${package_version}.tar"
 git archive --format=tar --prefix="${PROJECT}-${package_version}/" -o "${tarball}" HEAD
 
 # creating version file for tarball
-echo "#define VERSION \"$git_version\"" > icinga-version.h.force
-# TODO: do we need this?
-#touch -d`date +%Y%m%d` icinga-version.h.force
-tar --append -f "${tarball}" --transform "s@^@${PROJECT}-${package_version}/@" icinga-version.h.force
+mkdir "${PROJECT}-${package_version}"
+echo "#define VERSION \"$git_version\"" > "${PROJECT}-${package_version}/"icinga-version.h.force
+tar --append -f "${tarball}" "${PROJECT}-${package_version}/"*
+rm -rf "${PROJECT}-${package_version}"
 
 # pack tarball
 gzip -vf9 "${tarball}"
