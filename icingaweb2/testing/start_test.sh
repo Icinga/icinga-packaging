@@ -28,8 +28,8 @@ elif [ -x /usr/share/apache2/get_module_list ]; then
   sudo a2enmod php5
 
   # update apache config
-  /usr/share/apache2/get_includes
-  /usr/share/apache2/get_module_list
+  sudo /usr/share/apache2/get_includes
+  sudo /usr/share/apache2/get_module_list
 
   sudo /usr/sbin/apache2ctl -k start
 elif [ -x /usr/sbin/httpd ]; then
