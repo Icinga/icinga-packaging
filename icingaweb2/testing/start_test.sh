@@ -22,12 +22,12 @@ if [ -x /usr/sbin/start_apache2 ]; then
 
   sudo /usr/sbin/start_apache2 -t
   sudo /usr/sbin/start_apache2 -k start
-elif [ -x /usr/sbin/apache2ctl ]; then
+elif [ -x /usr/share/apache2/get_module_list ]; then
   # older SUSE
   sudo a2enmod rewrite
   sudo a2enmod php5
 
-  sudo /etc/init.d/apache2 start
+  sudo /usr/sbin/apache2ctl -k start
 elif [ -x /usr/sbin/httpd ]; then
   sudo httpd -t
   sudo httpd -k start
