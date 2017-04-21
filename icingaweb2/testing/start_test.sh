@@ -15,12 +15,22 @@ fi
 sudo sh -c "echo 'date.timezone = UTC' >${php_d}/timezone.ini"
 
 # Start apache in background
-if [ -x /usr/sbin/httpd ]; then
+if [ -x /usr/sbin/start_apache2 ]; then
+  # newer SUSE
+  sudo a2enmod rewrite
+  sudo a2enmod php5
+
+  sudo /usr/sbin/start_apache2 -t
+  sudo /usr/sbin/start_apache2 -k start
+elif [ -x /usr/sbin/apache2ctl ]; then
+  # older SUSE
+  sudo a2enmod rewrite
+  sudo a2enmod php5
+
+  sudo /etc/init.d/apache2 start
+elif [ -x /usr/sbin/httpd ]; then
   sudo httpd -t
   sudo httpd -k start
-elif [ -x /usr/sbin/apache2 ]; then
-  sudo apache2 -t
-  sudo apache2 -k start
 else
   echo "Can not detect how to start Apache!" >&2
   exit 1
