@@ -66,7 +66,7 @@
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.6.0
+Version: 2.6.3
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 Group: Applications/System
@@ -97,8 +97,15 @@ BuildRequires: gcc48-c++
 BuildRequires: libstdc++48-devel
 BuildRequires: libopenssl1-devel
 %else
+%if "%{_vendor}" == "redhat" && (0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+# Requires devtoolset-2 scl
+BuildRequires: devtoolset-2-gcc-c++
+BuildRequires: devtoolset-2-libstdc++-devel
+%define scl_enable scl enable devtoolset-2 --
+%else
 BuildRequires: gcc-c++
 BuildRequires: libstdc++-devel
+%endif
 BuildRequires: openssl-devel
 %endif
 BuildRequires: cmake
@@ -117,7 +124,12 @@ BuildRequires: boost153-devel
 # sles 11 sp3 requires packages.icinga.com
 BuildRequires: boost153-devel
 %else
-BuildRequires: boost-devel >= 1.41
+%if (0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+# Requires EPEL repository
+BuildRequires: boost148-devel >= 1.48
+%else
+BuildRequires: boost-devel >= 1.48
+%endif
 %endif
 %endif
 
@@ -230,8 +242,8 @@ BuildRequires:  checkpolicy, selinux-policy-devel, /usr/share/selinux/devel/poli
 Requires:       selinux-policy >= %{_selinux_policy_version}
 %endif
 Requires:       %{name} = %{version}-%{release}
-Requires(post):   /usr/sbin/semodule, /sbin/restorecon
-Requires(postun): /usr/sbin/semodule, /sbin/restorecon
+Requires(post):   policycoreutils-python
+Requires(postun): policycoreutils-python
 
 %description selinux
 SELinux policy module supporting icinga2
@@ -291,17 +303,21 @@ CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_WITH_STUDIO=true"
 %endif
 %if "%{_vendor}" == "redhat"
 %if 0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6"
+%if 0%{?build_icinga_org}
 # Boost_VERSION 1.41.0 vs 101400 - disable build tests
 # details in https://dev.icinga.com/issues/5033
-CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=/usr/lib/boost153 \
+CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=%{_libdir}/boost153 \
  -DBOOST_INCLUDEDIR=/usr/include/boost153 \
- -DBoost_ADDITIONAL_VERSIONS='1.53;1.53.0' \
+ -DBoost_ADDITIONAL_VERSIONS='1.53;1.53.0'"
+%else
+CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=%{_libdir}/boost148 \
+ -DBOOST_INCLUDEDIR=/usr/include/boost148 \
+ -DBoost_ADDITIONAL_VERSIONS='1.48;1.48.0'"
+%endif
+CMAKE_OPTS="$CMAKE_OPTS \
  -DBoost_NO_SYSTEM_PATHS=TRUE \
  -DBUILD_TESTING=FALSE \
  -DBoost_NO_BOOST_CMAKE=TRUE"
-%endif
-%if 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6"
-CMAKE_OPTS="$CMAKE_OPTS -DBUILD_TESTING=FALSE"
 %endif
 %endif
 
@@ -309,7 +325,7 @@ CMAKE_OPTS="$CMAKE_OPTS -DBUILD_TESTING=FALSE"
 CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_libdir}/nagios/plugins"
 %else
 %if 0%{?suse_version} < 1310
-CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=/usr/lib/boost153 \
+CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=%{_libdir}/boost153 \
  -DBOOST_INCLUDEDIR=/usr/include/boost153 \
  -DBoost_ADDITIONAL_VERSIONS='1.53;1.53.0' \
  -DBoost_NO_SYSTEM_PATHS=TRUE \
@@ -323,7 +339,7 @@ CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_prefix}/lib/nagios/plugins"
 CMAKE_OPTS="$CMAKE_OPTS -DUSE_SYSTEMD=ON"
 %endif
 
-cmake $CMAKE_OPTS -DCMAKE_C_FLAGS:STRING="%{optflags} %{?march_flag}" -DCMAKE_CXX_FLAGS:STRING="%{optflags} %{?march_flag}" .
+%{?scl_enable} cmake $CMAKE_OPTS -DCMAKE_C_FLAGS:STRING="%{optflags} %{?march_flag}" -DCMAKE_CXX_FLAGS:STRING="%{optflags} %{?march_flag}" .
 
 make %{?_smp_mflags}
 
