@@ -1,9 +1,9 @@
 # Icinga Web 2 | (c) 2013-2016 Icinga Development Team | GPLv2+
 
-%define revision 2
+%define revision 1
 
 Name:           icingaweb2
-Version:        2.4.0
+Version:        2.4.1
 Release:        %{revision}%{?dist}
 Summary:        Icinga Web 2
 Group:          Applications/System
@@ -235,7 +235,7 @@ do
   install -p -m 644 icingaweb2.pp.${selinuxvariant} %{buildroot}%{_datadir}/selinux/${selinuxvariant}/icingaweb2.pp
 done
 cd -
-#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
 %endif
 
 %pre

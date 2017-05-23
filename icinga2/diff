@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+curl -LsS --output icinga2.spec~ "https://raw.githubusercontent.com/Icinga/icinga2/master/icinga2.spec"
+
+diff -Nau icinga2.spec{,~}

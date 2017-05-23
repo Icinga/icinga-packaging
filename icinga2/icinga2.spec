@@ -393,7 +393,7 @@ do
 done
 cd -
 
-#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
 %endif
 
 %if 0%{?fedora}
@@ -469,10 +469,13 @@ getent passwd %{icinga_user} >/dev/null || %{_sbindir}/useradd -c "icinga" -s /s
 %fillup_and_insserv %{name}
 %endif
 
-# initial installation, enable default features
-for feature in checker notification mainlog; do
-	ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
-done
+if [ ${1:-0} -eq 1 ]
+then
+	# initial installation, enable default features
+	for feature in checker notification mainlog; do
+		ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
+	done
+fi
 
 exit 0
 
