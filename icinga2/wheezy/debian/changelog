@@ -1,3 +1,9 @@
+icinga2 (2.6.3-1) icinga-wheezy; urgency=medium
+
+  * Update to 2.6.3
+
+ -- Markus Frosch <lazyfrosch@debian.org>  Wed, 24 May 2017 08:47:46 +0200
+
 icinga2 (2.6.0-2~debmon70+1) debmon-wheezy; urgency=medium
 
   * Rebuild for wheezy
