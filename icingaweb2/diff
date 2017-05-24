@@ -6,7 +6,7 @@ cd "$(readlink -f "$(dirname "$0")")"
 
 target="${1%/}"
 branch="$target"
-debian_git=https://anonscm.debian.org/git/pkg-nagios/pkg-icinga2.git
+debian_git=https://anonscm.debian.org/git/pkg-nagios/pkg-icingaweb2.git
 
 case "$target" in
   jessie|wheezy)
@@ -15,7 +15,8 @@ case "$target" in
   stretch)
     branch=master
     ;;
-  ubuntu)
+  precise|trusty|xenial)
+    branch="ubuntu_$target"
     ;;
   *)
     echo "Please specify what to diff, target '$target' is unknown!" >&2
