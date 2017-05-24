@@ -235,7 +235,8 @@ do
   install -p -m 644 icingaweb2.pp.${selinuxvariant} %{buildroot}%{_datadir}/selinux/${selinuxvariant}/icingaweb2.pp
 done
 cd -
-/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+# TODO: Fix build problems on Icinga, see https://github.com/Icinga/puppet-icinga_build/issues/11
+#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
 %endif
 
 %pre
