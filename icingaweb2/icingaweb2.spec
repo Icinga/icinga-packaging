@@ -122,8 +122,6 @@ SELinux policy for Icinga Web 2
 
 
 %package vendor-dompdf
-Version:    0.7.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library dompdf
 Group:      Development/Libraries
 License:    LGPLv2.1
@@ -134,8 +132,6 @@ Icinga Web 2 vendor library dompdf
 
 
 %package vendor-HTMLPurifier
-Version:    4.8.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
@@ -146,8 +142,6 @@ Icinga Web 2 vendor library HTMLPurifier
 
 
 %package vendor-JShrink
-Version:    1.1.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library JShrink
 Group:      Development/Libraries
 License:    BSD
@@ -158,8 +152,6 @@ Icinga Web 2 vendor library JShrink
 
 
 %package vendor-lessphp
-Version:    0.4.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library lessphp
 Group:      Development/Libraries
 License:    MIT
@@ -170,8 +162,6 @@ Icinga Web 2 vendor library lessphp
 
 
 %package vendor-Parsedown
-Version:    1.6.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library Parsedown
 Group:      Development/Libraries
 License:    MIT
@@ -182,8 +172,6 @@ Icinga Web 2 vendor library Parsedown
 
 
 %package vendor-zf1
-Version:    1.12.20
-Release:    1%{?dist}
 Summary:    Icinga Web 2's fork of Zend Framework 1
 Group:      Development/Libraries
 License:    BSD
