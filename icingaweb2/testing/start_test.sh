@@ -44,7 +44,7 @@ sleep 5
 
 output=`mktemp`
 
-if curl -v http://localhost/icingaweb2/authentication/login -o "$output"; then
+if curl -v http://127.0.0.1/icingaweb2/authentication/login -o "$output"; then
   if grep -q '<div id="login"' "$output"; then
     echo "Login page available"
     exit 0
