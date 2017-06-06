@@ -50,7 +50,11 @@ else
 fi
 
 git_version=$(git describe --tags HEAD)
-package_version=$(echo "$git_version" | sed -e 's/^v//' -e 's/-/+/' -e 's/-/./g')
+if [[ "$git_version" = *2.6.3* ]]; then
+  package_version=$(echo "$git_version" | sed -e 's/^v//' -e 's/-/+t/' -e 's/-/./g')
+else
+  package_version=$(echo "$git_version" | sed -e 's/^v//' -e 's/-/+/' -e 's/-/./g')
+fi
 tarball="${workdir}/${PROJECT}_${package_version}.orig.tar"
 
 git archive --format=tar --prefix="${PROJECT}_${package_version}/" -o "${tarball}" HEAD
