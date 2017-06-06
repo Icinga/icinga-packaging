@@ -40,7 +40,7 @@ Requires: apache2-mod_php5
 Requires:                       %{name}-common = %{version}-%{release}
 Requires:                       php-Icinga = %{version}-%{release}
 Requires:                       %{name}-vendor-dompdf = %{version}-%{release}
-Requires:                       %{name}-vendor-HTMLPurifier = %{version}-%{release}
+Requires:                       %{name}-vendor-HTMLPurifier = 1:%{version}-%{release}
 Requires:                       %{name}-vendor-JShrink = %{version}-%{release}
 Requires:                       %{name}-vendor-lessphp = %{version}-%{release}
 Requires:                       %{name}-vendor-Parsedown = %{version}-%{release}
@@ -132,6 +132,7 @@ Icinga Web 2 vendor library dompdf
 
 
 %package vendor-HTMLPurifier
+Epoch:      1
 Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
@@ -176,7 +177,7 @@ Summary:    Icinga Web 2's fork of Zend Framework 1
 Group:      Development/Libraries
 License:    BSD
 Requires:   %{php} >= 5.3.0
-Obsoletes:  %{name}-vendor-Zend
+Obsoletes:  %{name}-vendor-Zend < 1.12.20
 
 %description vendor-zf1
 Icinga Web 2's fork of Zend Framework 1
