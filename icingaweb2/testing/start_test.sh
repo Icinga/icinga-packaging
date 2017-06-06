@@ -40,7 +40,7 @@ else
   exit 1
 fi
 
-sleep 5
+sleep 10
 
 output=`mktemp`
 
@@ -62,5 +62,7 @@ else
   echo "Output of the page is:"
   echo "====================================="
   cat "$output"
+  echo "====================================="
+  cat /var/log/httpd/*error* /var/log/apache2/*error*
   exit 1
 fi
