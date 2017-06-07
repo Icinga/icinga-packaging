@@ -31,27 +31,29 @@ workdir=`pwd`
 
 set -x
 
-if [ -d "${PROJECT}.git/" ]; then
-    cd "${PROJECT}.git"
-    if [ ! -d .git ]; then
-        echo "This is not a GIT repository: $(pwd)" >&2
+if [ -z "$UPSTREAM_GIT_NOREPO" ]; then
+    if [ -d "${PROJECT}.git/" ]; then
+        cd "${PROJECT}.git"
+        if [ ! -d .git ]; then
+            echo "This is not a GIT repository: $(pwd)" >&2
+            exit 1
+        fi
+        if [ -z "$UPSTREAM_GIT_NOUPDATE" ]; then
+            if [ "$(git config remote.origin.url)" != "${UPSTREAM_GIT_URL}" ]; then
+                git remote set-url origin "${UPSTREAM_GIT_URL}"
+            fi
+            git fetch origin -p
+            git checkout -f "${UPSTREAM_GIT_BRANCH}"
+            git reset --hard "origin/${UPSTREAM_GIT_BRANCH}"
+        fi
+        git clean -fdx
+    elif [ -z "$UPSTREAM_GIT_NOUPDATE" ]; then
+        git clone -b "${UPSTREAM_GIT_BRANCH}" "${UPSTREAM_GIT_URL}" "${PROJECT}.git/"
+        cd "${PROJECT}.git"
+    else
+        echo "Missing '${PROJECT}.git' directory!" >&2
         exit 1
     fi
-    if [ -z "$UPSTREAM_GIT_NOUPDATE" ]; then
-        if [ "$(git config remote.origin.url)" != "${UPSTREAM_GIT_URL}" ]; then
-            git remote set-url origin "${UPSTREAM_GIT_URL}"
-        fi
-        git fetch origin -p
-        git checkout -f "${UPSTREAM_GIT_BRANCH}"
-        git reset --hard "origin/${UPSTREAM_GIT_BRANCH}"
-    fi
-    git clean -fdx
-elif [ -z "$UPSTREAM_GIT_NOUPDATE" ]; then
-    git clone -b "${UPSTREAM_GIT_BRANCH}" "${UPSTREAM_GIT_URL}" "${PROJECT}.git/"
-    cd "${PROJECT}.git"
-else
-    echo "Missing '${PROJECT}.git' directory!" >&2
-    exit 1
 fi
 
 git_version=$(git describe --tags "${UPSTREAM_GIT_BRANCH}")
