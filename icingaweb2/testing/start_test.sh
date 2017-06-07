@@ -63,6 +63,6 @@ else
   echo "====================================="
   cat "$output"
   echo "====================================="
-  cat /var/log/httpd/*error* /var/log/apache2/*error*
+  sudo sh -ex <<<'cat /var/log/httpd/*error* /var/log/apache2/*error*'
   exit 1
 fi
