@@ -54,11 +54,11 @@ else
     exit 1
 fi
 
-git_version=$(git describe --tags HEAD)
+git_version=$(git describe --tags "${UPSTREAM_GIT_BRANCH}")
 package_version=$(echo "$git_version" | sed -e 's/^v//' -e 's/-/./g')
 tarball="${workdir}/${PROJECT}-${package_version}.tar"
 
-git archive --format=tar --prefix="${PROJECT}-${package_version}/" -o "${tarball}" HEAD
+git archive --format=tar --prefix="${PROJECT}-${package_version}/" -o "${tarball}" "${UPSTREAM_GIT_BRANCH}"
 
 # creating version file for tarball
 mkdir "${PROJECT}-${package_version}"
@@ -71,4 +71,4 @@ gzip -vf9 "${tarball}"
 sha256sum "${tarball}.gz"
 
 # store package version for build scripts
-echo -e "${package_version}\t$(git rev-parse HEAD)\t$(basename "${tarball}.gz")\t${UPSTREAM_GIT_BRANCH}" > "${workdir}/${PROJECT}.version"
+echo -e "${package_version}\t$(git rev-parse "${UPSTREAM_GIT_BRANCH}")\t$(basename "${tarball}.gz")\t${UPSTREAM_GIT_BRANCH}" > "${workdir}/${PROJECT}.version"
