@@ -35,7 +35,7 @@ elif [ -x /usr/share/apache2/get_module_list ]; then
 elif [ -x /usr/sbin/httpd ]; then
   # Disable mod_lua - it sometimes crashes on Fedora 25 with:
   # mod_lua: Failed to create shared memory segment on file /tmp/httpd_lua_shm.187
-  test -e conf.modules.d/00-lua.conf && mv conf.modules.d/00-lua.conf{,.off} || true
+  test -e /etc/httpd/conf.modules.d/00-lua.conf && mv /etc/httpd/conf.modules.d/00-lua.conf{,.off} || true
   sudo httpd -t
   sudo httpd -k start
 else
