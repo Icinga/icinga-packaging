@@ -64,7 +64,7 @@ else
 fi
 tarball="${workdir}/${PROJECT}_${package_version}.orig.tar"
 
-git archive --format=tar --prefix="${PROJECT}_${package_version}/" -o "${tarball}" HEAD
+git archive --format=tar --prefix="${PROJECT}_${package_version}/" -o "${tarball}" "${UPSTREAM_GIT_BRANCH}"
 
 # creating version file for tarball
 echo "#define VERSION \"$git_version\"" > icinga-version.h.force
