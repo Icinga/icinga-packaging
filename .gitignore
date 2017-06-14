@@ -1,6 +1,7 @@
 # Editors
 *~
 .*.sw[op]
+/.idea/
 
 # Tarball
 *.tar
@@ -9,3 +10,6 @@
 # Fragments from snapshots
 *.version
 *.git/
+
+# Fragments from diffing
+.debian_*
