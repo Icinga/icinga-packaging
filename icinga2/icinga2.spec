@@ -25,6 +25,7 @@
 %endif
 
 %define _libexecdir %{_prefix}/lib/
+%define plugindir %{_libdir}/nagios/plugins
 
 %if "%{_vendor}" == "redhat"
 %define apachename httpd
@@ -43,6 +44,7 @@
 %endif
 
 %if "%{_vendor}" == "suse"
+%define plugindir %{_prefix}/lib/nagios/plugins
 %define apachename apache2
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
 %define apacheuser wwwrun
@@ -302,6 +304,7 @@ CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=/usr \
          -DICINGA2_LTO_BUILD=ON \
          -DCMAKE_VERBOSE_MAKEFILE=ON \
          -DBoost_NO_BOOST_CMAKE=ON \
+         -DICINGA2_PLUGINDIR=%{plugindir} \
          -DICINGA2_RUNDIR=%{_rundir} \
          -DICINGA2_USER=%{icinga_user} \
          -DICINGA2_GROUP=%{icinga_group} \
@@ -329,18 +332,13 @@ CMAKE_OPTS="$CMAKE_OPTS \
 %endif
 %endif
 
-%if "%{_vendor}" != "suse"
-CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_libdir}/nagios/plugins"
-%else
-%if 0%{?suse_version} < 1310
+%if "%{_vendor}" == "suse" && 0%{?suse_version} < 1310
 CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=%{_libdir}/boost153 \
  -DBOOST_INCLUDEDIR=/usr/include/boost153 \
  -DBoost_ADDITIONAL_VERSIONS='1.53;1.53.0' \
  -DBoost_NO_SYSTEM_PATHS=TRUE \
  -DBUILD_TESTING=FALSE \
  -DBoost_NO_BOOST_CMAKE=TRUE"
-%endif
-CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_prefix}/lib/nagios/plugins"
 %endif
 
 %if 0%{?use_systemd}
@@ -674,6 +672,7 @@ fi
 %{_sbindir}/%{name}
 %dir %{_libdir}/%{name}/sbin
 %{_libdir}/%{name}/sbin/%{name}
+%{plugindir}/check_nscp_api
 %{_datadir}/%{name}
 %exclude %{_datadir}/%{name}/include
 %{_mandir}/man8/%{name}.8.gz
