@@ -1,3 +1,4 @@
 usr/sbin/icinga2
 usr/lib/*/icinga2/sbin
+usr/lib/nagios/plugins/check_nscp_api
 usr/share/man/man8/icinga2.8
