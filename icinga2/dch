@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+DIST=(wheezy jessie stretch ubuntu)
+VERSION="$1"
+shift
+CHANGELOG="$@"
+
+cd $(dirname "$0")
+
+newversion=()
+if [ -n "$VERSION" ]; then
+    newversion=("--newversion" "$VERSION")
+fi
+
+echo "Using your git name + email for Debian scripts..."
+
+set -x
+
+export DEBFULLNAME=$(git config user.name)
+export DEBEMAIL=$(git config user.email)
+
+for dist in "${DIST[@]}"; do
+    dch --force-distribution --changelog "$dist"/debian/changelog "${newversion[@]}" --distribution "icinga-$dist" -- "${CHANGELOG[@]}"
+done
