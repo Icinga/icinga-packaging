@@ -150,11 +150,16 @@ Provides binaries for Icinga 2 Core.
 %package common
 Summary:      Common Icinga 2 configuration
 Group:        Applications/System
-%{?amzn:Requires(pre):          shadow-utils}
-%{?fedora:Requires(pre):        shadow-utils}
-%{?rhel:Requires(pre):          shadow-utils}
-%{?suse_version:Requires(pre):  pwdutils}
+%if (0%{?amzn} || 0%{?fedora} || 0%{?rhel})
+Requires(pre):          shadow-utils
+Requires(post):         shadow-utils
+%endif
 %if "%{_vendor}" == "suse"
+Requires(pre):          shadow
+Requires(post):         shadow
+# Coreutils is added because of autoyast problems reported
+Requires(pre):          coreutils
+Requires(post):         coreutils
 Recommends:   logrotate
 %endif
 
