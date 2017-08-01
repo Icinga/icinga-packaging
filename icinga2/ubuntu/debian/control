@@ -1,13 +1,13 @@
 Source: icinga2
 Section: admin
 Priority: extra
-Maintainer: Icinga Development Team <info@icinga.com>
 #Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
 #Uploaders: Markus Frosch <lazyfrosch@debian.org>,
 #           Jan Wagner <waja@cyconet.org>,
 #           Alexander Wirt <formorer@debian.org>
-# WARNING: LEAVE LINE BELOW EMPTY - pbuilder-satisfy-deps is buggy on xenial + yakkety parsing lines with comments
-
+# WARNING: DO NOT PUT A COMMENTED LINE above Build-Depends
+# pbuilder-satisfy-deps is buggy on xenial + yakkety parsing lines with comments
+Maintainer: Icinga Development Team <info@icinga.com>
 Build-Depends: bash-completion,
                bison,
                cmake (>= 2.8.7),
