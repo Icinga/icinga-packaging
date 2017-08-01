@@ -6,6 +6,8 @@ Maintainer: Icinga Development Team <info@icinga.com>
 #Uploaders: Markus Frosch <lazyfrosch@debian.org>,
 #           Jan Wagner <waja@cyconet.org>,
 #           Alexander Wirt <formorer@debian.org>
+# WARNING: LEAVE LINE BELOW EMPTY - pbuilder-satisfy-deps is buggy on xenial + yakkety parsing lines with comments
+
 Build-Depends: bash-completion,
                bison,
                cmake (>= 2.8.7),
