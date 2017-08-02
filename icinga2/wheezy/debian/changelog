@@ -1,3 +1,9 @@
+icinga2 (2.7.0-1) icinga-wheezy; urgency=medium
+
+  * Update to 2.7.0
+
+ -- Markus Frosch <markus.frosch@icinga.com>  Tue, 20 Jun 2017 09:40:35 +0200
+
 icinga2 (2.6.3-1) icinga-wheezy; urgency=medium
 
   * Update to 2.6.3
