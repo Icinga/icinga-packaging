@@ -13,6 +13,12 @@ See branch [deb/snapshot](https://github.com/Icinga/icinga-packaging/tree/deb/sn
 
 See branch [rpm/snapshot](https://github.com/Icinga/icinga-packaging/tree/rpm/snapshot)
 
+## Documentation
+
+Documentation is collected inside the [doc](doc/) directory.
+
+* [Releasing packages](doc/releases.md)
+
 ## Contributing
 
 Checkout the `*/snapshot` branches, for the latest packaging version.
