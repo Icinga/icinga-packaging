@@ -39,11 +39,11 @@ Requires: apache2-mod_php5
 %{?suse_version:Requires(pre):  pwdutils}
 Requires:                       %{name}-common = %{version}-%{release}
 Requires:                       php-Icinga = %{version}-%{release}
-Requires:                       %{name}-vendor-dompdf = 0.7.0-1%{?dist}
-Requires:                       %{name}-vendor-HTMLPurifier = 4.8.0-1%{?dist}
-Requires:                       %{name}-vendor-JShrink = 1.1.0-1%{?dist}
-Requires:                       %{name}-vendor-lessphp = 0.4.0-1%{?dist}
-Requires:                       %{name}-vendor-Parsedown = 1.6.0-1%{?dist}
+Requires:                       %{name}-vendor-dompdf = %{version}-%{release}
+Requires:                       %{name}-vendor-HTMLPurifier = 1:%{version}-%{release}
+Requires:                       %{name}-vendor-JShrink = %{version}-%{release}
+Requires:                       %{name}-vendor-lessphp = %{version}-%{release}
+Requires:                       %{name}-vendor-Parsedown = %{version}-%{release}
 
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %define selinux 1
@@ -81,7 +81,7 @@ Summary:                    Icinga Web 2 PHP library
 Group:                      Development/Libraries
 Requires:                   %{php} >= 5.3.0
 Requires:                   %{php}-gd %{php}-intl
-Requires:                   %{name}-vendor-zf1 = 1.12.20-1%{?dist}
+Requires:                   %{name}-vendor-zf1 = %{version}-%{release}
 %{?amzn:Requires:           %{php}-pecl-imagick}
 %{?fedora:Requires:         php-pecl-imagick}
 %{?rhel:Requires:           php-pecl-imagick}
@@ -122,8 +122,6 @@ SELinux policy for Icinga Web 2
 
 
 %package vendor-dompdf
-Version:    0.7.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library dompdf
 Group:      Development/Libraries
 License:    LGPLv2.1
@@ -134,8 +132,7 @@ Icinga Web 2 vendor library dompdf
 
 
 %package vendor-HTMLPurifier
-Version:    4.8.0
-Release:    1%{?dist}
+Epoch:      1
 Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
@@ -146,8 +143,6 @@ Icinga Web 2 vendor library HTMLPurifier
 
 
 %package vendor-JShrink
-Version:    1.1.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library JShrink
 Group:      Development/Libraries
 License:    BSD
@@ -158,8 +153,6 @@ Icinga Web 2 vendor library JShrink
 
 
 %package vendor-lessphp
-Version:    0.4.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library lessphp
 Group:      Development/Libraries
 License:    MIT
@@ -170,8 +163,6 @@ Icinga Web 2 vendor library lessphp
 
 
 %package vendor-Parsedown
-Version:    1.6.0
-Release:    1%{?dist}
 Summary:    Icinga Web 2 vendor library Parsedown
 Group:      Development/Libraries
 License:    MIT
@@ -182,13 +173,11 @@ Icinga Web 2 vendor library Parsedown
 
 
 %package vendor-zf1
-Version:    1.12.20
-Release:    1%{?dist}
 Summary:    Icinga Web 2's fork of Zend Framework 1
 Group:      Development/Libraries
 License:    BSD
 Requires:   %{php} >= 5.3.0
-Obsoletes:  %{name}-vendor-Zend
+Obsoletes:  %{name}-vendor-Zend < 1.12.20
 
 %description vendor-zf1
 Icinga Web 2's fork of Zend Framework 1
