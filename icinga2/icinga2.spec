@@ -25,13 +25,14 @@
 %endif
 
 %define _libexecdir %{_prefix}/lib/
+%define plugindir %{_libdir}/nagios/plugins
 
 %if "%{_vendor}" == "redhat"
 %define apachename httpd
 %define apacheconfdir %{_sysconfdir}/httpd/conf.d
 %define apacheuser apache
 %define apachegroup apache
-%if 0%{?el5}%{?el6}
+%if 0%{?el5}%{?el6}%{?amzn}
 %define use_systemd 0
 %if %(uname -m) != "x86_64"
 %define march_flag -march=i686
@@ -43,6 +44,7 @@
 %endif
 
 %if "%{_vendor}" == "suse"
+%define plugindir %{_prefix}/lib/nagios/plugins
 %define apachename apache2
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
 %define apacheuser wwwrun
@@ -60,13 +62,14 @@
 %define icingaweb2name icingaweb2
 %define icingaweb2version 2.0.0
 
+# DEPRECATED
 %define icingaclassicconfdir %{_sysconfdir}/icinga
 
 %define logmsg logger -t %{name}/rpm
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.6.3
+Version: 2.7.0
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 Group: Applications/System
@@ -147,10 +150,10 @@ Provides binaries for Icinga 2 Core.
 %package common
 Summary:      Common Icinga 2 configuration
 Group:        Applications/System
-%if "%{_vendor}" == "redhat"
-Requires(pre): shadow-utils
-Requires(post): shadow-utils
-%endif
+%{?amzn:Requires(pre):          shadow-utils}
+%{?fedora:Requires(pre):        shadow-utils}
+%{?rhel:Requires(pre):          shadow-utils}
+%{?suse_version:Requires(pre):  pwdutils}
 %if "%{_vendor}" == "suse"
 Recommends:   logrotate
 %endif
@@ -212,7 +215,10 @@ Requires: %{name} = %{version}-%{release}
 Icinga 2 IDO PostgreSQL database backend. Compatible with Icinga 1.x
 IDOUtils schema >= 1.12
 
+# DEPRECATED, disable builds on Amazon
+%if !(0%{?amzn})
 
+# DEPRECATED
 %package classicui-config
 Summary:      Icinga 2 Classic UI Standalone configuration
 Group:        Applications/System
@@ -225,9 +231,13 @@ Recommends:   icinga-www
 Provides:     icinga-classicui-config
 Conflicts:    icinga-gui-config
 
+# DEPRECATED
 %description classicui-config
 Icinga 1.x Classic UI Standalone configuration with locations
 for Icinga 2.
+
+# DEPRECATED, disable builds on Amazon
+%endif
 
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %global selinux_variants mls targeted
@@ -294,6 +304,7 @@ CMAKE_OPTS="-DCMAKE_INSTALL_PREFIX=/usr \
          -DICINGA2_LTO_BUILD=ON \
          -DCMAKE_VERBOSE_MAKEFILE=ON \
          -DBoost_NO_BOOST_CMAKE=ON \
+         -DICINGA2_PLUGINDIR=%{plugindir} \
          -DICINGA2_RUNDIR=%{_rundir} \
          -DICINGA2_USER=%{icinga_user} \
          -DICINGA2_GROUP=%{icinga_group} \
@@ -321,18 +332,13 @@ CMAKE_OPTS="$CMAKE_OPTS \
 %endif
 %endif
 
-%if "%{_vendor}" != "suse"
-CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_libdir}/nagios/plugins"
-%else
-%if 0%{?suse_version} < 1310
+%if "%{_vendor}" == "suse" && 0%{?suse_version} < 1310
 CMAKE_OPTS="$CMAKE_OPTS -DBOOST_LIBRARYDIR=%{_libdir}/boost153 \
  -DBOOST_INCLUDEDIR=/usr/include/boost153 \
  -DBoost_ADDITIONAL_VERSIONS='1.53;1.53.0' \
  -DBoost_NO_SYSTEM_PATHS=TRUE \
  -DBUILD_TESTING=FALSE \
  -DBoost_NO_BOOST_CMAKE=TRUE"
-%endif
-CMAKE_OPTS="$CMAKE_OPTS -DICINGA2_PLUGINDIR=%{_prefix}/lib/nagios/plugins"
 %endif
 
 %if 0%{?use_systemd}
@@ -364,10 +370,16 @@ cd -
 make install \
 	DESTDIR="%{buildroot}"
 
+# DEPRECATED, disable builds on Amazon
+%if !(0%{?amzn})
+
 # install classicui config
 install -D -m 0644 etc/icinga/icinga-classic.htpasswd %{buildroot}%{icingaclassicconfdir}/passwd
 install -D -m 0644 etc/icinga/cgi.cfg %{buildroot}%{icingaclassicconfdir}/cgi.cfg
 install -D -m 0644 etc/icinga/icinga-classic-apache.conf %{buildroot}%{apacheconfdir}/icinga.conf
+
+# DEPRECATED, disable builds on Amazon
+%endif
 
 # remove features-enabled symlinks
 rm -f %{buildroot}/%{_sysconfdir}/%{name}/features-enabled/*.conf
@@ -596,6 +608,9 @@ fi
 
 exit 0
 
+# DEPRECATED, disable builds on Amazon
+%if !(0%{?amzn})
+
 %post classicui-config
 if [ ${1:-0} -eq 1 ]
 then
@@ -605,8 +620,11 @@ then
 	done
 fi
 
+%logmsg "The icinga2-classicui-config package has been deprecated and will be removed in future releases."
+
 exit 0
 
+# DEPRECATED
 %postun classicui-config
 if [ "$1" = "0" ]; then
         # deinstallation of the package - remove feature
@@ -616,6 +634,9 @@ if [ "$1" = "0" ]; then
 fi
 
 exit 0
+
+# DEPRECATED, disable builds on Amazon
+%endif
 
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %post selinux
@@ -647,10 +668,11 @@ fi
 
 %files bin
 %defattr(-,root,root,-)
-%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS ChangeLog
+%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md
 %{_sbindir}/%{name}
 %dir %{_libdir}/%{name}/sbin
 %{_libdir}/%{name}/sbin/%{name}
+%{plugindir}/check_nscp_api
 %{_datadir}/%{name}
 %exclude %{_datadir}/%{name}/include
 %{_mandir}/man8/%{name}.8.gz
@@ -667,7 +689,7 @@ fi
 
 %files libs
 %defattr(-,root,root,-)
-%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS ChangeLog
+%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md
 %exclude %{_libdir}/%{name}/libdb_ido_mysql*
 %exclude %{_libdir}/%{name}/libdb_ido_pgsql*
 %dir %{_libdir}/%{name}
@@ -675,7 +697,7 @@ fi
 
 %files common
 %defattr(-,root,root,-)
-%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS ChangeLog tools/syntax
+%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md tools/syntax
 %attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %{_sysconfdir}/bash_completion.d/%{name}
@@ -724,17 +746,20 @@ fi
 
 %files ido-mysql
 %defattr(-,root,root,-)
-%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS ChangeLog
+%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/features-available/ido-mysql.conf
 %{_libdir}/%{name}/libdb_ido_mysql*
 %{_datadir}/icinga2-ido-mysql
 
 %files ido-pgsql
 %defattr(-,root,root,-)
-%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS ChangeLog
+%doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/features-available/ido-pgsql.conf
 %{_libdir}/%{name}/libdb_ido_pgsql*
 %{_datadir}/icinga2-ido-pgsql
+
+# DEPRECATED, disable builds on Amazon
+%if !(0%{?amzn})
 
 %files classicui-config
 %defattr(-,root,root,-)
@@ -742,6 +767,9 @@ fi
 %config(noreplace) %{icingaclassicconfdir}/cgi.cfg
 %config(noreplace) %{apacheconfdir}/icinga.conf
 %config(noreplace) %attr(0640,root,%{apachegroup}) %{icingaclassicconfdir}/passwd
+
+# DEPRECATED, disable builds on Amazon
+%endif
 
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %files selinux
@@ -778,3 +806,5 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Tue Jun 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.0-1
+- Update to 2.7.0
