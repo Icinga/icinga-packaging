@@ -1,0 +1,7 @@
+[icinga-snapshot-builds]
+name=ICINGA (snapshot builds for @@repo@@)
+baseurl=http://packages.icinga.com/@@repo@@/$releasever/snapshot/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ICINGA
+metadata_expire=1d

@@ -1,0 +1,6 @@
+[icinga-stable-release]
+name=ICINGA (stable release for @@repo@@)
+baseurl=http://packages.icinga.com/@@repo@@/$releasever/release/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ICINGA
