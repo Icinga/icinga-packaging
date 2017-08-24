@@ -522,7 +522,7 @@ exit 0
 %postun common
 # suse
 %if "%{_vendor}" == "suse"
-%if 0%{?using_systemd}
+%if 0%{?use_systemd}
   %service_del_postun %{name}.service
 %else
   %restart_on_update %{name}
