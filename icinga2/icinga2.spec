@@ -232,6 +232,11 @@ Requires:     %{apachename}
 Requires:     %{name} = %{version}-%{release}
 %if "%{_vendor}" == "suse"
 Recommends:   icinga-www
+# for running logger to log the deprecated warning
+%if 0%{?use_systemd}
+BuildRequires:util-linux-systemd
+Requires:     util-linux-systemd
+%endif
 %endif
 Provides:     icinga-classicui-config
 Conflicts:    icinga-gui-config
