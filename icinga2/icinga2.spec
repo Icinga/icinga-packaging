@@ -151,16 +151,18 @@ Provides binaries for Icinga 2 Core.
 Summary:      Common Icinga 2 configuration
 Group:        Applications/System
 %if (0%{?amzn} || 0%{?fedora} || 0%{?rhel})
-Requires(pre):          shadow-utils
-Requires(post):         shadow-utils
+Requires(pre):  shadow-utils
+Requires(post): shadow-utils
 %endif
 %if "%{_vendor}" == "suse"
-Requires(pre):          shadow
-Requires(post):         shadow
+Requires(pre):  shadow
+Requires(post): shadow
 # Coreutils is added because of autoyast problems reported
-Requires(pre):          coreutils
-Requires(post):         coreutils
-Recommends:   logrotate
+Requires(pre):  coreutils
+Requires(post): coreutils
+BuildRequires:  monitoring-plugins-common
+Requires:       monitoring-plugins-common
+Recommends:     logrotate
 %endif
 
 %description common
