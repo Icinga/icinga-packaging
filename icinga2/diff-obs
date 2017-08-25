@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+project="$1"
+if [ -z "$project" ]; then
+    project=server:monitoring
+fi
+
+if ! which osc &>/dev/null; then
+    echo "This script needs 'osc' to download files from OpenSuSE Build Service" >&2
+    exit 1
+fi
+
+osc cat "$project" icinga2 icinga2.spec >icinga2.obs.spec~
+
+diff -Nau icinga2.spec icinga2.obs.spec~
