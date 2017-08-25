@@ -301,7 +301,6 @@ Vim syntax highlighting for icinga2
 %package -n nano-icinga2
 Summary:       Nano syntax highlighting for icinga2
 Group:         Applications/System
-BuildRequires: nano
 Requires:      nano
 
 %description -n nano-icinga2
@@ -827,6 +826,9 @@ fi
 
 %files -n nano-icinga2
 %defattr(-,root,root,-)
+%if "%{_vendor}" == "suse"
+%dir %{_datadir}/nano
+%endif
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
