@@ -301,7 +301,6 @@ Vim syntax highlighting for icinga2
 %package -n nano-icinga2
 Summary:       Nano syntax highlighting for icinga2
 Group:         Applications/System
-BuildRequires: nano
 Requires:      nano
 
 %description -n nano-icinga2
@@ -442,18 +441,8 @@ Keywords=Monitoring;" > %{buildroot}%{_datadir}/applications/icinga2-studio.desk
 %endif
 
 %if "%{_vendor}" == "suse"
-%if 0%{?leap_version} >= 420100
 install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/site/syntax/%{name}.vim
 install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/site/ftdetect/%{name}.vim
-%else
-%if 0%{?suse_version} >= 1310
-install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vim74/syntax/%{name}.vim
-install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vim74/ftdetect/%{name}.vim
-%else
-install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vim72/syntax/%{name}.vim
-install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vim72/ftdetect/%{name}.vim
-%endif
-%endif
 %else
 install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vimfiles/syntax/%{name}.vim
 install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vimfiles/ftdetect/%{name}.vim
@@ -808,18 +797,8 @@ fi
 %files -n vim-icinga2
 %defattr(-,root,root,-)
 %if "%{_vendor}" == "suse"
-%if 0%{?leap_version} >= 420100
 %{_datadir}/vim/site/syntax/%{name}.vim
 %{_datadir}/vim/site/ftdetect/%{name}.vim
-%else
-%if 0%{?suse_version} >= 1310
-%{_datadir}/vim/vim74/syntax/%{name}.vim
-%{_datadir}/vim/vim74/ftdetect/%{name}.vim
-%else
-%{_datadir}/vim/vim72/syntax/%{name}.vim
-%{_datadir}/vim/vim72/ftdetect/%{name}.vim
-%endif
-%endif
 %else
 %{_datadir}/vim/vimfiles/syntax/%{name}.vim
 %{_datadir}/vim/vimfiles/ftdetect/%{name}.vim
@@ -827,6 +806,9 @@ fi
 
 %files -n nano-icinga2
 %defattr(-,root,root,-)
+%if "%{_vendor}" == "suse"
+%dir %{_datadir}/nano
+%endif
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
