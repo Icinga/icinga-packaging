@@ -160,8 +160,12 @@ Requires(post): shadow
 # Coreutils is added because of autoyast problems reported
 Requires(pre):  coreutils
 Requires(post): coreutils
+%if 0%{?suse_version} >= 1200
 BuildRequires:  monitoring-plugins-common
 Requires:       monitoring-plugins-common
+%else
+Recommends:     monitoring-plugins-common
+%endif
 Recommends:     logrotate
 %endif
 
