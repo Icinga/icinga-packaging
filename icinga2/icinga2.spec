@@ -104,6 +104,7 @@ BuildRequires: libopenssl1-devel
 # Requires devtoolset-2 scl
 BuildRequires: devtoolset-2-gcc-c++
 BuildRequires: devtoolset-2-libstdc++-devel
+BuildRequires: devtoolset-2-binutils
 %define scl_enable scl enable devtoolset-2 --
 %else
 BuildRequires: gcc-c++
