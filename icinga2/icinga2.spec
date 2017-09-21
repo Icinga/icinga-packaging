@@ -817,5 +817,3 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
-* Tue Jun 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.0-1
-- Update to 2.7.0
