@@ -33,6 +33,9 @@ elif [ -x /usr/share/apache2/get_module_list ]; then
 
   sudo /usr/sbin/apache2ctl -k start
 elif [ -x /usr/sbin/httpd ]; then
+  # Disable mod_lua - it sometimes crashes on Fedora 25 with:
+  # mod_lua: Failed to create shared memory segment on file /tmp/httpd_lua_shm.187
+  sudo sh -ex <<<"test -e /etc/httpd/conf.modules.d/00-lua.conf && mv /etc/httpd/conf.modules.d/00-lua.conf{,.off} || true"
   sudo httpd -t
   sudo httpd -k start
 else
@@ -40,11 +43,11 @@ else
   exit 1
 fi
 
-sleep 5
+sleep 10
 
 output=`mktemp`
 
-if curl -v http://localhost/icingaweb2/authentication/login -o "$output"; then
+if curl -v http://127.0.0.1/icingaweb2/authentication/login -o "$output"; then
   if grep -q '<div id="login"' "$output"; then
     echo "Login page available"
     exit 0
@@ -62,5 +65,7 @@ else
   echo "Output of the page is:"
   echo "====================================="
   cat "$output"
+  echo "====================================="
+  sudo sh -ex <<<'cat /var/log/httpd/*error* /var/log/apache2/*error*'
   exit 1
 fi

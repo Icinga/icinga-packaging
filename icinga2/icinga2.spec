@@ -69,7 +69,7 @@
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.7.0
+Version: 2.7.1
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 Group: Applications/System
@@ -104,6 +104,7 @@ BuildRequires: libopenssl1-devel
 # Requires devtoolset-2 scl
 BuildRequires: devtoolset-2-gcc-c++
 BuildRequires: devtoolset-2-libstdc++-devel
+BuildRequires: devtoolset-2-binutils
 %define scl_enable scl enable devtoolset-2 --
 %else
 BuildRequires: gcc-c++
@@ -150,12 +151,23 @@ Provides binaries for Icinga 2 Core.
 %package common
 Summary:      Common Icinga 2 configuration
 Group:        Applications/System
-%{?amzn:Requires(pre):          shadow-utils}
-%{?fedora:Requires(pre):        shadow-utils}
-%{?rhel:Requires(pre):          shadow-utils}
-%{?suse_version:Requires(pre):  pwdutils}
+%if (0%{?amzn} || 0%{?fedora} || 0%{?rhel})
+Requires(pre):  shadow-utils
+Requires(post): shadow-utils
+%endif
 %if "%{_vendor}" == "suse"
-Recommends:   logrotate
+Requires(pre):  shadow
+Requires(post): shadow
+# Coreutils is added because of autoyast problems reported
+Requires(pre):  coreutils
+Requires(post): coreutils
+%if 0%{?suse_version} >= 1200
+BuildRequires:  monitoring-plugins-common
+Requires:       monitoring-plugins-common
+%else
+Recommends:     monitoring-plugins-common
+%endif
+Recommends:     logrotate
 %endif
 
 %description common
@@ -227,6 +239,11 @@ Requires:     %{apachename}
 Requires:     %{name} = %{version}-%{release}
 %if "%{_vendor}" == "suse"
 Recommends:   icinga-www
+# for running logger to log the deprecated warning
+%if 0%{?use_systemd}
+BuildRequires:util-linux-systemd
+Requires:     util-linux-systemd
+%endif
 %endif
 Provides:     icinga-classicui-config
 Conflicts:    icinga-gui-config
@@ -276,9 +293,10 @@ Provides a GUI for the Icinga 2 API.
 Summary:      Vim syntax highlighting for icinga2
 Group:        Applications/System
 %if "%{_vendor}" == "suse"
-Requires:     vim-data
+BuildRequires: vim
+Requires:      vim
 %else
-Requires:     vim-filesystem
+Requires:      vim-filesystem
 %endif
 
 %description -n vim-icinga2
@@ -286,9 +304,9 @@ Vim syntax highlighting for icinga2
 
 
 %package -n nano-icinga2
-Summary:      Nano syntax highlighting for icinga2
-Group:        Applications/System
-Requires:     nano
+Summary:       Nano syntax highlighting for icinga2
+Group:         Applications/System
+Requires:      nano
 
 %description -n nano-icinga2
 Nano syntax highlighting for icinga2
@@ -428,13 +446,8 @@ Keywords=Monitoring;" > %{buildroot}%{_datadir}/applications/icinga2-studio.desk
 %endif
 
 %if "%{_vendor}" == "suse"
-%if 0%{?suse_version} >= 1310
-install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vim74/syntax/%{name}.vim
-install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vim74/ftdetect/%{name}.vim
-%else
-install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vim72/syntax/%{name}.vim
-install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vim72/ftdetect/%{name}.vim
-%endif
+install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/site/syntax/%{name}.vim
+install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/site/ftdetect/%{name}.vim
 %else
 install -D -m 0644 tools/syntax/vim/syntax/%{name}.vim %{buildroot}%{_datadir}/vim/vimfiles/syntax/%{name}.vim
 install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}/vim/vimfiles/ftdetect/%{name}.vim
@@ -517,7 +530,7 @@ exit 0
 %postun common
 # suse
 %if "%{_vendor}" == "suse"
-%if 0%{?using_systemd}
+%if 0%{?use_systemd}
   %service_del_postun %{name}.service
 %else
   %restart_on_update %{name}
@@ -789,13 +802,8 @@ fi
 %files -n vim-icinga2
 %defattr(-,root,root,-)
 %if "%{_vendor}" == "suse"
-%if 0%{?suse_version} >= 1310
-%{_datadir}/vim/vim74/syntax/%{name}.vim
-%{_datadir}/vim/vim74/ftdetect/%{name}.vim
-%else
-%{_datadir}/vim/vim72/syntax/%{name}.vim
-%{_datadir}/vim/vim72/ftdetect/%{name}.vim
-%endif
+%{_datadir}/vim/site/syntax/%{name}.vim
+%{_datadir}/vim/site/ftdetect/%{name}.vim
 %else
 %{_datadir}/vim/vimfiles/syntax/%{name}.vim
 %{_datadir}/vim/vimfiles/ftdetect/%{name}.vim
@@ -803,8 +811,9 @@ fi
 
 %files -n nano-icinga2
 %defattr(-,root,root,-)
+%if "%{_vendor}" == "suse"
+%dir %{_datadir}/nano
+%endif
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
-* Tue Jun 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.0-1
-- Update to 2.7.0
