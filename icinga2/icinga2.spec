@@ -416,7 +416,9 @@ install -D -m 0644 etc/icinga/icinga-classic-apache.conf %{buildroot}%{apachecon
 
 # install custom limits.conf for systemd
 %if 0%{?configure_systemd_limits}
-install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %{buildroot}%{_userunitdir}/%{name}.service.d/limits.conf
+# for > 2.8 or > 2.7.2
+#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}%%{_userunitdir}/%%{name}.service.d/limits.conf
+install -D -m 0644 %{SOURCE1} %{buildroot}%{_userunitdir}/%{name}.service.d/limits.conf
 %endif
 
 # remove features-enabled symlinks
