@@ -3,7 +3,7 @@
 %define revision 1
 
 Name:           icingaweb2
-Version:        2.4.1
+Version:        2.4.2
 Release:        %{revision}%{?dist}
 Summary:        Icinga Web 2
 Group:          Applications/System
@@ -343,3 +343,7 @@ fi
 %files vendor-zf1
 %defattr(-,root,root)
 %{basedir}/library/vendor/Zend
+
+%changelog
+* Thu Sep 28 2017 Markus Frosch <markus.frosch@icinga.com> 2.4.2-1
+- Update to 2.4.2
