@@ -28,6 +28,7 @@ Recommends:
  apache2 | httpd,
  php5 (>= 5.3.2),
  php5-cli (>= 5.3.2),
+ php5-curl,
  php5-ldap,
  icingacli,
  icingaweb2-module-monitoring,
