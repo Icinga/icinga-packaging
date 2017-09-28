@@ -1,6 +1,7 @@
 public doc                       usr/share/icingaweb2
 
 application/controllers          usr/share/icingaweb2/application
+application/fonts/fontello-ifont/config.json usr/share/icingaweb2/application/fonts/fontello-ifont
 application/fonts/fontello-ifont/css usr/share/icingaweb2/application/fonts/fontello-ifont
 application/forms                usr/share/icingaweb2/application
 application/layouts              usr/share/icingaweb2/application
