@@ -40,6 +40,12 @@
 %else
 # fedora and el>=7
 %define use_systemd 1
+%if 0%{?fedora} >= 24
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %endif
 %endif
 
@@ -51,6 +57,12 @@
 %define apachegroup www
 %if 0%{?suse_version} >= 1310
 %define use_systemd 1
+%if 0%{?suse_version} >= 120200 && 0%{?is_opensuse}
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %else
 %define use_systemd 0
 %endif
@@ -72,9 +84,12 @@ Name: icinga2
 Version: 2.7.1
 Release: %{revision}%{?dist}
 License: GPL-2.0+
+URL: https://www.icinga.com/
 Group: Applications/System
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
-URL: https://www.icinga.com/
+
+Source1: icinga2.service.limits.conf
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires: %{name}-bin = %{version}-%{release}
 
@@ -399,6 +414,11 @@ install -D -m 0644 etc/icinga/icinga-classic-apache.conf %{buildroot}%{apachecon
 # DEPRECATED, disable builds on Amazon
 %endif
 
+# install custom limits.conf for systemd
+%if 0%{?configure_systemd_limits}
+install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %{buildroot}%{_userunitdir}/%{name}.service.d/limits.conf
+%endif
+
 # remove features-enabled symlinks
 rm -f %{buildroot}/%{_sysconfdir}/%{name}/features-enabled/*.conf
 
@@ -716,6 +736,9 @@ fi
 %{_sysconfdir}/bash_completion.d/%{name}
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
+%if 0%{?configure_systemd_limits}
+%attr(644,root,root) %{_userunitdir}/%{name}.service.d/limits.conf
+%endif
 %else
 %attr(755,root,root) %{_sysconfdir}/init.d/%{name}
 %endif
