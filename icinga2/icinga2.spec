@@ -375,8 +375,8 @@ make install \
 # install custom limits.conf for systemd
 %if 0%{?configure_systemd_limits}
 # for > 2.8 or > 2.7.2
-#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}%%{_userunitdir}/%%{name}.service.d/limits.conf
-install -D -m 0644 %{SOURCE1} %{buildroot}%{_userunitdir}/%{name}.service.d/limits.conf
+#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}/etc/systemd/system/%%{name}.service.d/limits.conf
+install -D -m 0644 %{SOURCE1} %{buildroot}/etc/systemd/system/%{name}.service.d/limits.conf
 %endif
 
 # remove features-enabled symlinks
@@ -667,7 +667,7 @@ fi
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %if 0%{?configure_systemd_limits}
-%attr(644,root,root) %{_userunitdir}/%{name}.service.d/limits.conf
+%attr(644,root,root) /etc/systemd/system/%{name}.service.d/limits.conf
 %endif
 %else
 %attr(755,root,root) %{_sysconfdir}/init.d/%{name}
