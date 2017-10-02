@@ -761,7 +761,7 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
-* Tue Sep 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.1-2
+* Mon Oct 02 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.1-2
 - Fixing systemd limit issues on openSUSE > 42.1
 
 * Thu Sep 21 2017 Michael Friedrich <michael.friedrich@icinga.com> 2.7.1-1
