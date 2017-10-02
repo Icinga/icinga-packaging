@@ -1,4 +1,5 @@
 debian/config/apt.conf        etc/icinga2/conf.d
+debian/icinga2.service.d      etc/systemd/system
 debian/tmp/etc/icinga2
 debian/tmp/etc/logrotate.d
 tools/syntax/nano/icinga2.nanorc usr/share/nano

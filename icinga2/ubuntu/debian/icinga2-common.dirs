@@ -1,3 +1,4 @@
+etc/icinga2/pki
 var/cache/icinga2
 var/lib/icinga2
 var/lib/icinga2/api/log
