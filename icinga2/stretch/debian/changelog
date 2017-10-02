@@ -1,3 +1,9 @@
+icinga2 (2.7.1-2) icinga-stretch; urgency=medium
+
+  * Increase systemd TasksMax to infinity
+
+ -- Markus Frosch <markus.frosch@icinga.com>  Mon, 02 Oct 2017 10:21:15 +0200
+
 icinga2 (2.7.1-1) icinga-stretch; urgency=medium
 
   * Update to 2.7.1
