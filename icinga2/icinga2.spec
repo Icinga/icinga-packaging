@@ -17,7 +17,7 @@
 # * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.             *
 # ******************************************************************************/
 
-%define revision 1
+%define revision 2
 
 # make sure that _rundir is working on older systems
 %if ! %{defined _rundir}
@@ -842,5 +842,11 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Tue Sep 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.1-2
+- Fixing systemd limit issues on openSUSE > 42.1
+
+* Thu Sep 21 2017 Michael Friedrich <michael.friedrich@icinga.com> 2.7.1-1
+- Update to 2.7.1
+
 * Tue Jun 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.0-1
 - Update to 2.7.0
