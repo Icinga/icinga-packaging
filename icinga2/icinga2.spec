@@ -40,6 +40,12 @@
 %else
 # fedora and el>=7
 %define use_systemd 1
+%if 0%{?fedora} >= 24
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %endif
 %endif
 
@@ -51,6 +57,12 @@
 %define apachegroup www
 %if 0%{?suse_version} >= 1310
 %define use_systemd 1
+%if 0%{?leap_version} >= 420100
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %else
 %define use_systemd 0
 %endif
@@ -62,8 +74,6 @@
 %define icingaweb2name icingaweb2
 %define icingaweb2version 2.0.0
 
-# DEPRECATED
-%define icingaclassicconfdir %{_sysconfdir}/icinga
 
 %define logmsg logger -t %{name}/rpm
 
@@ -72,9 +82,12 @@ Name: icinga2
 Version: 2.7.1
 Release: %{revision}%{?dist}
 License: GPL-2.0+
+URL: https://www.icinga.com/
 Group: Applications/System
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
-URL: https://www.icinga.com/
+
+Source1: icinga2.service.limits.conf
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires: %{name}-bin = %{version}-%{release}
 
@@ -227,35 +240,6 @@ Requires: %{name} = %{version}-%{release}
 Icinga 2 IDO PostgreSQL database backend. Compatible with Icinga 1.x
 IDOUtils schema >= 1.12
 
-# DEPRECATED, disable builds on Amazon
-%if !(0%{?amzn})
-
-# DEPRECATED
-%package classicui-config
-Summary:      Icinga 2 Classic UI Standalone configuration
-Group:        Applications/System
-BuildRequires: %{apachename}
-Requires:     %{apachename}
-Requires:     %{name} = %{version}-%{release}
-%if "%{_vendor}" == "suse"
-Recommends:   icinga-www
-# for running logger to log the deprecated warning
-%if 0%{?use_systemd}
-BuildRequires:util-linux-systemd
-Requires:     util-linux-systemd
-%endif
-%endif
-Provides:     icinga-classicui-config
-Conflicts:    icinga-gui-config
-
-# DEPRECATED
-%description classicui-config
-Icinga 1.x Classic UI Standalone configuration with locations
-for Icinga 2.
-
-# DEPRECATED, disable builds on Amazon
-%endif
-
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %global selinux_variants mls targeted
 %{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
@@ -388,15 +372,11 @@ cd -
 make install \
 	DESTDIR="%{buildroot}"
 
-# DEPRECATED, disable builds on Amazon
-%if !(0%{?amzn})
-
-# install classicui config
-install -D -m 0644 etc/icinga/icinga-classic.htpasswd %{buildroot}%{icingaclassicconfdir}/passwd
-install -D -m 0644 etc/icinga/cgi.cfg %{buildroot}%{icingaclassicconfdir}/cgi.cfg
-install -D -m 0644 etc/icinga/icinga-classic-apache.conf %{buildroot}%{apacheconfdir}/icinga.conf
-
-# DEPRECATED, disable builds on Amazon
+# install custom limits.conf for systemd
+%if 0%{?configure_systemd_limits}
+# for > 2.8 or > 2.7.2
+#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}%%{_userunitdir}/%%{name}.service.d/limits.conf
+install -D -m 0644 %{SOURCE1} %{buildroot}%{_userunitdir}/%{name}.service.d/limits.conf
 %endif
 
 # remove features-enabled symlinks
@@ -621,36 +601,6 @@ fi
 
 exit 0
 
-# DEPRECATED, disable builds on Amazon
-%if !(0%{?amzn})
-
-%post classicui-config
-if [ ${1:-0} -eq 1 ]
-then
-        # initial installation, enable features
-	for feature in statusdata compatlog command; do
-		ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
-	done
-fi
-
-%logmsg "The icinga2-classicui-config package has been deprecated and will be removed in future releases."
-
-exit 0
-
-# DEPRECATED
-%postun classicui-config
-if [ "$1" = "0" ]; then
-        # deinstallation of the package - remove feature
-	for feature in statusdata compatlog command; do
-		rm -f %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
-	done
-fi
-
-exit 0
-
-# DEPRECATED, disable builds on Amazon
-%endif
-
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %post selinux
 for selinuxvariant in %{selinux_variants}
@@ -716,6 +666,9 @@ fi
 %{_sysconfdir}/bash_completion.d/%{name}
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
+%if 0%{?configure_systemd_limits}
+%attr(644,root,root) %{_userunitdir}/%{name}.service.d/limits.conf
+%endif
 %else
 %attr(755,root,root) %{_sysconfdir}/init.d/%{name}
 %endif
@@ -730,9 +683,7 @@ fi
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/features-available
 %exclude %{_sysconfdir}/%{name}/features-available/ido-*.conf
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/features-enabled
-%attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/repository.d
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/scripts
-%attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/repository.d
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_sysconfdir}/%{name}/zones.d
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/%{name}.conf
 %config(noreplace) %attr(0640,root,%{icinga_group}) %{_sysconfdir}/%{name}/init.conf
@@ -740,7 +691,6 @@ fi
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/zones.conf
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/conf.d/*.conf
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/features-available/*.conf
-%config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/repository.d/*
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/zones.d/*
 %config(noreplace) %{_sysconfdir}/%{name}/scripts/*
 %dir %{_libexecdir}/%{name}
@@ -770,19 +720,6 @@ fi
 %config(noreplace) %attr(0640,%{icinga_user},%{icinga_group}) %{_sysconfdir}/%{name}/features-available/ido-pgsql.conf
 %{_libdir}/%{name}/libdb_ido_pgsql*
 %{_datadir}/icinga2-ido-pgsql
-
-# DEPRECATED, disable builds on Amazon
-%if !(0%{?amzn})
-
-%files classicui-config
-%defattr(-,root,root,-)
-%attr(0751,%{icinga_user},%{icinga_group}) %dir %{icingaclassicconfdir}
-%config(noreplace) %{icingaclassicconfdir}/cgi.cfg
-%config(noreplace) %{apacheconfdir}/icinga.conf
-%config(noreplace) %attr(0640,root,%{apachegroup}) %{icingaclassicconfdir}/passwd
-
-# DEPRECATED, disable builds on Amazon
-%endif
 
 %if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 %files selinux
