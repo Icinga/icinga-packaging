@@ -57,7 +57,7 @@
 %define apachegroup www
 %if 0%{?suse_version} >= 1310
 %define use_systemd 1
-%if 0%{?suse_version} >= 120200 && 0%{?is_opensuse}
+%if 0%{?leap_version} >= 420100
 # for installing limits.conf on systemd >= 228
 %define configure_systemd_limits 1
 %else
