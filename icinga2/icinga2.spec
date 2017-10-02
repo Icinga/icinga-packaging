@@ -17,7 +17,7 @@
 # * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.             *
 # ******************************************************************************/
 
-%define revision 1
+%define revision 2
 
 # make sure that _rundir is working on older systems
 %if ! %{defined _rundir}
@@ -40,6 +40,12 @@
 %else
 # fedora and el>=7
 %define use_systemd 1
+%if 0%{?fedora} >= 24
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %endif
 %endif
 
@@ -51,6 +57,12 @@
 %define apachegroup www
 %if 0%{?suse_version} >= 1310
 %define use_systemd 1
+%if 0%{?leap_version} >= 420100
+# for installing limits.conf on systemd >= 228
+%define configure_systemd_limits 1
+%else
+%define configure_systemd_limits 0
+%endif
 %else
 %define use_systemd 0
 %endif
@@ -72,9 +84,12 @@ Name: icinga2
 Version: 2.7.1
 Release: %{revision}%{?dist}
 License: GPL-2.0+
+URL: https://www.icinga.com/
 Group: Applications/System
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
-URL: https://www.icinga.com/
+
+Source1: icinga2.service.limits.conf
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires: %{name}-bin = %{version}-%{release}
 
@@ -399,6 +414,13 @@ install -D -m 0644 etc/icinga/icinga-classic-apache.conf %{buildroot}%{apachecon
 # DEPRECATED, disable builds on Amazon
 %endif
 
+# install custom limits.conf for systemd
+%if 0%{?configure_systemd_limits}
+# for > 2.8 or > 2.7.2
+#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}/etc/systemd/system/%%{name}.service.d/limits.conf
+install -D -m 0644 %{SOURCE1} %{buildroot}/etc/systemd/system/%{name}.service.d/limits.conf
+%endif
+
 # remove features-enabled symlinks
 rm -f %{buildroot}/%{_sysconfdir}/%{name}/features-enabled/*.conf
 
@@ -716,6 +738,9 @@ fi
 %{_sysconfdir}/bash_completion.d/%{name}
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
+%if 0%{?configure_systemd_limits}
+%attr(644,root,root) /etc/systemd/system/%{name}.service.d/limits.conf
+%endif
 %else
 %attr(755,root,root) %{_sysconfdir}/init.d/%{name}
 %endif
@@ -817,3 +842,11 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Tue Sep 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.1-2
+- Fixing systemd limit issues on openSUSE > 42.1
+
+* Thu Sep 21 2017 Michael Friedrich <michael.friedrich@icinga.com> 2.7.1-1
+- Update to 2.7.1
+
+* Tue Jun 20 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.0-1
+- Update to 2.7.0
