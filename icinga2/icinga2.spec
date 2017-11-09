@@ -17,7 +17,7 @@
 # * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.             *
 # ******************************************************************************/
 
-%define revision 2
+%define revision 1
 
 # make sure that _rundir is working on older systems
 %if ! %{defined _rundir}
@@ -81,7 +81,7 @@
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.7.1
+Version: 2.7.2
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 URL: https://www.icinga.com/
@@ -842,6 +842,9 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Thu Nov 09 2017 Gunnar Beutner <gunnar.beutner@icinga.com> 2.7.2-1
+- Update to 2.7.2
+
 * Mon Oct 02 2017 Markus Frosch <markus.frosch@icinga.com> 2.7.1-2
 - Fixing systemd limit issues on openSUSE > 42.1
 
