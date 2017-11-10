@@ -60,7 +60,7 @@
 %define apachegroup www
 %if 0%{?suse_version} >= 1310
 %define use_systemd 1
-%if 0%{?leap_version} >= 420100 || 0%{?sle_version} >= 120200
+%if 0%{?sle_version} >= 120200 || 0%{?suse_version} > 1320
 # for installing limits.conf on systemd >= 228
 %define configure_systemd_limits 1
 %else
@@ -86,7 +86,7 @@ Version: 2.8.0
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 URL: https://www.icinga.com/
-Group: Applications/System
+Group: System/Monitoring
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -97,7 +97,7 @@ Meta package for Icinga 2 Core, DB IDO and Web.
 
 %package bin
 Summary:      Icinga 2 binaries and libraries
-Group:        Applications/System
+Group:        System/Monitoring
 
 %if "%{_vendor}" == "suse"
 PreReq:        permissions
@@ -160,11 +160,11 @@ Requires: %{name}-libs = %{version}-%{release}
 
 %description bin
 Icinga 2 is a general-purpose network monitoring application.
-Provides binaries for Icinga 2 Core.
+This subpackage provides the binaries for Icinga 2 Core.
 
 %package common
 Summary:      Common Icinga 2 configuration
-Group:        Applications/System
+Group:        System/Monitoring
 %if (0%{?amzn} || 0%{?fedora} || 0%{?rhel})
 Requires(pre):  shadow-utils
 Requires(post): shadow-utils
@@ -185,31 +185,30 @@ Recommends:     logrotate
 %endif
 
 %description common
-Provides common directories, uid and gid among Icinga 2 related
-packages.
+This subpackage provides common directories, and the UID and GUID definitions
+among Icinga 2 related packages.
 
 
 %package doc
 Summary:      Documentation for Icinga 2
-Group:        Applications/System
-Requires:     %{name} = %{version}-%{release}
+Group:        Documentation/Other
 
 %description doc
-Provides documentation for Icinga 2.
+This subpackage provides documentation for Icinga 2.
 
 
 %package libs
 Summary:      Libraries for Icinga 2
-Group:        Applications/System
+Group:        System/Libraries
 Requires:     %{name}-common = %{version}-%{release}
 
 %description libs
-Provides internal libraries for the daemon or studio.
+This subpackage provides the internal libraries for the daemon or studio.
 
 
 %package ido-mysql
 Summary:      IDO MySQL database backend for Icinga 2
-Group:        Applications/System
+Group:        System/Monitoring
 %if "%{_vendor}" == "suse"
 BuildRequires: libmysqlclient-devel
 %if 0%{?suse_version} >= 1310
@@ -229,7 +228,7 @@ IDOUtils schema >= 1.12
 
 %package ido-pgsql
 Summary:      IDO PostgreSQL database backend for Icinga 2
-Group:        Applications/System
+Group:        System/Monitoring
 %if "%{_vendor}" == "suse" && 0%{?suse_version} < 1210
 BuildRequires: postgresql-devel >= 8.4
 %else
@@ -247,7 +246,7 @@ IDOUtils schema >= 1.12
 
 %package selinux
 Summary:        SELinux policy module supporting icinga2
-Group:          System Environment/Base
+Group:          System/Base
 BuildRequires:  checkpolicy, selinux-policy-devel, hardlink
 Requires:       %{name} = %{version}-%{release}
 Requires(post):   policycoreutils-python
@@ -261,7 +260,7 @@ SELinux policy module supporting icinga2
 %if 0%{?fedora}
 %package studio
 Summary:      Studio for Icinga 2
-Group:        Applications/System
+Group:        System/Monitoring
 Requires:     %{name}-libs = %{version}-%{release}
 Requires:     wxGTK3
 
@@ -272,7 +271,7 @@ Provides a GUI for the Icinga 2 API.
 
 %package -n vim-icinga2
 Summary:      Vim syntax highlighting for icinga2
-Group:        Applications/System
+Group:        Productivity/Text/Editors
 %if "%{_vendor}" == "suse"
 BuildRequires: vim
 Requires:      vim
@@ -286,7 +285,7 @@ Vim syntax highlighting for icinga2
 
 %package -n nano-icinga2
 Summary:       Nano syntax highlighting for icinga2
-Group:         Applications/System
+Group:         Productivity/Text/Editors
 Requires:      nano
 
 %description -n nano-icinga2
@@ -430,9 +429,6 @@ install -D -m 0644 tools/syntax/vim/ftdetect/%{name}.vim %{buildroot}%{_datadir}
 %endif
 
 install -D -m 0644 tools/syntax/nano/%{name}.nanorc %{buildroot}%{_datadir}/nano/%{name}.nanorc
-
-%clean
-[ "%{buildroot}" != "/" ] && [ -d "%{buildroot}" ] && rm -rf %{buildroot}
 
 %pre common
 getent group %{icinga_group} >/dev/null || %{_sbindir}/groupadd -r %{icinga_group}
@@ -663,6 +659,7 @@ fi
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %if 0%{?configure_systemd_limits}
+%dir /etc/systemd/system/%{name}.service.d
 %attr(644,root,root) %config(noreplace) /etc/systemd/system/%{name}.service.d/limits.conf
 %endif
 %else
