@@ -8,7 +8,7 @@ cd archive
 
 apt-ftparchive packages . > Packages
 
-sudo su -c 'echo "deb file:$(pwd)/ ./" >>  /etc/apt/sources.list'
+sudo su -c 'echo "deb [trusted=yes] file:$(pwd)/ ./" >>  /etc/apt/sources.list'
 
 sudo apt-get update
 
