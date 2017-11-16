@@ -15,11 +15,24 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Packager:       Icinga Team <info@icinga.com>
 
 %if 0%{?fedora} || 0%{?rhel} || 0%{?amzn}
-%define php_runtime     %{php}
+%if 0%{?rhel} == 7
+%define php_scl         rh-php71
+%endif
+%if 0%{?rhel} == 6
+%define php_scl         rh-php70
+%endif
 
-%define php             php
-%define php_cli         php-cli
-%define php_common      php-common
+%if 0%{?php_scl:1}
+%define php_scl_prefix  %{php_scl}-
+%define php_runtime     %{php_scl_prefix}php-fpm
+%define php_bin         /opt/rh/%{php_scl}/root/usr/bin/php
+%else
+%define php_runtime     %{php}
+%endif
+
+%define php             %{?php_scl_prefix}php
+%define php_cli         %{php}-cli
+%define php_common      %{php}-common
 %define wwwconfigdir    %{_sysconfdir}/httpd/conf.d
 %define wwwuser         apache
 %endif
@@ -94,10 +107,10 @@ Summary:                    Icinga Web 2 PHP library
 Group:                      Development/Libraries
 Requires:                   %{php_common} >= %{php_version}
 Requires:                   %{php}-gd %{php}-intl
+%{?rhel:Requires:           %{php}-pdo}
 Requires:                   %{name}-vendor-zf1 = %{version}-%{release}
 %{?amzn:Requires:           %{php}-pecl-imagick}
 %{?fedora:Requires:         php-pecl-imagick}
-%{?rhel:Requires:           php-pecl-imagick}
 %{?suse_version:Requires:   %{php}-gettext %{php}-json %{php}-openssl %{php}-posix}
 
 %description -n php-Icinga
@@ -227,6 +240,9 @@ cp -prv library/vendor/{dompdf,HTMLPurifier*,JShrink,lessphp,Parsedown,Zend} %{b
 cp -prv public/{css,font,img,js,error_norewrite.html} %{buildroot}/%{basedir}/public
 cp -pv packages/files/apache/icingaweb2.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
 cp -pv packages/files/bin/icingacli %{buildroot}/%{bindir}
+%if 0%{?php_bin:1}
+sed -i '1 s~#!.*~#!%{php_bin}~' %{buildroot}/%{bindir}/icingacli
+%endif
 cp -pv packages/files/public/index.php %{buildroot}/%{basedir}/public
 cp -prv etc/schema %{buildroot}/%{docsdir}
 cp -prv packages/files/config/modules/{setup,translation} %{buildroot}/%{configdir}/modules
