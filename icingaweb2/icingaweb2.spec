@@ -1,4 +1,4 @@
-# Icinga Web 2 | (c) 2013-2016 Icinga Development Team | GPLv2+
+# Icinga Web 2 | (c) 2013-2017 Icinga Development Team | GPLv2+
 
 %define revision 1
 
@@ -15,28 +15,41 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Packager:       Icinga Team <info@icinga.com>
 
 %if 0%{?fedora} || 0%{?rhel} || 0%{?amzn}
+%define php_runtime     %{php}
+
 %define php             php
 %define php_cli         php-cli
+%define php_common      php-common
 %define wwwconfigdir    %{_sysconfdir}/httpd/conf.d
 %define wwwuser         apache
 %endif
+
+# minimum required PHP version
+%define php_version 5.3.0
 
 %if 0%{?suse_version}
 %define wwwconfigdir    %{_sysconfdir}/apache2/conf.d
 %define wwwuser         wwwrun
 %if 0%{?suse_version} == 1110
-%define php php53
-Requires: apache2-mod_php53
+%define php             php53
+%define php_runtime     apache2-mod_php53
 %else
-%define php php5
-Requires: apache2-mod_php5
+# TODO: php7 on 12
+%define php             php5
+%define php_runtime     apache2-mod_php5
 %endif
+%define php_common      %{php}
 %endif
 
 %{?amzn:Requires(pre):          shadow-utils}
 %{?fedora:Requires(pre):        shadow-utils}
 %{?rhel:Requires(pre):          shadow-utils}
 %{?suse_version:Requires(pre):  pwdutils}
+
+Requires:                       %{php_runtime} >= %{php_version}
+Requires:                       %{php_common} >= %{php_version}
+
+Requires:                       icingacli = %{version}-%{release}
 Requires:                       %{name}-common = %{version}-%{release}
 Requires:                       php-Icinga = %{version}-%{release}
 Requires:                       %{name}-vendor-dompdf = %{version}-%{release}
@@ -79,7 +92,7 @@ Common files for Icinga Web 2 and the Icinga CLI
 %package -n php-Icinga
 Summary:                    Icinga Web 2 PHP library
 Group:                      Development/Libraries
-Requires:                   %{php} >= 5.3.0
+Requires:                   %{php_common} >= %{php_version}
 Requires:                   %{php}-gd %{php}-intl
 Requires:                   %{name}-vendor-zf1 = %{version}-%{release}
 %{?amzn:Requires:           %{php}-pecl-imagick}
@@ -96,10 +109,11 @@ Summary:                    Icinga CLI
 Group:                      Applications/System
 Requires:                   %{name}-common = %{version}-%{release}
 Requires:                   php-Icinga = %{version}-%{release}
-%{?amzn:Requires:           %{php_cli} >= 5.3.0 bash-completion}
-%{?fedora:Requires:         %{php_cli} >= 5.3.0 bash-completion}
-%{?rhel:Requires:           %{php_cli} >= 5.3.0 bash-completion}
-%{?suse_version:Requires:   %{php} >= 5.3.0}
+%{?amzn:Requires:           %{php_cli} >= %{php_version} bash-completion}
+%{?fedora:Requires:         %{php_cli} >= %{php_version} bash-completion}
+%{?rhel:Requires:           %{php_cli} >= %{php_version} bash-completion}
+# TODO: cli package for SUSE?
+%{?suse_version:Requires:   %{php_common} >= %{php_version}}
 
 %description -n icingacli
 Icinga CLI
@@ -125,7 +139,7 @@ SELinux policy for Icinga Web 2
 Summary:    Icinga Web 2 vendor library dompdf
 Group:      Development/Libraries
 License:    LGPLv2.1
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 
 %description vendor-dompdf
 Icinga Web 2 vendor library dompdf
@@ -136,7 +150,7 @@ Epoch:      1
 Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 
 %description vendor-HTMLPurifier
 Icinga Web 2 vendor library HTMLPurifier
@@ -146,7 +160,7 @@ Icinga Web 2 vendor library HTMLPurifier
 Summary:    Icinga Web 2 vendor library JShrink
 Group:      Development/Libraries
 License:    BSD
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 
 %description vendor-JShrink
 Icinga Web 2 vendor library JShrink
@@ -156,7 +170,7 @@ Icinga Web 2 vendor library JShrink
 Summary:    Icinga Web 2 vendor library lessphp
 Group:      Development/Libraries
 License:    MIT
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 
 %description vendor-lessphp
 Icinga Web 2 vendor library lessphp
@@ -166,7 +180,7 @@ Icinga Web 2 vendor library lessphp
 Summary:    Icinga Web 2 vendor library Parsedown
 Group:      Development/Libraries
 License:    MIT
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 
 %description vendor-Parsedown
 Icinga Web 2 vendor library Parsedown
@@ -176,7 +190,7 @@ Icinga Web 2 vendor library Parsedown
 Summary:    Icinga Web 2's fork of Zend Framework 1
 Group:      Development/Libraries
 License:    BSD
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 Obsoletes:  %{name}-vendor-Zend < 1.12.20
 
 %description vendor-zf1
