@@ -79,7 +79,7 @@
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.7.2
+Version: 2.8.0
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 URL: https://www.icinga.com/
@@ -761,6 +761,9 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Thu Nov 16 2017 Jean Flach <jean-marcel.flach@icinga.com> 2.8.0-1
+- Update to 2.8.0
+
 * Thu Nov 09 2017 Gunnar Beutner <gunnar.beutner@icinga.com> 2.7.2-1
 - Update to 2.7.2
 
