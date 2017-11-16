@@ -48,11 +48,11 @@ Packager:       Icinga Team <info@icinga.com>
 %define php             php53
 %define php_runtime     apache2-mod_php53
 %else
-# TODO: php7 on 12
-%define php             php5
-%define php_runtime     apache2-mod_php5
+%define php             php
+%define php_runtime     mod_php_any
 %endif
 %define php_common      %{php}
+%define php_cli         %{php}
 %endif
 
 %{?amzn:Requires(pre):          shadow-utils}
@@ -123,11 +123,8 @@ Summary:                    Icinga CLI
 Group:                      Applications/System
 Requires:                   %{name}-common = %{version}-%{release}
 Requires:                   php-Icinga = %{version}-%{release}
-%{?amzn:Requires:           %{php_cli} >= %{php_version} bash-completion}
-%{?fedora:Requires:         %{php_cli} >= %{php_version} bash-completion}
-%{?rhel:Requires:           %{php_cli} >= %{php_version} bash-completion}
-# TODO: cli package for SUSE?
-%{?suse_version:Requires:   %{php_common} >= %{php_version}}
+Requires:                   bash-completion
+Requires:                   %{php_cli} >= %{php_version}
 
 %description -n icingacli
 Icinga CLI
