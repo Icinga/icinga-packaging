@@ -4,10 +4,20 @@
 install_package icingaweb2
 
 # set timezone for PHP
-if [ -d /etc/php.d ]; then
+if [ -d /etc/opt/rh/rh-php71/php.d ]; then
+  php_d=/etc/opt/rh/rh-php71/php.d
+  fpm="scl enable rh-php70 -- php-fpm"
+elif [ -d /etc/opt/rh/rh-php70/php.d ]; then
+  php_d=/etc/opt/rh/rh-php70/php.d
+  fpm="scl enable rh-php71 -- php-fpm"
+elif [ -d /etc/php.d ]; then
   php_d=/etc/php.d
 elif [ -d /etc/php5/conf.d ]; then
   php_d=/etc/php5/conf.d
+  mod_php=php5
+elif [ -d /etc/php7/conf.d ]; then
+  php_d=/etc/php7/conf.d
+  mod_php=php7
 else
   echo "Can not set PHP timezone!" >&2
   exit 1
@@ -18,14 +28,14 @@ sudo sh -c "echo 'date.timezone = UTC' >${php_d}/timezone.ini"
 if [ -e /usr/sbin/start_apache2 ]; then
   # newer SUSE
   sudo a2enmod rewrite
-  sudo a2enmod php5
+  sudo a2enmod "$mod_php"
 
   sudo /usr/sbin/start_apache2 -t
   sudo /usr/sbin/start_apache2 -k start
 elif [ -x /usr/share/apache2/get_module_list ]; then
   # older SUSE
   sudo a2enmod rewrite
-  sudo a2enmod php5
+  sudo a2enmod "$mod_php"
 
   # update apache config
   sudo /usr/share/apache2/get_includes
@@ -36,6 +46,13 @@ elif [ -x /usr/sbin/httpd ]; then
   # Disable mod_lua - it sometimes crashes on Fedora 25 with:
   # mod_lua: Failed to create shared memory segment on file /tmp/httpd_lua_shm.187
   sudo sh -ex <<<"test -e /etc/httpd/conf.modules.d/00-lua.conf && mv /etc/httpd/conf.modules.d/00-lua.conf{,.off} || true"
+
+  if [ -n "$fpm" ]; then
+    echo "Starting FPM daemon in background"
+    sudo $fpm -t
+    sudo $fpm -D
+  fi
+
   sudo httpd -t
   sudo httpd -k start
 else
