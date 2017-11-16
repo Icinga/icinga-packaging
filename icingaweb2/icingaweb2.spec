@@ -25,7 +25,7 @@ Packager:       Icinga Team <info@icinga.com>
 %endif
 
 # minimum required PHP version
-%define php_version 5.3.0
+%define php_version 5.6.0
 
 %if 0%{?suse_version}
 %define wwwconfigdir    %{_sysconfdir}/apache2/conf.d
