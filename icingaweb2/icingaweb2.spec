@@ -151,6 +151,7 @@ Summary:    Icinga Web 2 vendor library dompdf
 Group:      Development/Libraries
 License:    LGPLv2.1
 Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-dompdf
 Icinga Web 2 vendor library dompdf
@@ -162,6 +163,7 @@ Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
 Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-HTMLPurifier
 Icinga Web 2 vendor library HTMLPurifier
@@ -172,6 +174,7 @@ Summary:    Icinga Web 2 vendor library JShrink
 Group:      Development/Libraries
 License:    BSD
 Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-JShrink
 Icinga Web 2 vendor library JShrink
@@ -182,6 +185,7 @@ Summary:    Icinga Web 2 vendor library lessphp
 Group:      Development/Libraries
 License:    MIT
 Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-lessphp
 Icinga Web 2 vendor library lessphp
@@ -192,6 +196,7 @@ Summary:    Icinga Web 2 vendor library Parsedown
 Group:      Development/Libraries
 License:    MIT
 Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-Parsedown
 Icinga Web 2 vendor library Parsedown
@@ -203,6 +208,7 @@ Group:      Development/Libraries
 License:    BSD
 Requires:   %{php_common} >= %{php_version}
 Obsoletes:  %{name}-vendor-Zend < 1.12.20
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-zf1
 Icinga Web 2's fork of Zend Framework 1
@@ -283,6 +289,11 @@ rm -rf %{buildroot}
 %{basedir}/doc
 %{basedir}/modules
 %{basedir}/public
+%if 0%{?suse_version}
+# for lint on OBS
+%dir %{dirname:%{wwwconfigdir}}
+%dir %{wwwconfigdir}
+%endif
 %config(noreplace) %{wwwconfigdir}/icingaweb2.conf
 %attr(2775,root,%{icingawebgroup}) %dir %{logdir}
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}/modules/setup
@@ -299,14 +310,22 @@ exit 0
 
 %files common
 %defattr(-,root,root)
-%{basedir}/application/locale
+%dir %{basedir}
+%dir %{basedir}/application
+%dir %{basedir}/library
+%dir %{basedir}/library/vendor
 %dir %{basedir}/modules
+%{basedir}/application/locale
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}/modules
 
 
 %files -n php-Icinga
 %defattr(-,root,root)
+%if 0%{?suse_version}
+# for lint on OBS
+%dir %{phpdir}
+%endif
 %{phpdir}/Icinga
 
 
