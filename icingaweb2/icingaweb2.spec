@@ -26,6 +26,7 @@ Packager:       Icinga Team <info@icinga.com>
 %define php_scl_prefix  %{php_scl}-
 %define php_runtime     %{php_scl_prefix}php-fpm
 %define php_bin         /opt/rh/%{php_scl}/root/usr/bin/php
+%define php_fpm         1
 %else
 %define php_runtime     %{php}
 %endif
@@ -238,7 +239,11 @@ cp -prv modules/{monitoring,setup,doc,translation} %{buildroot}/%{basedir}/modul
 cp -prv library/Icinga %{buildroot}/%{phpdir}
 cp -prv library/vendor/{dompdf,HTMLPurifier*,JShrink,lessphp,Parsedown,Zend} %{buildroot}/%{basedir}/library/vendor
 cp -prv public/{css,font,img,js,error_norewrite.html} %{buildroot}/%{basedir}/public
+%if 0%{?php_fpm:1}
+cp -pv packages/files/apache/icingaweb2.fpm.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
+%else
 cp -pv packages/files/apache/icingaweb2.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
+%endif
 cp -pv packages/files/bin/icingacli %{buildroot}/%{bindir}
 %if 0%{?php_bin:1}
 sed -i '1 s~#!.*~#!%{php_bin}~' %{buildroot}/%{bindir}/icingacli
