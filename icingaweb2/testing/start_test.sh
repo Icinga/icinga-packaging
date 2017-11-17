@@ -1,12 +1,12 @@
 #!/bin/bash
 # this script runs in the rpm_test environment
 
-install_package icingaweb2
-
 # Install SCL on CentOS
 if grep -q 'ID="centos"' /etc/os-release; then
   sudo yum install -y centos-scl-release
 fi
+
+install_package icingaweb2
 
 # set timezone for PHP
 if [ -d /etc/opt/rh/rh-php71/php.d ]; then
