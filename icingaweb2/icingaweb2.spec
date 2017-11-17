@@ -48,6 +48,10 @@ Packager:       Icinga Team <info@icinga.com>
 %define php_runtime     mod_php_any
 %define php_common      %{php}
 %define php_cli         %{php}
+# conflict with older PHP on SLES and openSUSE
+Conflicts:              php < %{php_version}
+Conflicts:              php5 < %{php_version}
+Conflicts:              php53
 %endif
 
 %{?amzn:Requires(pre):          shadow-utils}
@@ -120,6 +124,13 @@ Requires:                   %{name}-common = %{version}-%{release}
 Requires:                   php-Icinga = %{version}-%{release}
 Requires:                   bash-completion
 Requires:                   %{php_cli} >= %{php_version}
+%if 0%{?suse_version}
+# conflict with older PHP on SLES and openSUSE
+Conflicts:                  php < %{php_version}
+Conflicts:                  php5 < %{php_version}
+Conflicts:                  php53
+%endif
+
 
 %description -n icingacli
 Icinga CLI
