@@ -112,8 +112,8 @@ Common files for Icinga Web 2 and the Icinga CLI
 Summary:                    Icinga Web 2 PHP library
 Group:                      Development/Libraries
 Requires:                   %{php_common} >= %{php_version}
-Requires:                   %{php}-gd %{php}-intl
-%{?rhel:Requires:           %{php}-pdo}
+Requires:                   %{php}-gd %{php}-intl %{php}-mbstring
+%{?rhel:Requires:           %{php}-pdo %{php}-xml}
 Requires:                   %{name}-vendor-zf1 = %{version}-%{release}
 %{?amzn:Requires:           %{php}-pecl-imagick}
 %{?fedora:Requires:         php-pecl-imagick}
