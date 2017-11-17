@@ -2,7 +2,7 @@
 # this script runs in the rpm_test environment
 
 # Install SCL on CentOS
-if grep -q 'ID="centos"' /etc/os-release; then
+if [ -f /etc/centos-release ] || grep -q 'ID="centos"' /etc/os-release; then
   sudo yum install -y centos-release-scl
 fi
 
