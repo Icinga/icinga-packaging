@@ -4,6 +4,7 @@
 # Install SCL on CentOS
 if [ -f /etc/centos-release ] || grep -q 'ID="centos"' /etc/os-release; then
   sudo yum install -y centos-release-scl
+  sudo yum install -y httpd
 fi
 
 install_package icingaweb2
