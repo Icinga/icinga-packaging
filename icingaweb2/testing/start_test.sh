@@ -12,10 +12,10 @@ install_package icingaweb2
 # set timezone for PHP
 if [ -d /etc/opt/rh/rh-php71/php.d ]; then
   php_d=/etc/opt/rh/rh-php71/php.d
-  fpm="scl enable rh-php70 -- php-fpm"
+  fpm="scl enable rh-php71 -- php-fpm"
 elif [ -d /etc/opt/rh/rh-php70/php.d ]; then
   php_d=/etc/opt/rh/rh-php70/php.d
-  fpm="scl enable rh-php71 -- php-fpm"
+  fpm="scl enable rh-php70 -- php-fpm"
 elif [ -d /etc/php.d ]; then
   php_d=/etc/php.d
 elif [ -d /etc/php5/conf.d ]; then
