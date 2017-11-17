@@ -61,6 +61,9 @@ Conflicts:              php53
 
 Requires:                       %{php_runtime} >= %{php_version}
 Requires:                       %{php_common} >= %{php_version}
+%if 0%{?suse_version}
+Requires:                       apache2
+%endif
 
 Requires:                       icingacli = %{version}-%{release}
 Requires:                       %{name}-common = %{version}-%{release}
