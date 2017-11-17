@@ -44,13 +44,8 @@ Packager:       Icinga Team <info@icinga.com>
 %if 0%{?suse_version}
 %define wwwconfigdir    %{_sysconfdir}/apache2/conf.d
 %define wwwuser         wwwrun
-%if 0%{?suse_version} == 1110
-%define php             php53
-%define php_runtime     apache2-mod_php53
-%else
 %define php             php
 %define php_runtime     mod_php_any
-%endif
 %define php_common      %{php}
 %define php_cli         %{php}
 %endif
