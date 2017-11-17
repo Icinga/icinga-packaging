@@ -5,6 +5,10 @@
 if [ -f /etc/centos-release ] || grep -q 'ID="centos"' /etc/os-release; then
   sudo yum install -y centos-release-scl
   sudo yum install -y httpd
+
+  if [ -f /etc/system-release-cpe ] && grep -qF centos:linux:6:GA /etc/system-release-cpe; then
+    sudo yum install -y mod_proxy_fcgi
+  fi
 fi
 
 install_package icingaweb2
