@@ -3,6 +3,11 @@
 
 install_package icingaweb2
 
+# Install SCL on CentOS
+if grep -q 'ID="centos"' /etc/os-release; then
+  sudo yum install -y centos-scl-release
+fi
+
 # set timezone for PHP
 if [ -d /etc/opt/rh/rh-php71/php.d ]; then
   php_d=/etc/opt/rh/rh-php71/php.d
