@@ -100,6 +100,9 @@ Group:                          Applications/System
 %{?fedora:Requires(pre):        shadow-utils}
 %{?rhel:Requires(pre):          shadow-utils}
 %{?suse_version:Requires(pre):  pwdutils}
+%if 0%{?suse_version} > 1320
+Requires(pre):                  system-user-wwwrun
+%endif
 
 %description common
 Common files for Icinga Web 2 and the Icinga CLI
