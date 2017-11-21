@@ -36,6 +36,11 @@ Packager:       Icinga Team <info@icinga.com>
 %define php_common      %{php}-common
 %define wwwconfigdir    %{_sysconfdir}/httpd/conf.d
 %define wwwuser         apache
+
+# extra requirements on RHEL
+Requires:               %{php}-mysqlnd
+Requires:               %{php}-pgsql
+Requires:               %{php}-ldap
 %endif
 
 # minimum required PHP version
