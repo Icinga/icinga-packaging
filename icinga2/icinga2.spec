@@ -674,10 +674,10 @@ fi
 %if 0%{?use_systemd}
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %if 0%{?configure_systemd_limits}
-%attr(644,root,root) /etc/systemd/system/%{name}.service.d/limits.conf
+%attr(644,root,root) %config(noreplace) /etc/systemd/system/%{name}.service.d/limits.conf
 %endif
 %else
-%attr(755,root,root) %{_sysconfdir}/init.d/%{name}
+%attr(755,root,root) %config(noreplace) %{_sysconfdir}/init.d/%{name}
 %endif
 %if "%{_vendor}" == "suse"
 %{_sbindir}/rc%{name}
