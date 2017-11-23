@@ -86,8 +86,6 @@ URL: https://www.icinga.com/
 Group: Applications/System
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
 
-Source1: icinga2.service.limits.conf
-
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Requires: %{name}-bin = %{version}-%{release}
 
@@ -375,15 +373,7 @@ make install \
 # install custom limits.conf for systemd
 %if 0%{?configure_systemd_limits}
 # for > 2.8 or > 2.7.2
-#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}/etc/systemd/system/%%{name}.service.d/limits.conf
-install -D -m 0644 %{SOURCE1} %{buildroot}/etc/systemd/system/%{name}.service.d/limits.conf
-%endif
-
-# install custom limits.conf for systemd
-%if 0%{?configure_systemd_limits}
-# for > 2.8 or > 2.7.2
-#install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %%{buildroot}/etc/systemd/system/%%{name}.service.d/limits.conf
-install -D -m 0644 %{SOURCE1} %{buildroot}/etc/systemd/system/%{name}.service.d/limits.conf
+install -D -m 0644 etc/initsystem/icinga2.service.limits.conf %{buildroot}/etc/systemd/system/%{name}.service.d/limits.conf
 %endif
 
 # remove features-enabled symlinks
