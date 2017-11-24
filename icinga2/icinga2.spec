@@ -32,14 +32,17 @@
 %define apacheconfdir %{_sysconfdir}/httpd/conf.d
 %define apacheuser apache
 %define apachegroup apache
+
 %if 0%{?el5}%{?el6}%{?amzn}
 %define use_systemd 0
+%define use_selinux 0
 %if %(uname -m) != "x86_64"
 %define march_flag -march=i686
 %endif
 %else
 # fedora and el>=7
 %define use_systemd 1
+%define use_selinux 1
 %if 0%{?fedora} >= 24
 # for installing limits.conf on systemd >= 228
 %define configure_systemd_limits 1
@@ -238,18 +241,14 @@ Requires: %{name} = %{version}-%{release}
 Icinga 2 IDO PostgreSQL database backend. Compatible with Icinga 1.x
 IDOUtils schema >= 1.12
 
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+%if 0%{?use_selinux}
 %global selinux_variants mls targeted
-%{!?_selinux_policy_version: %global _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
-%global modulename %{name}
+%global selinux_modulename %{name}
 
 %package selinux
 Summary:        SELinux policy module supporting icinga2
 Group:          System Environment/Base
-BuildRequires:  checkpolicy, selinux-policy-devel, /usr/share/selinux/devel/policyhelp, hardlink
-%if "%{_selinux_policy_version}" != ""
-Requires:       selinux-policy >= %{_selinux_policy_version}
-%endif
+BuildRequires:  checkpolicy, selinux-policy-devel, hardlink
 Requires:       %{name} = %{version}-%{release}
 Requires(post):   policycoreutils-python
 Requires(postun): policycoreutils-python
@@ -355,12 +354,12 @@ export CXX=g++-4.8
 
 make %{?_smp_mflags}
 
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+%if 0%{?use_selinux}
 cd tools/selinux
 for selinuxvariant in %{selinux_variants}
 do
   make NAME=${selinuxvariant} -f /usr/share/selinux/devel/Makefile
-  mv %{modulename}.pp %{modulename}.pp.${selinuxvariant}
+  mv %{selinux_modulename}.pp %{selinux_modulename}.pp.${selinuxvariant}
   make NAME=${selinuxvariant} -f /usr/share/selinux/devel/Makefile clean
 done
 cd -
@@ -390,13 +389,13 @@ mkdir -p "%{buildroot}%{_localstatedir}/adm/fillup-templates/"
 mv "%{buildroot}%{_sysconfdir}/sysconfig/%{name}" "%{buildroot}%{_localstatedir}/adm/fillup-templates/sysconfig.%{name}"
 %endif
 
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+%if 0%{?use_selinux}
 cd tools/selinux
 for selinuxvariant in %{selinux_variants}
 do
   install -d %{buildroot}%{_datadir}/selinux/${selinuxvariant}
-  install -p -m 644 %{modulename}.pp.${selinuxvariant} \
-    %{buildroot}%{_datadir}/selinux/${selinuxvariant}/%{modulename}.pp
+  install -p -m 644 %{selinux_modulename}.pp.${selinuxvariant} \
+    %{buildroot}%{_datadir}/selinux/${selinuxvariant}/%{selinux_modulename}.pp
 done
 cd -
 
@@ -598,12 +597,12 @@ fi
 
 exit 0
 
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+%if 0%{?use_selinux}
 %post selinux
 for selinuxvariant in %{selinux_variants}
 do
   /usr/sbin/semodule -s ${selinuxvariant} -i \
-    %{_datadir}/selinux/${selinuxvariant}/%{modulename}.pp &> /dev/null || :
+    %{_datadir}/selinux/${selinuxvariant}/%{selinux_modulename}.pp &> /dev/null || :
 done
 /sbin/fixfiles -R icinga2-bin restore &> /dev/null || :
 /sbin/fixfiles -R icinga2-common restore &> /dev/null || :
@@ -614,7 +613,7 @@ if [ $1 -eq 0 ] ; then
   /sbin/semanage port -d -t icinga2_port_t -p tcp 5665 &> /dev/null || :
   for selinuxvariant in %{selinux_variants}
   do
-     /usr/sbin/semodule -s ${selinuxvariant} -r %{modulename} &> /dev/null || :
+     /usr/sbin/semodule -s ${selinuxvariant} -r %{selinux_modulename} &> /dev/null || :
   done
   /sbin/fixfiles -R icinga2-bin restore &> /dev/null || :
   /sbin/fixfiles -R icinga2-common restore &> /dev/null || :
@@ -718,11 +717,11 @@ fi
 %{_libdir}/%{name}/libdb_ido_pgsql*
 %{_datadir}/icinga2-ido-pgsql
 
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
+%if 0%{?use_selinux}
 %files selinux
 %defattr(-,root,root,0755)
 %doc tools/selinux/*
-%{_datadir}/selinux/*/%{modulename}.pp
+%{_datadir}/selinux/*/%{selinux_modulename}.pp
 %endif
 
 %if 0%{?fedora}
