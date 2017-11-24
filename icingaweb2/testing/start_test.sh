@@ -11,6 +11,10 @@ if [ -f /etc/centos-release ] || grep -q 'ID="centos"' /etc/os-release; then
   fi
 fi
 
+if [ -f /etc/os-release ]; then
+  source /etc/os-release
+fi
+
 install_package icingaweb2
 
 # set timezone for PHP
@@ -22,6 +26,9 @@ elif [ -d /etc/opt/rh/rh-php70/php.d ]; then
   fpm="scl enable rh-php70 -- php-fpm"
 elif [ -d /etc/php.d ]; then
   php_d=/etc/php.d
+  if [ "$ID" = fedora ] && [ "$VERSION_ID" -ge 27 ]; then
+    fpm="php-fpm"
+  fi
 elif [ -d /etc/php5/conf.d ]; then
   php_d=/etc/php5/conf.d
   mod_php=php5
@@ -96,3 +103,5 @@ else
   sudo sh -ex <<<'cat /var/log/httpd/*error* /var/log/apache2/*error*'
   exit 1
 fi
+
+# vi: ts=2 sw=2 expandtab :
