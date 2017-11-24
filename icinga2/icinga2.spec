@@ -17,7 +17,7 @@
 # * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.             *
 # ******************************************************************************/
 
-%define revision 1
+%define revision 2
 
 # make sure that _rundir is working on older systems
 %if ! %{defined _rundir}
@@ -747,6 +747,13 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Fri Nov 24 2017 Markus Frosch <markus.frosch@icinga.com> 2.8.0-2
+- [SLES] Add systemd limits file
+- Add config(noreplace) for the systemd limits file
+  (no need to release every OS immediately)
+- Update SELinux handling to be compatible to Fedora 27
+  (only affecting f27 builds)
+
 * Thu Nov 16 2017 Jean Flach <jean-marcel.flach@icinga.com> 2.8.0-1
 - Update to 2.8.0
 
