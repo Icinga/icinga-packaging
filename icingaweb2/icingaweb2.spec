@@ -22,6 +22,12 @@ Packager:       Icinga Team <info@icinga.com>
 %define php_scl         rh-php70
 %endif
 
+%if 0%{?el5}%{?el6}%{?amzn}
+%define use_selinux 0
+%else
+%define use_selinux 1
+%endif
+
 %if 0%{?php_scl:1}
 %define php_scl_prefix  %{php_scl}-
 %define php_runtime     %{php_scl_prefix}php-fpm
@@ -78,12 +84,6 @@ Requires:                       %{name}-vendor-HTMLPurifier = 1:%{version}-%{rel
 Requires:                       %{name}-vendor-JShrink = %{version}-%{release}
 Requires:                       %{name}-vendor-lessphp = %{version}-%{release}
 Requires:                       %{name}-vendor-Parsedown = %{version}-%{release}
-
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
-%define selinux 1
-%define selinux_variants mls targeted
-%{!?_selinux_policy_version: %define _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
-%endif
 
 %define basedir         %{_datadir}/%{name}
 %define bindir          %{_bindir}
@@ -147,13 +147,12 @@ Conflicts:                  php53
 Icinga CLI
 
 
-%if 0%{?selinux}
+%if 0%{?use_selinux}
+%define selinux_variants mls targeted
+
 %package selinux
 Summary:        SELinux policy for Icinga Web 2
-BuildRequires:  checkpolicy, selinux-policy-devel, /usr/share/selinux/devel/policyhelp, hardlink
-%if "%{_selinux_policy_version}" != ""
-Requires:       selinux-policy >= %{_selinux_policy_version}
-%endif
+BuildRequires:  checkpolicy, selinux-policy-devel, hardlink
 Requires:           %{name} = %{version}-%{release}
 Requires(post):     policycoreutils
 Requires(postun):   policycoreutils
@@ -233,13 +232,13 @@ Icinga Web 2's fork of Zend Framework 1
 
 %prep
 %setup -q
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 mkdir selinux
 cp -p packages/selinux/icingaweb2.{fc,if,te} selinux
 %endif
 
 %build
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 cd selinux
 for selinuxvariant in %{selinux_variants}
 do
@@ -271,7 +270,7 @@ sed -i '1 s~#!.*~#!%{php_bin}~' %{buildroot}/%{bindir}/icingacli
 cp -pv packages/files/public/index.php %{buildroot}/%{basedir}/public
 cp -prv etc/schema %{buildroot}/%{docsdir}
 cp -prv packages/files/config/modules/{setup,translation} %{buildroot}/%{configdir}/modules
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 cd selinux
 for selinuxvariant in %{selinux_variants}
 do
@@ -353,7 +352,7 @@ exit 0
 %attr(0755,root,root) %{bindir}/icingacli
 
 
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 %post selinux
 for selinuxvariant in %{selinux_variants}
 do
