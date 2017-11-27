@@ -1,9 +1,9 @@
-# Icinga Web 2 | (c) 2013-2016 Icinga Development Team | GPLv2+
+# Icinga Web 2 | (c) 2013-2017 Icinga Development Team | GPLv2+
 
 %define revision 1
 
 Name:           icingaweb2
-Version:        2.4.2
+Version:        2.5.0
 Release:        %{revision}%{?dist}
 Summary:        Icinga Web 2
 Group:          Applications/System
@@ -15,28 +15,68 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Packager:       Icinga Team <info@icinga.com>
 
 %if 0%{?fedora} || 0%{?rhel} || 0%{?amzn}
-%define php             php
-%define php_cli         php-cli
+%if 0%{?rhel} == 7
+%define php_scl         rh-php71
+%endif
+%if 0%{?rhel} == 6
+%define php_scl         rh-php70
+%endif
+
+%if 0%{?el5}%{?el6}%{?amzn}
+%define use_selinux 0
+%else
+%define use_selinux 1
+%endif
+
+%if 0%{?php_scl:1}
+%define php_scl_prefix  %{php_scl}-
+%define php_runtime     %{php_scl_prefix}php-fpm
+%define php_bin         /opt/rh/%{php_scl}/root/usr/bin/php
+%define php_fpm         1
+%else
+%define php_runtime     %{php}
+%endif
+
+%define php             %{?php_scl_prefix}php
+%define php_cli         %{php}-cli
+%define php_common      %{php}-common
 %define wwwconfigdir    %{_sysconfdir}/httpd/conf.d
 %define wwwuser         apache
+
+# extra requirements on RHEL
+Requires:               %{php}-mysqlnd
+Requires:               %{php}-pgsql
+Requires:               %{php}-ldap
 %endif
+
+# minimum required PHP version
+%define php_version 5.6.0
 
 %if 0%{?suse_version}
 %define wwwconfigdir    %{_sysconfdir}/apache2/conf.d
 %define wwwuser         wwwrun
-%if 0%{?suse_version} == 1110
-%define php php53
-Requires: apache2-mod_php53
-%else
-%define php php5
-Requires: apache2-mod_php5
-%endif
+%define php             php
+%define php_runtime     mod_php_any
+%define php_common      %{php}
+%define php_cli         %{php}
+# conflict with older PHP on SLES and openSUSE
+Conflicts:              php < %{php_version}
+Conflicts:              php5 < %{php_version}
+Conflicts:              php53
 %endif
 
 %{?amzn:Requires(pre):          shadow-utils}
 %{?fedora:Requires(pre):        shadow-utils}
 %{?rhel:Requires(pre):          shadow-utils}
 %{?suse_version:Requires(pre):  pwdutils}
+
+Requires:                       %{php_runtime} >= %{php_version}
+Requires:                       %{php_common} >= %{php_version}
+%if 0%{?suse_version}
+Requires:                       apache2
+%endif
+
+Requires:                       icingacli = %{version}-%{release}
 Requires:                       %{name}-common = %{version}-%{release}
 Requires:                       php-Icinga = %{version}-%{release}
 Requires:                       %{name}-vendor-dompdf = %{version}-%{release}
@@ -44,12 +84,6 @@ Requires:                       %{name}-vendor-HTMLPurifier = 1:%{version}-%{rel
 Requires:                       %{name}-vendor-JShrink = %{version}-%{release}
 Requires:                       %{name}-vendor-lessphp = %{version}-%{release}
 Requires:                       %{name}-vendor-Parsedown = %{version}-%{release}
-
-%if "%{_vendor}" == "redhat" && !(0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
-%define selinux 1
-%define selinux_variants mls targeted
-%{!?_selinux_policy_version: %define _selinux_policy_version %(sed -e 's,.*selinux-policy-\\([^/]*\\)/.*,\\1,' /usr/share/selinux/devel/policyhelp 2>/dev/null)}
-%endif
 
 %define basedir         %{_datadir}/%{name}
 %define bindir          %{_bindir}
@@ -71,6 +105,9 @@ Group:                          Applications/System
 %{?fedora:Requires(pre):        shadow-utils}
 %{?rhel:Requires(pre):          shadow-utils}
 %{?suse_version:Requires(pre):  pwdutils}
+%if 0%{?suse_version} > 1320
+Requires(pre):                  system-user-wwwrun
+%endif
 
 %description common
 Common files for Icinga Web 2 and the Icinga CLI
@@ -79,12 +116,12 @@ Common files for Icinga Web 2 and the Icinga CLI
 %package -n php-Icinga
 Summary:                    Icinga Web 2 PHP library
 Group:                      Development/Libraries
-Requires:                   %{php} >= 5.3.0
-Requires:                   %{php}-gd %{php}-intl
+Requires:                   %{php_common} >= %{php_version}
+Requires:                   %{php}-gd %{php}-intl %{php}-mbstring
+%{?rhel:Requires:           %{php}-pdo %{php}-xml}
 Requires:                   %{name}-vendor-zf1 = %{version}-%{release}
 %{?amzn:Requires:           %{php}-pecl-imagick}
 %{?fedora:Requires:         php-pecl-imagick}
-%{?rhel:Requires:           php-pecl-imagick}
 %{?suse_version:Requires:   %{php}-gettext %{php}-json %{php}-openssl %{php}-posix}
 
 %description -n php-Icinga
@@ -96,22 +133,26 @@ Summary:                    Icinga CLI
 Group:                      Applications/System
 Requires:                   %{name}-common = %{version}-%{release}
 Requires:                   php-Icinga = %{version}-%{release}
-%{?amzn:Requires:           %{php_cli} >= 5.3.0 bash-completion}
-%{?fedora:Requires:         %{php_cli} >= 5.3.0 bash-completion}
-%{?rhel:Requires:           %{php_cli} >= 5.3.0 bash-completion}
-%{?suse_version:Requires:   %{php} >= 5.3.0}
+Requires:                   bash-completion
+Requires:                   %{php_cli} >= %{php_version}
+%if 0%{?suse_version}
+# conflict with older PHP on SLES and openSUSE
+Conflicts:                  php < %{php_version}
+Conflicts:                  php5 < %{php_version}
+Conflicts:                  php53
+%endif
+
 
 %description -n icingacli
 Icinga CLI
 
 
-%if 0%{?selinux}
+%if 0%{?use_selinux}
+%define selinux_variants mls targeted
+
 %package selinux
 Summary:        SELinux policy for Icinga Web 2
-BuildRequires:  checkpolicy, selinux-policy-devel, /usr/share/selinux/devel/policyhelp, hardlink
-%if "%{_selinux_policy_version}" != ""
-Requires:       selinux-policy >= %{_selinux_policy_version}
-%endif
+BuildRequires:  checkpolicy, selinux-policy-devel, hardlink
 Requires:           %{name} = %{version}-%{release}
 Requires(post):     policycoreutils
 Requires(postun):   policycoreutils
@@ -125,7 +166,8 @@ SELinux policy for Icinga Web 2
 Summary:    Icinga Web 2 vendor library dompdf
 Group:      Development/Libraries
 License:    LGPLv2.1
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-dompdf
 Icinga Web 2 vendor library dompdf
@@ -136,7 +178,8 @@ Epoch:      1
 Summary:    Icinga Web 2 vendor library HTMLPurifier
 Group:      Development/Libraries
 License:    LGPLv2.1
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-HTMLPurifier
 Icinga Web 2 vendor library HTMLPurifier
@@ -146,7 +189,8 @@ Icinga Web 2 vendor library HTMLPurifier
 Summary:    Icinga Web 2 vendor library JShrink
 Group:      Development/Libraries
 License:    BSD
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-JShrink
 Icinga Web 2 vendor library JShrink
@@ -156,7 +200,8 @@ Icinga Web 2 vendor library JShrink
 Summary:    Icinga Web 2 vendor library lessphp
 Group:      Development/Libraries
 License:    MIT
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-lessphp
 Icinga Web 2 vendor library lessphp
@@ -166,7 +211,8 @@ Icinga Web 2 vendor library lessphp
 Summary:    Icinga Web 2 vendor library Parsedown
 Group:      Development/Libraries
 License:    MIT
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-Parsedown
 Icinga Web 2 vendor library Parsedown
@@ -176,8 +222,9 @@ Icinga Web 2 vendor library Parsedown
 Summary:    Icinga Web 2's fork of Zend Framework 1
 Group:      Development/Libraries
 License:    BSD
-Requires:   %{php} >= 5.3.0
+Requires:   %{php_common} >= %{php_version}
 Obsoletes:  %{name}-vendor-Zend < 1.12.20
+Requires:   %{name}-common = %{version}-%{release}
 
 %description vendor-zf1
 Icinga Web 2's fork of Zend Framework 1
@@ -185,13 +232,13 @@ Icinga Web 2's fork of Zend Framework 1
 
 %prep
 %setup -q
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 mkdir selinux
 cp -p packages/selinux/icingaweb2.{fc,if,te} selinux
 %endif
 
 %build
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 cd selinux
 for selinuxvariant in %{selinux_variants}
 do
@@ -211,12 +258,19 @@ cp -prv modules/{monitoring,setup,doc,translation} %{buildroot}/%{basedir}/modul
 cp -prv library/Icinga %{buildroot}/%{phpdir}
 cp -prv library/vendor/{dompdf,HTMLPurifier*,JShrink,lessphp,Parsedown,Zend} %{buildroot}/%{basedir}/library/vendor
 cp -prv public/{css,font,img,js,error_norewrite.html} %{buildroot}/%{basedir}/public
+%if 0%{?php_fpm:1}
+cp -pv packages/files/apache/icingaweb2.fpm.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
+%else
 cp -pv packages/files/apache/icingaweb2.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
+%endif
 cp -pv packages/files/bin/icingacli %{buildroot}/%{bindir}
+%if 0%{?php_bin:1}
+sed -i '1 s~#!.*~#!%{php_bin}~' %{buildroot}/%{bindir}/icingacli
+%endif
 cp -pv packages/files/public/index.php %{buildroot}/%{basedir}/public
 cp -prv etc/schema %{buildroot}/%{docsdir}
 cp -prv packages/files/config/modules/{setup,translation} %{buildroot}/%{configdir}/modules
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 cd selinux
 for selinuxvariant in %{selinux_variants}
 do
@@ -251,6 +305,11 @@ rm -rf %{buildroot}
 %{basedir}/doc
 %{basedir}/modules
 %{basedir}/public
+%if 0%{?suse_version}
+# for lint on OBS
+%dir %{dirname:%{wwwconfigdir}}
+%dir %{wwwconfigdir}
+%endif
 %config(noreplace) %{wwwconfigdir}/icingaweb2.conf
 %attr(2775,root,%{icingawebgroup}) %dir %{logdir}
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}/modules/setup
@@ -267,14 +326,22 @@ exit 0
 
 %files common
 %defattr(-,root,root)
-%{basedir}/application/locale
+%dir %{basedir}
+%dir %{basedir}/application
+%dir %{basedir}/library
+%dir %{basedir}/library/vendor
 %dir %{basedir}/modules
+%{basedir}/application/locale
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}
 %attr(2770,root,%{icingawebgroup}) %config(noreplace) %dir %{configdir}/modules
 
 
 %files -n php-Icinga
 %defattr(-,root,root)
+%if 0%{?suse_version}
+# for lint on OBS
+%dir %{phpdir}
+%endif
 %{phpdir}/Icinga
 
 
@@ -285,7 +352,7 @@ exit 0
 %attr(0755,root,root) %{bindir}/icingacli
 
 
-%if 0%{?selinux}
+%if 0%{?use_selinux}
 %post selinux
 for selinuxvariant in %{selinux_variants}
 do
@@ -345,5 +412,12 @@ fi
 %{basedir}/library/vendor/Zend
 
 %changelog
+* Mon Nov 11 2017 Markus Frosch <markus.frosch@icinga.com> 2.5.0-1
+- Update to 2.5.0
+- All packages now require PHP >= 5.6
+- [EPEL 6 + 7] We now require PHP 7 from SCL packages, php-fpm as runtime engine
+- [SUSE / openSUSE] Requirements will force the installation of php7
+- Please check upgrading docs at /usr/share/icingaweb2/doc/80-Upgrading.md
+
 * Thu Sep 28 2017 Markus Frosch <markus.frosch@icinga.com> 2.4.2-1
 - Update to 2.4.2

@@ -1,13 +1,40 @@
 #!/bin/bash
 # this script runs in the rpm_test environment
 
+# Install SCL on CentOS
+if [ -f /etc/centos-release ] || grep -q 'ID="centos"' /etc/os-release; then
+  sudo yum install -y centos-release-scl
+  sudo yum install -y httpd
+
+  if [ -f /etc/system-release-cpe ] && grep -qF centos:linux:6:GA /etc/system-release-cpe; then
+    sudo yum install -y mod_proxy_fcgi
+  fi
+fi
+
+if [ -f /etc/os-release ]; then
+  source /etc/os-release
+fi
+
 install_package icingaweb2
 
 # set timezone for PHP
-if [ -d /etc/php.d ]; then
+if [ -d /etc/opt/rh/rh-php71/php.d ]; then
+  php_d=/etc/opt/rh/rh-php71/php.d
+  fpm="scl enable rh-php71 -- php-fpm"
+elif [ -d /etc/opt/rh/rh-php70/php.d ]; then
+  php_d=/etc/opt/rh/rh-php70/php.d
+  fpm="scl enable rh-php70 -- php-fpm"
+elif [ -d /etc/php.d ]; then
   php_d=/etc/php.d
+  if [ "$ID" = fedora ] && [ "$VERSION_ID" -ge 27 ]; then
+    fpm="php-fpm"
+  fi
 elif [ -d /etc/php5/conf.d ]; then
   php_d=/etc/php5/conf.d
+  mod_php=php5
+elif [ -d /etc/php7/conf.d ]; then
+  php_d=/etc/php7/conf.d
+  mod_php=php7
 else
   echo "Can not set PHP timezone!" >&2
   exit 1
@@ -18,14 +45,14 @@ sudo sh -c "echo 'date.timezone = UTC' >${php_d}/timezone.ini"
 if [ -e /usr/sbin/start_apache2 ]; then
   # newer SUSE
   sudo a2enmod rewrite
-  sudo a2enmod php5
+  sudo a2enmod "$mod_php"
 
   sudo /usr/sbin/start_apache2 -t
   sudo /usr/sbin/start_apache2 -k start
 elif [ -x /usr/share/apache2/get_module_list ]; then
   # older SUSE
   sudo a2enmod rewrite
-  sudo a2enmod php5
+  sudo a2enmod "$mod_php"
 
   # update apache config
   sudo /usr/share/apache2/get_includes
@@ -36,6 +63,13 @@ elif [ -x /usr/sbin/httpd ]; then
   # Disable mod_lua - it sometimes crashes on Fedora 25 with:
   # mod_lua: Failed to create shared memory segment on file /tmp/httpd_lua_shm.187
   sudo sh -ex <<<"test -e /etc/httpd/conf.modules.d/00-lua.conf && mv /etc/httpd/conf.modules.d/00-lua.conf{,.off} || true"
+
+  if [ -n "$fpm" ]; then
+    echo "Starting FPM daemon in background"
+    sudo $fpm -t
+    sudo $fpm -D
+  fi
+
   sudo httpd -t
   sudo httpd -k start
 else
@@ -69,3 +103,5 @@ else
   sudo sh -ex <<<'cat /var/log/httpd/*error* /var/log/apache2/*error*'
   exit 1
 fi
+
+# vi: ts=2 sw=2 expandtab :
