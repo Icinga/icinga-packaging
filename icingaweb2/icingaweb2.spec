@@ -3,7 +3,7 @@
 %define revision 1
 
 Name:           icingaweb2
-Version:        2.4.2
+Version:        2.5.0
 Release:        %{revision}%{?dist}
 Summary:        Icinga Web 2
 Group:          Applications/System
@@ -412,5 +412,12 @@ fi
 %{basedir}/library/vendor/Zend
 
 %changelog
+* Mon Nov 11 2017 Markus Frosch <markus.frosch@icinga.com> 2.5.0-1
+- Update to 2.5.0
+- All packages now require PHP >= 5.6
+- [EPEL 6 + 7] We now require PHP 7 from SCL packages, php-fpm as runtime engine
+- [SUSE / openSUSE] Requirements will force the installation of php7
+- Please check upgrading docs at /usr/share/icingaweb2/doc/80-Upgrading.md
+
 * Thu Sep 28 2017 Markus Frosch <markus.frosch@icinga.com> 2.4.2-1
 - Update to 2.4.2
