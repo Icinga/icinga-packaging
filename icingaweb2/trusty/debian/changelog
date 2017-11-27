@@ -1,3 +1,9 @@
+icingaweb2 (2.5.0-1) icinga-trusty; urgency=medium
+
+  * Update to 2.5.0
+
+ -- Markus Frosch <markus.frosch@icinga.com>  Mon, 27 Nov 2017 09:54:06 +0100
+
 icingaweb2 (2.4.2-1) icinga-trusty; urgency=medium
 
   * Update to 2.4.2
