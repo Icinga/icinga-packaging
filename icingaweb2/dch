@@ -2,7 +2,7 @@
 
 set -e
 
-DIST=(wheezy jessie stretch trusty xenial)
+DIST=(jessie stretch trusty xenial)
 VERSION="$1"
 shift
 CHANGELOG="$@"
