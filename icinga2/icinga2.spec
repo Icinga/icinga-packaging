@@ -165,14 +165,14 @@ This subpackage provides the binaries for Icinga 2 Core.
 %package common
 Summary:      Common Icinga 2 configuration
 Group:        System/Monitoring
-Provides:     user(%{icinga_user})
-Provides:     group(%{icinga_group})
-Provides:     group(%{icingacmd_group})
 %if (0%{?amzn} || 0%{?fedora} || 0%{?rhel})
 Requires(pre):  shadow-utils
 Requires(post): shadow-utils
 %endif
 %if "%{_vendor}" == "suse"
+Provides:       user(%{icinga_user})
+Provides:       group(%{icinga_group})
+Provides:       group(%{icingacmd_group})
 Requires(pre):  shadow
 Requires(post): shadow
 # Coreutils is added because of autoyast problems reported
