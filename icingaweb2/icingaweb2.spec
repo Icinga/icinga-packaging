@@ -257,7 +257,7 @@ cp -pv etc/bash_completion.d/icingacli %{buildroot}/%{_sysconfdir}/bash_completi
 cp -prv modules/{monitoring,setup,doc,translation} %{buildroot}/%{basedir}/modules
 cp -prv library/Icinga %{buildroot}/%{phpdir}
 cp -prv library/vendor/{dompdf,HTMLPurifier*,JShrink,lessphp,Parsedown,Zend} %{buildroot}/%{basedir}/library/vendor
-cp -prv public/{css,font,img,js,error_norewrite.html} %{buildroot}/%{basedir}/public
+cp -prv public/{css,font,img,js,error_norewrite.html,error_unavailable.html} %{buildroot}/%{basedir}/public
 %if 0%{?php_fpm:1}
 cp -pv packages/files/apache/icingaweb2.fpm.conf %{buildroot}/%{wwwconfigdir}/icingaweb2.conf
 %else
@@ -412,7 +412,10 @@ fi
 %{basedir}/library/vendor/Zend
 
 %changelog
-* Mon Nov 11 2017 Markus Frosch <markus.frosch@icinga.com> 2.5.0-1
+* Tue Nov 28 2017 Eric Lippmann <eric.lippmann@icinga.com> 2.5.0-1
+- Install error_unavailable.html
+
+* Mon Nov 27 2017 Markus Frosch <markus.frosch@icinga.com> 2.5.0-1
 - Update to 2.5.0
 - All packages now require PHP >= 5.6
 - [EPEL 6 + 7] We now require PHP 7 from SCL packages, php-fpm as runtime engine
