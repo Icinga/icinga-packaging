@@ -10,6 +10,7 @@ Group:          Applications/System
 License:        GPLv2+ and MIT and BSD
 URL:            https://icinga.com
 Source0:        https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
+Patch0:         icingaweb2-fix-apache-fpm-config.patch
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Packager:       Icinga Team <info@icinga.com>
@@ -232,6 +233,7 @@ Icinga Web 2's fork of Zend Framework 1
 
 %prep
 %setup -q
+%patch0 -p1
 %if 0%{?use_selinux}
 mkdir selinux
 cp -p packages/selinux/icingaweb2.{fc,if,te} selinux
