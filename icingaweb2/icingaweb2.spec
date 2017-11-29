@@ -1,6 +1,6 @@
 # Icinga Web 2 | (c) 2013-2017 Icinga Development Team | GPLv2+
 
-%define revision 1
+%define revision 2
 
 Name:           icingaweb2
 Version:        2.5.0
@@ -11,6 +11,7 @@ License:        GPLv2+ and MIT and BSD
 URL:            https://icinga.com
 Source0:        https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
 Patch0:         icingaweb2-fix-apache-fpm-config.patch
+Patch1:         icingaweb2-fix-apache22-fpm-config.patch
 BuildArch:      noarch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}
 Packager:       Icinga Team <info@icinga.com>
@@ -234,6 +235,7 @@ Icinga Web 2's fork of Zend Framework 1
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 %if 0%{?use_selinux}
 mkdir selinux
 cp -p packages/selinux/icingaweb2.{fc,if,te} selinux
@@ -414,6 +416,9 @@ fi
 %{basedir}/library/vendor/Zend
 
 %changelog
+* Wed Nov 29 2017 Eric Lippmann <eric.lippmann@icinga.com> 2.5.0-2
+- FPM: Add patch to support both Apache >= 2.4 and Apache < 2.4
+
 * Tue Nov 28 2017 Eric Lippmann <eric.lippmann@icinga.com> 2.5.0-1
 - Install error_unavailable.html
 - Add patch to fix Apache FPM config
