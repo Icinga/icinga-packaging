@@ -142,11 +142,18 @@ BuildRequires: boost153-devel
 # sles 11 sp3 requires packages.icinga.com
 BuildRequires: boost153-devel
 %else
+%if "%{_vendor}" == "suse" && 0%{?suse_version} > 1320
+BuildRequires: libboost_thread-devel >= 1.48
+BuildRequires: libboost_program_options-devel >= 1.48
+BuildRequires: libboost_regex-devel >= 1.48
+BuildRequires: libboost_system-devel >= 1.48
+%else
 %if (0%{?el5} || 0%{?rhel} == 5 || "%{?dist}" == ".el5" || 0%{?el6} || 0%{?rhel} == 6 || "%{?dist}" == ".el6")
 # Requires EPEL repository
 BuildRequires: boost148-devel >= 1.48
 %else
 BuildRequires: boost-devel >= 1.48
+%endif
 %endif
 %endif
 %endif
