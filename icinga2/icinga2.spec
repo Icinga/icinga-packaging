@@ -169,6 +169,7 @@ Group:        System/Monitoring
 Requires(pre):  shadow-utils
 Requires(post): shadow-utils
 %endif
+BuildRequires:	logrotate
 %if "%{_vendor}" == "suse"
 Requires(pre):  shadow
 Requires(post): shadow
