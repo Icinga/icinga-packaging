@@ -53,7 +53,7 @@
 %endif
 
 %if "%{_vendor}" == "suse"
-%define plugindir %{_prefix}/lib/nagios/plugins
+%define plugindir %{_libexecdir}/nagios/plugins
 %define apachename apache2
 %define apacheconfdir  %{_sysconfdir}/apache2/conf.d
 %define apacheuser wwwrun
@@ -74,9 +74,6 @@
 %define icinga_user icinga
 %define icinga_group icinga
 %define icingacmd_group icingacmd
-%define icingaweb2name icingaweb2
-%define icingaweb2version 2.0.0
-
 
 %define logmsg logger -t %{name}/rpm
 
@@ -84,7 +81,7 @@ Summary: Network monitoring application
 Name: icinga2
 Version: 2.8.0
 Release: %{revision}%{?dist}
-License: GPL-2.0+
+License: GPLv2+
 URL: https://www.icinga.com/
 Group: System/Monitoring
 Source: https://github.com/Icinga/%{name}/archive/v%{version}.tar.gz
@@ -169,7 +166,7 @@ Group:        System/Monitoring
 Requires(pre):  shadow-utils
 Requires(post): shadow-utils
 %endif
-BuildRequires:	logrotate
+BuildRequires:  logrotate
 %if "%{_vendor}" == "suse"
 Requires(pre):  shadow
 Requires(post): shadow
@@ -367,7 +364,7 @@ cd -
 
 %install
 make install \
-	DESTDIR="%{buildroot}"
+        DESTDIR="%{buildroot}"
 
 # install custom limits.conf for systemd
 %if 0%{?configure_systemd_limits}
@@ -400,7 +397,7 @@ done
 cd -
 
 # TODO: Fix build problems on Icinga, see https://github.com/Icinga/puppet-icinga_build/issues/11
-#/usr/sbin/hardlink -cv %{buildroot}%{_datadir}/selinux
+#/usr/sbin/hardlink -cv %%{buildroot}%%{_datadir}/selinux
 %endif
 
 %if 0%{?fedora}
@@ -470,10 +467,10 @@ getent passwd %{icinga_user} >/dev/null || %{_sbindir}/useradd -c "icinga" -s /s
 
 if [ ${1:-0} -eq 1 ]
 then
-	# initial installation, enable default features
-	for feature in checker notification mainlog; do
-		ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
-	done
+        # initial installation, enable default features
+        for feature in checker notification mainlog; do
+                ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
+        done
 fi
 
 exit 0
@@ -489,10 +486,10 @@ exit 0
 
 if [ ${1:-0} -eq 1 ]
 then
-	# initial installation, enable default features
-	for feature in checker notification mainlog; do
-		ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
-	done
+        # initial installation, enable default features
+        for feature in checker notification mainlog; do
+                ln -sf ../features-available/${feature}.conf %{_sysconfdir}/%{name}/features-enabled/${feature}.conf
+        done
 fi
 
 exit 0
@@ -517,7 +514,7 @@ exit 0
 %systemd_postun_with_restart %{name}.service
 %else
 if [ "$1" -ge  "1" ]; then
-	/sbin/service %{name} condrestart >/dev/null 2>&1 || :
+        /sbin/service %{name} condrestart >/dev/null 2>&1 || :
 fi
 %endif
 
@@ -525,8 +522,8 @@ fi
 # suse / rhel
 
 if [ "$1" = "0" ]; then
-	# deinstallation of the package - remove enabled features
-	rm -rf %{_sysconfdir}/%{name}/features-enabled
+        # deinstallation of the package - remove enabled features
+        rm -rf %{_sysconfdir}/%{name}/features-enabled
 fi
 
 exit 0
@@ -550,8 +547,8 @@ exit 0
 %systemd_preun %{name}.service
 %else
 if [ "$1" = "0" ]; then
-	/sbin/service %{name} stop > /dev/null 2>&1 || :
-	/sbin/chkconfig --del %{name} || :
+        /sbin/service %{name} stop > /dev/null 2>&1 || :
+        /sbin/chkconfig --del %{name} || :
 fi
 %endif
 
@@ -563,16 +560,16 @@ exit 0
 %post ido-mysql
 if [ ${1:-0} -eq 1 ]
 then
-	# initial installation, enable ido-mysql feature
-	ln -sf ../features-available/ido-mysql.conf %{_sysconfdir}/%{name}/features-enabled/ido-mysql.conf
+        # initial installation, enable ido-mysql feature
+        ln -sf ../features-available/ido-mysql.conf %{_sysconfdir}/%{name}/features-enabled/ido-mysql.conf
 fi
 
 exit 0
 
 %postun ido-mysql
 if [ "$1" = "0" ]; then
-	# deinstallation of the package - remove feature
-	rm -f %{_sysconfdir}/%{name}/features-enabled/ido-mysql.conf
+        # deinstallation of the package - remove feature
+        rm -f %{_sysconfdir}/%{name}/features-enabled/ido-mysql.conf
 fi
 
 exit 0
@@ -580,16 +577,16 @@ exit 0
 %post ido-pgsql
 if [ ${1:-0} -eq 1 ]
 then
-	# initial installation, enable ido-pgsql feature
-	ln -sf ../features-available/ido-pgsql.conf %{_sysconfdir}/%{name}/features-enabled/ido-pgsql.conf
+        # initial installation, enable ido-pgsql feature
+        ln -sf ../features-available/ido-pgsql.conf %{_sysconfdir}/%{name}/features-enabled/ido-pgsql.conf
 fi
 
 exit 0
 
 %postun ido-pgsql
 if [ "$1" = "0" ]; then
-	# deinstallation of the package - remove feature
-	rm -f %{_sysconfdir}/%{name}/features-enabled/ido-pgsql.conf
+        # deinstallation of the package - remove feature
+        rm -f %{_sysconfdir}/%{name}/features-enabled/ido-pgsql.conf
 fi
 
 exit 0
@@ -633,16 +630,6 @@ fi
 %exclude %{_datadir}/%{name}/include
 %{_mandir}/man8/%{name}.8.gz
 
-%attr(0750,%{icinga_user},%{icingacmd_group}) %{_localstatedir}/cache/%{name}
-%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}
-%attr(0750,%{icinga_user},%{icinga_group}) %dir %{_localstatedir}/log/%{name}/crash
-%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}/compat
-%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}/compat/archives
-%attr(0750,%{icinga_user},%{icinga_group}) %{_localstatedir}/lib/%{name}
-
-%attr(0750,%{icinga_user},%{icingacmd_group}) %ghost %{_rundir}/%{name}
-%attr(2750,%{icinga_user},%{icingacmd_group}) %ghost %{_rundir}/%{name}/cmd
-
 %files libs
 %defattr(-,root,root,-)
 %doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md
@@ -654,7 +641,6 @@ fi
 %files common
 %defattr(-,root,root,-)
 %doc COPYING COPYING.Exceptions README.md NEWS AUTHORS CHANGELOG.md tools/syntax
-%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}
 %config(noreplace) %{_sysconfdir}/logrotate.d/%{name}
 %{_sysconfdir}/bash_completion.d/%{name}
 %if 0%{?use_systemd}
@@ -690,6 +676,14 @@ fi
 %dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/prepare-dirs
 %{_libexecdir}/%{name}/safe-reload
+%attr(0750,%{icinga_user},%{icingacmd_group}) %{_localstatedir}/cache/%{name}
+%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}
+%attr(0750,%{icinga_user},%{icinga_group}) %dir %{_localstatedir}/log/%{name}/crash
+%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}/compat
+%attr(0750,%{icinga_user},%{icingacmd_group}) %dir %{_localstatedir}/log/%{name}/compat/archives
+%attr(0750,%{icinga_user},%{icinga_group}) %{_localstatedir}/lib/%{name}
+%attr(0750,%{icinga_user},%{icingacmd_group}) %ghost %{_rundir}/%{name}
+%attr(2750,%{icinga_user},%{icingacmd_group}) %ghost %{_rundir}/%{name}/cmd
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_localstatedir}/spool/%{name}
 %attr(0770,%{icinga_user},%{icinga_group}) %dir %{_localstatedir}/spool/%{name}/perfdata
 %attr(0750,%{icinga_user},%{icinga_group}) %dir %{_localstatedir}/spool/%{name}/tmp
