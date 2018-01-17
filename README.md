@@ -1,29 +1,46 @@
-Icinga Packaging
-================
+# Icinga Packaging
 
-This repository is the packaging control GIT for the Icinga project.
-
-Please see the other branches for target distributions and major versions.
-
-## Debian/Ubuntu packaging
-
-See branch [deb/snapshot](https://github.com/Icinga/icinga-packaging/tree/deb/snapshot)
-
-## RPM packaging
-
-See branch [rpm/snapshot](https://github.com/Icinga/icinga-packaging/tree/rpm/snapshot)
+This repository holds the required build scripts to create packages for packages.icinga.com
 
 ## Documentation
 
-Documentation is collected inside the [doc](doc/) directory.
+Documentation for release packages and more can be found in the [doc](doc/) directory.
 
-* [Releasing packages](doc/releases.md)
+* [Introduction into RPM/Deb packages](doc/01-Introduction.md)
+* [Build release packages](doc/02-Release-Packages.md)
+
+## Branches
+
+### Snapshot Packages
+
+* Debian/Ubuntu: [deb/snapshot](https://github.com/Icinga/icinga-packaging/tree/deb/snapshot)
+* RedHat/Fedora/SUSE: [rpm/snapshot](https://github.com/Icinga/icinga-packaging/tree/rpm/snapshot)
+
+### Release Packages
+
+* Debian/Ubuntu: [deb/release](https://github.com/Icinga/icinga-packaging/tree/deb/release)
+* RedHat/Fedora/SUSE: [rpm/release](https://github.com/Icinga/icinga-packaging/tree/rpm/release)
+
 
 ## Contributing
 
-Checkout the `*/snapshot` branches, for the latest packaging version.
+Fork this repository on GitHub. Checkout the snapshot branches and build your PR based on that.
 
-Feel free to test the packages and report issues, or add pull requests here.
+Example for RPM packages:
+
+```
+git checkout rpm/snapshot
+git checkout -b fix/rpm-lint
+
+Do your work, test, commit
+
+git commit -av -m "Fix RPMlint errors"
+git push -u origin fix/rpm-lint
+
+hub pull-request -b rpm/snapshot
+```
+
+Issues and problems should be discussed in new issues.
 
 ## License
 
@@ -32,7 +49,7 @@ author and license information about every package contained here.
 
     All additional scripts are licensed under GPL-2.0+ and
 
-    Copyright (c) 2017 Icinga Development Team <info@icinga.com>
+    Copyright (c) 2018 Icinga Development Team <info@icinga.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
