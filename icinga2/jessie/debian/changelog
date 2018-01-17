@@ -1,3 +1,9 @@
+icinga2 (2.8.1-1) icinga-jessie; urgency=medium
+
+  * Update to 2.8.1
+
+ -- Gunnar Beutner <gunnar.beutner@icinga.com>  Wed, 17 Jan 2018 10:45:19 +0000
+
 icinga2 (2.8.0-1) icinga-jessie; urgency=medium
 
   * Update to 2.8.0
