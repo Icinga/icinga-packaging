@@ -17,7 +17,7 @@
 # * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.             *
 # ******************************************************************************/
 
-%define revision 2
+%define revision 1
 
 # make sure that _rundir is working on older systems
 %if ! %{defined _rundir}
@@ -82,7 +82,7 @@
 
 Summary: Network monitoring application
 Name: icinga2
-Version: 2.8.0
+Version: 2.8.1
 Release: %{revision}%{?dist}
 License: GPL-2.0+
 URL: https://www.icinga.com/
@@ -747,6 +747,9 @@ fi
 %{_datadir}/nano/%{name}.nanorc
 
 %changelog
+* Wed Jan 17 2018 Gunnar Beutner <gunnar.beutner@icinga.com> 2.8.1-1
+- Update to 2.8.1
+
 * Fri Nov 24 2017 Markus Frosch <markus.frosch@icinga.com> 2.8.0-2
 - [SLES] Add systemd limits file
 - Add config(noreplace) for the systemd limits file
