@@ -1,23 +1,23 @@
 # Release Packages <a id="release-package"></a>
 
-#### TOC
+#### Contents
 
-* 1. [Requirements](02-Release-Packages.md#release-package-requirements)
-* 2. [Preparations](02-Release-Packages.md#release-package-preparations)
+1. [Requirements](02-Release-Packages.md#release-package-requirements)
+2. [Preparations](02-Release-Packages.md#release-package-preparations)
     * [macOS](02-Release-Packages.md#release-package-preparations-macos)
-* 3. [Checklist](02-Release-Packages.md#release-package-checklist)
+3. [Checklist](02-Release-Packages.md#release-package-checklist)
     * [Icinga 2](02-Release-Packages.md#release-package-checklist-icinga2)
     * [Icinga Web 2](02-Release-Packages.md#release-package-checklist-icingaweb2)
-* 4. [RPM Release](02-Release-Packages.md#release-package-rpm)
+4. [RPM Release](02-Release-Packages.md#release-package-rpm)
     * [Major](02-Release-Packages.md#release-package-rpm-major)
     * [Minor](02-Release-Packages.md#release-package-rpm-minor)
-* 5. [DEB Release](02-Release-Packages.md#release-package-deb)
+5. [DEB Release](02-Release-Packages.md#release-package-deb)
     * [Major](02-Release-Packages.md#release-package-deb-major)
     * [Minor](02-Release-Packages.md#release-package-deb-minor)
-* 6. [Build Release Packages](02-Release-Packages.md#release-package-build)
+6. [Build Release Packages](02-Release-Packages.md#release-package-build)
     * [Publish Release Packages](02-Release-Packages.md#release-package-build-publish)
     * [Windows Packages](02-Release-Packages.md#release-package-build-windows)
-* 7. [Hints](02-Release-Packages.md#release-package-hints)
+7. [Hints](02-Release-Packages.md#release-package-hints)
 
 ## Requirements <a id="release-package-requirements"></a>
 
