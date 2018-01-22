@@ -1,5 +1,6 @@
 application/locale               usr/share/icingaweb2/application
 
+modules/migrate                  usr/share/icingaweb2/modules
 modules/setup                    usr/share/icingaweb2/modules
 modules/test                     usr/share/icingaweb2/modules
 modules/translation              usr/share/icingaweb2/modules
