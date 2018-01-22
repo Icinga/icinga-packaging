@@ -1,3 +1,9 @@
+icingaweb2 (2.5.1-1) icinga-stretch; urgency=medium
+
+  * Update to 2.5.1
+
+ -- Markus Frosch <markus.frosch@icinga.com>  Mon, 22 Jan 2018 14:33:08 +0100
+
 icingaweb2 (2.5.0-1) icinga-stretch; urgency=medium
 
   * Update to 2.5.0
