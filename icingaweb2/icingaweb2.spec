@@ -1,9 +1,9 @@
 # Icinga Web 2 | (c) 2013-2017 Icinga Development Team | GPLv2+
 
-%define revision 2
+%define revision 1
 
 Name:           icingaweb2
-Version:        2.5.0
+Version:        2.5.1
 Release:        %{revision}%{?dist}
 Summary:        Icinga Web 2
 Group:          Applications/System
@@ -414,6 +414,10 @@ fi
 %{basedir}/library/vendor/Zend
 
 %changelog
+* Mon Jan 22 2018 Markus Frosch <markus.frosch@icinga.com> 2.5.1-1
+- Update to 2.5.1
+- Remove FPM patches
+
 * Wed Nov 29 2017 Eric Lippmann <eric.lippmann@icinga.com> 2.5.0-2
 - FPM: Add patch to support both Apache >= 2.4 and Apache < 2.4
 
