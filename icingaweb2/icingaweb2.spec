@@ -234,8 +234,6 @@ Icinga Web 2's fork of Zend Framework 1
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 %if 0%{?use_selinux}
 mkdir selinux
 cp -p packages/selinux/icingaweb2.{fc,if,te} selinux
