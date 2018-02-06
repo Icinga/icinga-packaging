@@ -1,6 +1,36 @@
 # Icinga Packaging
 
-This repository holds the required build scripts to create packages for packages.icinga.com
+![Icinga Logo](https://www.icinga.com/wp-content/uploads/2014/06/icinga_logo.png)
+
+#### Table of Contents
+
+1. [About](#about)
+2. [Packages](#packages)
+3. [Documentation](#documentation)
+4. [Contributing](#contributing)
+5. [License](#license)
+
+## About
+
+This repository is the main issue tracker and support channel for [packages.icinga.com].
+
+All packages build for the Icinga repository have their own packaging repository for RPM and Debian/Ubuntu builds.
+
+If you are uncertain where your issue/request belongs to, [open an issue here](https://github.com/Icinga/icinga-packaging/issues/new).
+
+> **Note:**
+> Previously this repository contained all packaging within branches.
+> This has been discontinued as of 2018-02-06. Please see the individual
+> repositories below.
+
+## Packages
+
+Package            | RPM           | Debian/Ubuntu
+-------------------|---------------|--------------
+icinga2            | [rpm-icinga2] | [deb-icinga2]
+icinga2-templates  | [rpm-icinga2-templates] | [deb-icinga2-templates]
+icingaweb2         | [rpm-icingaweb2] | [deb-icingaweb2]
+icinga-rpm-release | [rpm-icinga-rpm-release] | -
 
 ## Documentation
 
@@ -9,58 +39,21 @@ Documentation for release packages and more can be found in the [doc](doc/) dire
 * [Introduction into RPM/Deb packages](doc/01-Introduction.md)
 * [Build release packages](doc/02-Release-Packages.md)
 
-## Branches
-
-### Snapshot Packages
-
-* Debian/Ubuntu: [deb/snapshot](https://github.com/Icinga/icinga-packaging/tree/deb/snapshot)
-* RedHat/Fedora/SUSE: [rpm/snapshot](https://github.com/Icinga/icinga-packaging/tree/rpm/snapshot)
-
-### Release Packages
-
-* Debian/Ubuntu: [deb/release](https://github.com/Icinga/icinga-packaging/tree/deb/release)
-* RedHat/Fedora/SUSE: [rpm/release](https://github.com/Icinga/icinga-packaging/tree/rpm/release)
-
-
 ## Contributing
 
-Fork this repository on GitHub. Checkout the snapshot branches and build your PR based on that.
-
-Example for RPM packages:
-
-```
-git checkout rpm/snapshot
-git checkout -b fix/rpm-lint
-
-Do your work, test, commit
-
-git commit -av -m "Fix RPMlint errors"
-git push -u origin fix/rpm-lint
-
-hub pull-request -b rpm/snapshot
-```
-
-Issues and problems should be discussed in new issues.
+Feel free to contribute to our packaging work, see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## License
 
-Please see the respective `*.spec` file, or the contents of `debian/copyright` for
-author and license information about every package contained here.
+Icinga software and the Icinga documentation are licensed under the terms of the GNU
+General Public License Version 2, you will find a copy of this license in the
+COPYING file included in the source package.
 
-    All additional scripts are licensed under GPL-2.0+ and
-
-    Copyright (c) 2018 Icinga Development Team <info@icinga.com>
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with this program; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+[packages.icinga.com]: https://packages.icinga.com
+[rpm-icinga2]: https://github.com/Icinga/rpm-icinga2
+[deb-icinga2]: https://github.com/Icinga/deb-icinga2
+[rpm-icinga2-templates]: https://github.com/Icinga/rpm-icinga2-templates
+[deb-icinga2-templates]: https://github.com/Icinga/deb-icinga2-templates
+[rpm-icingaweb2]: https://github.com/Icinga/rpm-icingaweb2
+[deb-icingaweb2]: https://github.com/Icinga/deb-icingaweb2
+[rpm-icinga-rpm-release]: https://github.com/Icinga/rpm-icinga-rpm-release
