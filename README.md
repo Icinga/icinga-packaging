@@ -38,6 +38,7 @@ Documentation for release packages and more can be found in the [doc](doc/) dire
 
 * [Introduction into RPM/Deb packages](doc/01-Introduction.md)
 * [Build release packages](doc/02-Release-Packages.md)
+* [Dependencies by OS](doc/03-Dependencies.md)
 
 ## Contributing
 
