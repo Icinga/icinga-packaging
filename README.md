@@ -10,7 +10,6 @@ Icinga Packaging
 
 - [About](#about)
 - [Packages and Sources](#packages-and-sources)
-  - [Libraries](#libraries)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
@@ -39,13 +38,9 @@ icinga2            | [rpm-icinga2] [deb-icinga2] [raspbian-icinga2]
 icingaweb2         | [rpm-icingaweb2] [deb-icingaweb2] [raspbian-icingaweb2]
 icinga-rpm-release | [rpm-icinga-rpm-release]
 
-### Libraries
+Also some libraries are built a fulfill requirements, especially on older OS releases:
 
-Also some libraries are built a fulfill requirements, especially on older OS releases.
-
-Package | Description                  | Repositories
---------|------------------------------|----------------------------------------
-boost   | Icinga 2 needs boost >= 1.66 | [redhat-boost] [suse-boost] [deb-boost]
+* [boost](doc/packages-boost.md)
 
 ## Documentation
 
