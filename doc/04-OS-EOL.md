@@ -11,6 +11,7 @@ Ubuntu   | 14.04 trusty | 2019-04
 Ubuntu   | 16.04 xenial | 2021-04
 Ubuntu   | 18.04 bionic | 2023-04
 Ubuntu   | 18.10 cosmic | 2019-07
+Ubuntu   | 19.04 disco  | 2020-01
 RHEL     | 6            | 2020-11-30
 RHEL     | 7            | 2024-06-30
 Fedora   | 28           | (1 month after Fedora 30)
