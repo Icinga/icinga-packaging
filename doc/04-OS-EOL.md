@@ -1,6 +1,6 @@
 # OS EOL dates <a id="os-eol-dates"></a>
 
-[The officially supported OSes](https://icinga.com/support/details/)'
+[The officially supported OSes](https://icinga.com/support/support-details/)
 end-of-life dates:
 
 OS       | Version      | Supported until
@@ -14,8 +14,9 @@ Ubuntu   | 18.10 cosmic | 2019-07
 Ubuntu   | 19.04 disco  | 2020-01
 RHEL     | 6            | 2020-11-30
 RHEL     | 7            | 2024-06-30
-Fedora   | 28           | (1 month after Fedora 30)
+Fedora   | 28           | 2019-05-31
 Fedora   | 29           | (1 month after Fedora 31)
+Fedora   | 30           | (1 month after Fedora 32)
 SLES     | 11.4         | 2019-03-31
 SLES     | 12.3         | 2019-06-30
 SLES     | 12.4         | (4 months after 12.5)
