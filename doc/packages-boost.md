@@ -16,6 +16,7 @@ Packages provided from Icinga are built with the following sources:
 * [suse-boost](https://git.icinga.com/packaging/suse-boost) for SLES and openSUSE
 * [redhat-boost](https://git.icinga.com/packaging/redhat-boost) for RHEL and compatible
 * [deb-boost](https://git.icinga.com/packaging/deb-boost) for Debian and Ubuntu
+* [raspbian-boost](https://git.icinga.com/packaging/raspbian-boost) for Raspbian on Raspberry Pi
 
 ## Boost Package Distribution
 
