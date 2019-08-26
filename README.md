@@ -50,6 +50,27 @@ Package       | Repositories
 [incubator]   | [RPM][rpm-icingaweb2-module-incubator] [Debian/Ubuntu][deb-icingaweb2-module-incubator]
 [reactbundle] | [RPM][rpm-icingaweb2-module-reactbundle] [Debian/Ubuntu][deb-icingaweb2-module-reactbundle]
 
+Upcoming packages for modules:
+
+* audit
+* businessprocess
+* cube
+* elasticsearch
+* fileshipper
+* generictts
+* graphite
+* nagvis
+* pnp
+* reporting
+  - pdfexport
+  - idoreports
+* vspheredb
+* x509
+* (for director)
+  - aws
+  - puppetdb
+  - vsphere
+
 ### Other
 
 Also some libraries are built a fulfill requirements, especially on older OS releases:
