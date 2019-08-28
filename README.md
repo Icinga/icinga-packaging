@@ -40,15 +40,15 @@ Package      | RPM | Debian/Ubuntu | Raspbian | Windows
 -------------|-----|---------------|----------|--------
 [icinga2]    | <!-- PACKAGE BADGES: icinga2 rpm,deb,raspbian,windows --> [![rpm](https://git.icinga.com/packaging/rpm-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icinga2) | [![deb](https://git.icinga.com/packaging/deb-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icinga2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icinga2) | [![windows](https://git.icinga.com/packaging/windows-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/windows-icinga2) | 
 [icingaweb2] | <!-- PACKAGE BADGES: icingaweb2 rpm,deb,raspbian --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icingaweb2) | 
+[icingaweb2-module-director] | <!-- PACKAGE BADGES: icingaweb2-module-director rpm,deb --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-director) | 
 
 ### Icinga Web Modules
 
-<!-- PACKAGES: director businessprocess cube | prefix=icingaweb2-module- -->
+<!-- PACKAGES: businessprocess cube | prefix=icingaweb2-module- -->
 Package | RPM | Debian/Ubuntu
 --------|-----|--------------
 [icingaweb2-module-businessprocess](https://github.com/Icinga/icingaweb2-module-businessprocess) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess)
 [icingaweb2-module-cube](https://github.com/Icinga/icingaweb2-module-cube) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-cube)
-[icingaweb2-module-director](https://github.com/Icinga/icingaweb2-module-director) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-director)
 <!-- END PACKAGES -->
 
 These modules are mainly add-ons to Icinga Director:
@@ -114,12 +114,7 @@ COPYING file included in the source package.
 
 [icinga2]: https://github.com/Icinga/icinga2
 [icingaweb2]: https://github.com/Icinga/icingaweb2
-
-[rpm-icinga2]: https://git.icinga.com/packaging/rpm-icinga2
-[deb-icinga2]: https://git.icinga.com/packaging/deb-icinga2
-[windows-icinga2]: https://git.icinga.com/packaging/windows-icinga2
-[rpm-icingaweb2]: https://git.icinga.com/packaging/rpm-icingaweb2
-[deb-icingaweb2]: https://git.icinga.com/packaging/deb-icingaweb2
+[icingaweb2-module-director]: https://github.com/Icinga/icingaweb2-module-director
 
 [rpm-icinga-rpm-release]: https://git.icinga.com/packaging/rpm-icinga-rpm-release
 
