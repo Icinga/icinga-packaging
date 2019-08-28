@@ -34,12 +34,12 @@ All public packages are built from GIT repositories in our [Icinga GitLab packag
 
 Package sources are split into several repositories, based on OS, support or update behavior.
 
-### Products
+### Main Products
 
-Package      | Repositories
--------------|--------------------------------------------------------
-[icinga2]    | [RPM][rpm-icinga2] - [Debian/Ubuntu][deb-icinga2] - [Raspbian][raspbian-icinga2] - [Windows][windows-icinga2]
-[icingaweb2] | [RPM][rpm-icingaweb2] - [Debian/Ubuntu][deb-icingaweb2] - [Raspbian][raspbian-icingaweb2]
+Package      | RPM | Debian/Ubuntu | Raspbian | Windows
+-------------|-----|---------------|----------|--------
+[icinga2]    | <!-- PACKAGE BADGES: icinga2 rpm,deb,raspbian,windows --> [![rpm](https://git.icinga.com/packaging/rpm-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icinga2) | [![deb](https://git.icinga.com/packaging/deb-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icinga2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icinga2) | [![windows](https://git.icinga.com/packaging/windows-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/windows-icinga2) | 
+[icingaweb2] | <!-- PACKAGE BADGES: icingaweb2 rpm,deb,raspbian --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icingaweb2) | 
 
 ### Icinga Web Modules
 

@@ -5,13 +5,27 @@ import re
 README_FILE = 'README.md'
 
 PACKAGES_PATTERN = r"<!\-\-\s*PACKAGES:\s*(.*?)\s*\-\->(.*?)<!\-\-\s*END PACKAGES\s*\-\->\s*\n"
+PACKAGES_BADGES_PATTERN = r"<!\-\-\s*PACKAGE BADGES:\s*(\S+)\s+(\S+)\s*\-\->.*"
+
+BASEURL = "https://git.icinga.com/packaging"
+
+def build_badge(name, variant):
+    project = variant + "-" + name
+    return "[![%s](%s/%s/badges/master/pipeline.svg?style=flat-square)](%s/%s)" % (
+        variant, BASEURL, project, BASEURL, project)
+
+def render_badges(name, variants):
+    text = "<!-- PACKAGE BADGES: %s %s --> " % (name, ",".join(variants))
+
+    for variant in variants:
+        text += build_badge(name, variant) + " | "
+
+    return text
 
 def render_packages(config,
                     pkgs=[],
                     prefix='',
                     upstream='https://github.com/Icinga/%s',
-                    rpm='https://git.icinga.com/packaging/rpm-%s',
-                    deb='https://git.icinga.com/packaging/deb-%s',
                     sorted=True):
     text = "<!-- PACKAGES: %s -->\n" % (config)
 
@@ -26,9 +40,11 @@ def render_packages(config,
             package = prefix + package
 
         text += ("[%s](" + upstream + ") | ") % (package, package)
-        text += ("[![rpm](" + rpm + "/badges/master/pipeline.svg?style=flat-square)](" + rpm + ")") % (package, package)
+        #text += ("[![rpm](" + rpm + "/badges/master/pipeline.svg?style=flat-square)](" + rpm + ")") % (package, package)
+        text += build_badge(package, "rpm")
         text += " | "
-        text += ("[![deb](" + deb + "/badges/master/pipeline.svg?style=flat-square)](" + deb + ")") % (package, package)
+        #text += ("[![deb](" + deb + "/badges/master/pipeline.svg?style=flat-square)](" + deb + ")") % (package, package)
+        text += build_badge(package, "deb")
         text += "\n"
 
     text += "<!-- END PACKAGES -->\n\n"
@@ -58,6 +74,13 @@ def main():
         result = render_packages(**config)
 
         content = re.sub(re.escape(match.group(0)), result, content, re.DOTALL)
+
+    for match in re.finditer(PACKAGES_BADGES_PATTERN, content):
+        name = match.group(1)
+        variants = match.group(2).split(",")
+        result = render_badges(name, variants)
+
+        content = re.sub(re.escape(match.group(0)), result, content)
 
     with open(README_FILE, 'w') as _f:
         _f.write(content)
