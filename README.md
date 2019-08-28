@@ -38,23 +38,40 @@ Package sources are split into several repositories, based on OS, support or upd
 
 Package      | Repositories
 -------------|--------------------------------------------------------
-[icinga2]    | [RPM][rpm-icinga2] [Debian/Ubuntu][deb-icinga2] [Raspbian][raspbian-icinga2] [Windows][windows-icinga2]
-[icingaweb2] | [RPM][rpm-icingaweb2] [Debian/Ubuntu][deb-icingaweb2] [Raspbian][raspbian-icingaweb2]
+[icinga2]    | [RPM][rpm-icinga2] - [Debian/Ubuntu][deb-icinga2] - [Raspbian][raspbian-icinga2] - [Windows][windows-icinga2]
+[icingaweb2] | [RPM][rpm-icingaweb2] - [Debian/Ubuntu][deb-icingaweb2] - [Raspbian][raspbian-icingaweb2]
 
 ### Icinga Web Modules
 
-Package       | Repositories
---------------|--------------------------------------------------------------------------------------------
-[director]    | [RPM][rpm-icingaweb2-module-director] [Debian/Ubuntu][deb-icingaweb2-module-director]
-[ipl]         | [RPM][rpm-icingaweb2-module-ipl] [Debian/Ubuntu][deb-icingaweb2-module-ipl]
-[incubator]   | [RPM][rpm-icingaweb2-module-incubator] [Debian/Ubuntu][deb-icingaweb2-module-incubator]
-[reactbundle] | [RPM][rpm-icingaweb2-module-reactbundle] [Debian/Ubuntu][deb-icingaweb2-module-reactbundle]
+<!-- PACKAGES: director businessprocess cube | prefix=icingaweb2-module- -->
+Package | Repositories
+--------|-------------
+[icingaweb2-module-businessprocess](https://github.com/Icinga/icingaweb2-module-businessprocess) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess)
+[icingaweb2-module-cube](https://github.com/Icinga/icingaweb2-module-cube) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-cube)
+[icingaweb2-module-director](https://github.com/Icinga/icingaweb2-module-director) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-director)
+<!-- END PACKAGES -->
+
+These modules are mainly add-ons to Icinga Director:
+
+<!-- PACKAGES: fileshipper | prefix=icingaweb2-module- -->
+Package | Repositories
+--------|-------------
+[icingaweb2-module-fileshipper](https://github.com/Icinga/icingaweb2-module-fileshipper) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper)
+<!-- END PACKAGES -->
+
+Some modules provide libraries and no direct functionality:
+
+<!-- PACKAGES: ipl incubator reactbundle | prefix=icingaweb2-module- -->
+Package | Repositories
+--------|-------------
+[icingaweb2-module-incubator](https://github.com/Icinga/icingaweb2-module-incubator) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator)
+[icingaweb2-module-ipl](https://github.com/Icinga/icingaweb2-module-ipl) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl)
+[icingaweb2-module-reactbundle](https://github.com/Icinga/icingaweb2-module-reactbundle) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle)
+<!-- END PACKAGES -->
 
 Upcoming packages for modules:
 
 * audit
-* businessprocess
-* cube
 * elasticsearch
 * fileshipper
 * generictts
@@ -103,22 +120,6 @@ COPYING file included in the source package.
 [windows-icinga2]: https://git.icinga.com/packaging/windows-icinga2
 [rpm-icingaweb2]: https://git.icinga.com/packaging/rpm-icingaweb2
 [deb-icingaweb2]: https://git.icinga.com/packaging/deb-icingaweb2
-
-[director]: https://github.com/Icinga/icingaweb2-module-director
-[deb-icingaweb2-module-director]: https://git.icinga.com/packaging/deb-icingaweb2-module-director
-[rpm-icingaweb2-module-director]: https://git.icinga.com/packaging/rpm-icingaweb2-module-director
-
-[ipl]: https://github.com/Icinga/icingaweb2-module-ipl
-[deb-icingaweb2-module-ipl]: https://git.icinga.com/packaging/deb-icingaweb2-module-ipl
-[rpm-icingaweb2-module-ipl]: https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl
-
-[incubator]: https://github.com/Icinga/icingaweb2-module-incubator
-[deb-icingaweb2-module-incubator]: https://git.icinga.com/packaging/deb-icingaweb2-module-incubator
-[rpm-icingaweb2-module-incubator]: https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator
-
-[reactbundle]: https://github.com/Icinga/icingaweb2-module-reactbundle
-[deb-icingaweb2-module-reactbundle]: https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle
-[rpm-icingaweb2-module-reactbundle]: https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle
 
 [rpm-icinga-rpm-release]: https://git.icinga.com/packaging/rpm-icinga-rpm-release
 
