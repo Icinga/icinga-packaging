@@ -15,8 +15,8 @@ def render_packages(config,
                     sorted=True):
     text = "<!-- PACKAGES: %s -->\n" % (config)
 
-    text += "Package | Repositories\n"
-    text += "--------|-------------\n"
+    text += "Package | RPM | Debian/Ubuntu\n"
+    text += "--------|-----|--------------\n"
 
     if sorted:
         pkgs.sort()
@@ -26,8 +26,9 @@ def render_packages(config,
             package = prefix + package
 
         text += ("[%s](" + upstream + ") | ") % (package, package)
-        text += ("[RPM](" + rpm + ")") % (package)
-        text += (" - [Debian/Ubuntu](" + deb + ")") % (package)
+        text += ("[![rpm](" + rpm + "/badges/master/pipeline.svg?style=flat-square)](" + rpm + ")") % (package, package)
+        text += " | "
+        text += ("[![deb](" + deb + "/badges/master/pipeline.svg?style=flat-square)](" + deb + ")") % (package, package)
         text += "\n"
 
     text += "<!-- END PACKAGES -->\n\n"

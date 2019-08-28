@@ -44,29 +44,29 @@ Package      | Repositories
 ### Icinga Web Modules
 
 <!-- PACKAGES: director businessprocess cube | prefix=icingaweb2-module- -->
-Package | Repositories
---------|-------------
-[icingaweb2-module-businessprocess](https://github.com/Icinga/icingaweb2-module-businessprocess) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess)
-[icingaweb2-module-cube](https://github.com/Icinga/icingaweb2-module-cube) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-cube)
-[icingaweb2-module-director](https://github.com/Icinga/icingaweb2-module-director) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-director)
+Package | RPM | Debian/Ubuntu
+--------|-----|--------------
+[icingaweb2-module-businessprocess](https://github.com/Icinga/icingaweb2-module-businessprocess) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess)
+[icingaweb2-module-cube](https://github.com/Icinga/icingaweb2-module-cube) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-cube)
+[icingaweb2-module-director](https://github.com/Icinga/icingaweb2-module-director) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-director)
 <!-- END PACKAGES -->
 
 These modules are mainly add-ons to Icinga Director:
 
 <!-- PACKAGES: fileshipper | prefix=icingaweb2-module- -->
-Package | Repositories
---------|-------------
-[icingaweb2-module-fileshipper](https://github.com/Icinga/icingaweb2-module-fileshipper) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper)
+Package | RPM | Debian/Ubuntu
+--------|-----|--------------
+[icingaweb2-module-fileshipper](https://github.com/Icinga/icingaweb2-module-fileshipper) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper)
 <!-- END PACKAGES -->
 
 Some modules provide libraries and no direct functionality:
 
 <!-- PACKAGES: ipl incubator reactbundle | prefix=icingaweb2-module- -->
-Package | Repositories
---------|-------------
-[icingaweb2-module-incubator](https://github.com/Icinga/icingaweb2-module-incubator) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator)
-[icingaweb2-module-ipl](https://github.com/Icinga/icingaweb2-module-ipl) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl)
-[icingaweb2-module-reactbundle](https://github.com/Icinga/icingaweb2-module-reactbundle) | [RPM](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle) - [Debian/Ubuntu](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle)
+Package | RPM | Debian/Ubuntu
+--------|-----|--------------
+[icingaweb2-module-incubator](https://github.com/Icinga/icingaweb2-module-incubator) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator)
+[icingaweb2-module-ipl](https://github.com/Icinga/icingaweb2-module-ipl) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl)
+[icingaweb2-module-reactbundle](https://github.com/Icinga/icingaweb2-module-reactbundle) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle)
 <!-- END PACKAGES -->
 
 Upcoming packages for modules:
