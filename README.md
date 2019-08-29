@@ -44,11 +44,15 @@ Package      | RPM | Debian/Ubuntu | Raspbian | Windows
 
 ### Icinga Web Modules
 
-<!-- PACKAGES: businessprocess cube | prefix=icingaweb2-module- -->
+<!-- PACKAGES: businessprocess cube audit generictts graphite elasticsearch | prefix=icingaweb2-module- -->
 Package | RPM | Debian/Ubuntu
 --------|-----|--------------
+[icingaweb2-module-audit](https://github.com/Icinga/icingaweb2-module-audit) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-audit/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-audit) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-audit/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-audit)
 [icingaweb2-module-businessprocess](https://github.com/Icinga/icingaweb2-module-businessprocess) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-businessprocess) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-businessprocess)
 [icingaweb2-module-cube](https://github.com/Icinga/icingaweb2-module-cube) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-cube) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-cube/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-cube)
+[icingaweb2-module-elasticsearch](https://github.com/Icinga/icingaweb2-module-elasticsearch) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-elasticsearch/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-elasticsearch) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-elasticsearch/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-elasticsearch)
+[icingaweb2-module-generictts](https://github.com/Icinga/icingaweb2-module-generictts) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-generictts/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-generictts) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-generictts/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-generictts)
+[icingaweb2-module-graphite](https://github.com/Icinga/icingaweb2-module-graphite) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-graphite/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-graphite) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-graphite/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-graphite)
 <!-- END PACKAGES -->
 
 These modules are mainly add-ons to Icinga Director:
@@ -71,11 +75,6 @@ Package | RPM | Debian/Ubuntu
 
 Upcoming packages for modules:
 
-* audit
-* elasticsearch
-* fileshipper
-* generictts
-* graphite
 * nagvis
 * pnp
 * reporting
