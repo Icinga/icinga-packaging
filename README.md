@@ -38,13 +38,17 @@ Package sources are split into several repositories, based on OS, support or upd
 
 Package      | RPM | Debian/Ubuntu | Raspbian | Windows
 -------------|-----|---------------|----------|--------
-[icinga2]    | <!-- PACKAGE BADGES: icinga2 rpm,deb,raspbian,windows --> [![rpm](https://git.icinga.com/packaging/rpm-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icinga2) | [![deb](https://git.icinga.com/packaging/deb-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icinga2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icinga2) | [![windows](https://git.icinga.com/packaging/windows-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/windows-icinga2) | 
-[icingaweb2] | <!-- PACKAGE BADGES: icingaweb2 rpm,deb,raspbian --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icingaweb2) | 
-[icingaweb2-module-director] | <!-- PACKAGE BADGES: icingaweb2-module-director rpm,deb --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-director) | 
+[icinga2]    | <!-- PACKAGE BADGES: icinga2 rpm,deb,raspbian,windows --> [![rpm](https://git.icinga.com/packaging/rpm-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icinga2) | [![deb](https://git.icinga.com/packaging/deb-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icinga2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icinga2) | [![windows](https://git.icinga.com/packaging/windows-icinga2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/windows-icinga2) |
+[icingaweb2] | <!-- PACKAGE BADGES: icingaweb2 rpm,deb,raspbian --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2) | [![raspbian](https://git.icinga.com/packaging/raspbian-icingaweb2/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/raspbian-icingaweb2) |
+[icingaweb2-module-director] | <!-- PACKAGE BADGES: icingaweb2-module-director rpm,deb --> [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-director) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-director/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-director) |
 
 ### Icinga Web Modules
 
-<!-- PACKAGES: businessprocess cube audit generictts graphite elasticsearch | prefix=icingaweb2-module- -->
+<!-- PACKAGES:
+  businessprocess cube audit generictts graphite elasticsearch nagvis pnp reporting idoreports pdfexport
+| prefix=icingaweb2-module- -->
+
+
 Package | RPM | Debian/Ubuntu
 --------|-----|--------------
 [icingaweb2-module-audit](https://github.com/Icinga/icingaweb2-module-audit) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-audit/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-audit) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-audit/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-audit)
@@ -53,6 +57,11 @@ Package | RPM | Debian/Ubuntu
 [icingaweb2-module-elasticsearch](https://github.com/Icinga/icingaweb2-module-elasticsearch) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-elasticsearch/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-elasticsearch) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-elasticsearch/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-elasticsearch)
 [icingaweb2-module-generictts](https://github.com/Icinga/icingaweb2-module-generictts) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-generictts/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-generictts) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-generictts/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-generictts)
 [icingaweb2-module-graphite](https://github.com/Icinga/icingaweb2-module-graphite) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-graphite/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-graphite) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-graphite/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-graphite)
+[icingaweb2-module-idoreports](https://github.com/Icinga/icingaweb2-module-idoreports) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-idoreports/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-idoreports) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-idoreports/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-idoreports)
+[icingaweb2-module-nagvis](https://github.com/Icinga/icingaweb2-module-nagvis) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-nagvis/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-nagvis) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-nagvis/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-nagvis)
+[icingaweb2-module-pdfexport](https://github.com/Icinga/icingaweb2-module-pdfexport) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-pdfexport/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-pdfexport) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-pdfexport/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-pdfexport)
+[icingaweb2-module-pnp](https://github.com/Icinga/icingaweb2-module-pnp) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-pnp/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-pnp) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-pnp/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-pnp)
+[icingaweb2-module-reporting](https://github.com/Icinga/icingaweb2-module-reporting) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-reporting/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-reporting) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-reporting/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-reporting)
 <!-- END PACKAGES -->
 
 These modules are mainly add-ons to Icinga Director:
@@ -75,11 +84,6 @@ Package | RPM | Debian/Ubuntu
 
 Upcoming packages for modules:
 
-* nagvis
-* pnp
-* reporting
-  - pdfexport
-  - idoreports
 * vspheredb
 * x509
 * (for director)

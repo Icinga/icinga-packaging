@@ -4,7 +4,7 @@ import re
 
 README_FILE = 'README.md'
 
-PACKAGES_PATTERN = r"<!\-\-\s*PACKAGES:\s*(.*?)\s*\-\->(.*?)<!\-\-\s*END PACKAGES\s*\-\->\s*\n"
+PACKAGES_PATTERN = r"<!\-\-\s*PACKAGES: ?(.*?)\s*\-\->(.*?)<!\-\-\s*END PACKAGES\s*\-\->\s*\n"
 PACKAGES_BADGES_PATTERN = r"<!\-\-\s*PACKAGE BADGES:\s*(\S+)\s+(\S+)\s*\-\->.*"
 
 BASEURL = "https://git.icinga.com/packaging"
@@ -27,7 +27,7 @@ def render_packages(config,
                     prefix='',
                     upstream='https://github.com/Icinga/%s',
                     sorted=True):
-    text = "<!-- PACKAGES: %s -->\n" % (config)
+    text = "<!-- PACKAGES:%s -->\n" % (config)
 
     text += "Package | RPM | Debian/Ubuntu\n"
     text += "--------|-----|--------------\n"
@@ -40,10 +40,8 @@ def render_packages(config,
             package = prefix + package
 
         text += ("[%s](" + upstream + ") | ") % (package, package)
-        #text += ("[![rpm](" + rpm + "/badges/master/pipeline.svg?style=flat-square)](" + rpm + ")") % (package, package)
         text += build_badge(package, "rpm")
         text += " | "
-        #text += ("[![deb](" + deb + "/badges/master/pipeline.svg?style=flat-square)](" + deb + ")") % (package, package)
         text += build_badge(package, "deb")
         text += "\n"
 
@@ -53,8 +51,8 @@ def render_packages(config,
 
 def parse_config(text):
     config = {}
-    (pkgs, options) = re.split(r"\s*\|\s*", text, 1)
-    config['pkgs'] = pkgs.strip().split(' ')
+    (pkgs, options) = re.split(r"\s*\|\s*", text.strip(), 1, re.DOTALL)
+    config['pkgs'] = re.split(r"[\s\r\n]*", pkgs.strip())
     for opt in re.split(r"\s+", options.strip()):
         match = re.match(r"^(\w+)=(.+)$", opt)
         if match and match.group(1) != 'pkgs':
@@ -68,7 +66,7 @@ def main():
         content = _f.read()
 
     for match in re.finditer(PACKAGES_PATTERN, content, re.DOTALL):
-        config_line = match.group(1).strip()
+        config_line = match.group(1)
         config = parse_config(config_line)
         config['config'] = config_line
         result = render_packages(**config)
