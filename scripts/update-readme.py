@@ -4,7 +4,7 @@ import re
 
 README_FILE = 'README.md'
 
-PACKAGES_PATTERN = r"<!\-\-\s*PACKAGES: ?(.*?)\s*\-\->(.*?)<!\-\-\s*END PACKAGES\s*\-\->\s*\n"
+PACKAGES_PATTERN = r"<!\-\-\s*PACKAGES:(.*?)\s*\-\->(.*?)<!\-\-\s*END PACKAGES\s*\-\->\s*\n"
 PACKAGES_BADGES_PATTERN = r"<!\-\-\s*PACKAGE BADGES:\s*(\S+)\s+(\S+)\s*\-\->.*"
 
 BASEURL = "https://git.icinga.com/packaging"
