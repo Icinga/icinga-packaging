@@ -45,7 +45,7 @@ Package      | RPM | Debian/Ubuntu | Raspbian | Windows
 ### Icinga Web Modules
 
 <!-- PACKAGES:
-  audit businessprocess cube generictts graphite elasticsearch nagvis pnp
+  audit businessprocess cube generictts graphite elasticsearch nagvis pnp x509 vspheredb
   reporting idoreports pdfexport
 | prefix=icingaweb2-module- -->
 Package | RPM | Debian/Ubuntu
@@ -61,34 +61,30 @@ Package | RPM | Debian/Ubuntu
 [icingaweb2-module-pdfexport](https://github.com/Icinga/icingaweb2-module-pdfexport) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-pdfexport/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-pdfexport) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-pdfexport/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-pdfexport)
 [icingaweb2-module-pnp](https://github.com/Icinga/icingaweb2-module-pnp) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-pnp/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-pnp) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-pnp/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-pnp)
 [icingaweb2-module-reporting](https://github.com/Icinga/icingaweb2-module-reporting) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-reporting/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-reporting) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-reporting/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-reporting)
+[icingaweb2-module-vspheredb](https://github.com/Icinga/icingaweb2-module-vspheredb) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-vspheredb/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-vspheredb) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-vspheredb/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-vspheredb)
+[icingaweb2-module-x509](https://github.com/Icinga/icingaweb2-module-x509) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-x509/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-x509) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-x509/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-x509)
 <!-- END PACKAGES -->
 
 These modules are mainly add-ons to Icinga Director:
 
-<!-- PACKAGES:fileshipper | prefix=icingaweb2-module- -->
+<!-- PACKAGES: aws fileshipper vsphere puppetdb | prefix=icingaweb2-module- -->
 Package | RPM | Debian/Ubuntu
 --------|-----|--------------
+[icingaweb2-module-aws](https://github.com/Icinga/icingaweb2-module-aws) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-aws/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-aws) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-aws/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-aws)
 [icingaweb2-module-fileshipper](https://github.com/Icinga/icingaweb2-module-fileshipper) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-fileshipper) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-fileshipper)
+[icingaweb2-module-puppetdb](https://github.com/Icinga/icingaweb2-module-puppetdb) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-puppetdb/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-puppetdb) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-puppetdb/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-puppetdb)
+[icingaweb2-module-vsphere](https://github.com/Icinga/icingaweb2-module-vsphere) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-vsphere/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-vsphere) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-vsphere/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-vsphere)
 <!-- END PACKAGES -->
 
 Some modules provide libraries and no direct functionality:
 
-<!-- PACKAGES:ipl incubator reactbundle | prefix=icingaweb2-module- -->
+<!-- PACKAGES: ipl incubator reactbundle | prefix=icingaweb2-module- -->
 Package | RPM | Debian/Ubuntu
 --------|-----|--------------
 [icingaweb2-module-incubator](https://github.com/Icinga/icingaweb2-module-incubator) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-incubator) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-incubator)
 [icingaweb2-module-ipl](https://github.com/Icinga/icingaweb2-module-ipl) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-ipl) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-ipl)
 [icingaweb2-module-reactbundle](https://github.com/Icinga/icingaweb2-module-reactbundle) | [![rpm](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/rpm-icingaweb2-module-reactbundle) | [![deb](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle/badges/master/pipeline.svg?style=flat-square)](https://git.icinga.com/packaging/deb-icingaweb2-module-reactbundle)
 <!-- END PACKAGES -->
-
-Upcoming packages for modules:
-
-* vspheredb
-* x509
-* (for director)
-  - aws
-  - puppetdb
-  - vsphere
 
 ### Other
 
@@ -119,13 +115,3 @@ COPYING file included in the source package.
 [icingaweb2-module-director]: https://github.com/Icinga/icingaweb2-module-director
 
 [rpm-icinga-rpm-release]: https://git.icinga.com/packaging/rpm-icinga-rpm-release
-
-[raspbian-icinga2]: https://git.icinga.com/packaging/raspbian-icinga2
-[raspbian-icingaweb2]: https://git.icinga.com/packaging/raspbian-icingaweb2
-
-[suse-boost]: https://git.icinga.com/packaging/suse-boost
-[redhat-boost]: https://git.icinga.com/packaging/redhat-boost
-[deb-boost]: https://git.icinga.com/packaging/deb-boost
-
-[rpm-icinga2-templates]: https://git.icinga.com/packaging/rpm-icinga2-templates
-[deb-icinga2-templates]: https://git.icinga.com/packaging/deb-icinga2-templates
