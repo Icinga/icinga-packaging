@@ -7,26 +7,31 @@ OS       | Version      | Supported until
 ---------|--------------|--------------------------
 Debian   | 8 jessie     | 2020-06-06
 Debian   | 9 stretch    | approx. 2022
-Ubuntu   | 14.04 trusty | 2019-04
 Ubuntu   | 16.04 xenial | 2021-04
 Ubuntu   | 18.04 bionic | 2023-04
-Ubuntu   | 18.10 cosmic | 2019-07
 Ubuntu   | 19.04 disco  | 2020-01
 RHEL     | 6            | 2020-11-30
 RHEL     | 7            | 2024-06-30
-Fedora   | 28           | 2019-05-31
 Fedora   | 29           | (1 month after Fedora 31)
 Fedora   | 30           | (1 month after Fedora 32)
-SLES     | 11.4         | 2019-03-31
-SLES     | 12.3         | 2019-06-30
 SLES     | 12.4         | (4 months after 12.5)
 SLES     | 12.X         | 2024-10-31
 SLES     | 15.0         | TBD
 SLES     | 15.X         | 2028-06-31
-openSUSE | 42.3         | 2019-06-30
 openSUSE | 15.0         | 2019-11-30
 Windows  | Server 2012  | 2023-10-10
 Windows  | Server 2016  | 2027-01-12
+
+## No longer supported
+
+OS       | Version      | Supported until
+---------|--------------|--------------------------
+Ubuntu   | 14.04 trusty | 2019-04
+Ubuntu   | 18.10 cosmic | 2019-07
+Fedora   | 28           | 2019-05-31
+SLES     | 11.4         | 2019-03-31
+SLES     | 12.3         | 2019-06-30
+openSUSE | 42.3         | 2019-06-30
 
 ## Supported Release Cycles
 
