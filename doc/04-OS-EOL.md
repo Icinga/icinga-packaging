@@ -10,19 +10,18 @@ Debian   | 9 stretch    | approx. 2022 (LTS)
 Debian   | 10 buster    | approx. 2024 (LTS)
 Ubuntu   | 16.04 xenial | 2021-04 (LTS)
 Ubuntu   | 18.04 bionic | 2023-04 (LTS)
-Ubuntu   | 19.04 disco  | 2020-01
+Ubuntu   | 19.10 eoan   | 2020-07
 RHEL     | 6            | 2020-11-30
 RHEL     | 7            | 2024-06-30
-RHEL     | 8 .          | approx. 2027
-Fedora   | 29           | (1 month after Fedora 31)
+RHEL     | 8            | approx. 2027
 Fedora   | 30           | (1 month after Fedora 32)
 Fedora   | 31           | (1 month after Fedora 33)
-SLES     | 12.4         | (6 months after 12.5 release)
+SLES     | 12.4         | 2020-06-30
+SLES     | 12.5         | (6 months after 12.6 release)
 SLES     | 12.X         | 2024-10-31
 SLES     | 15.0         | 2019-12-31
 SLES     | 15.1         | (6 months after 15.2 release)
 SLES     | 15.X         | 2028-06-31
-openSUSE | 15.0         | 2019-11-30
 openSUSE | 15.1         | 2020-11-30
 Windows  | Server 2012  | 2023-10-10
 Windows  | Server 2016  | 2027-01-12
