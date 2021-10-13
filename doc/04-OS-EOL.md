@@ -10,7 +10,7 @@ Debian   | 9 stretch    | approx. 2022 (LTS)
 Debian   | 10 buster    | approx. 2024 (LTS)
 Ubuntu   | 16.04 xenial | 2021-04 (LTS)
 Ubuntu   | 18.04 bionic | 2023-04 (LTS)
-Ubuntu   | 20.04 focal  | 2030-04 (LTS)
+Ubuntu   | 20.04 focal  | 2025-04 (LTS)
 Ubuntu   | 21.04 hirsut | 2022-01
 RHEL     | 6            | 2020-11-30
 RHEL     | 7            | 2024-06-30
