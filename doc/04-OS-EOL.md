@@ -37,7 +37,7 @@ Windows  | Server 2019  | approx. 2028
 
 OS                           | Type                   | Documentation
 -----------------------------|------------------------|---------------------------------------------------------------------------------------------------
-Debian                       | Full Support and LTS   | [wiki.debian.org](https://wiki.debian.org/DebianReleases#Production_Releases)
+Debian                       | LTS                    | [wiki.debian.org](https://wiki.debian.org/DebianReleases#Production_Releases)
 Ubuntu                       | Standard Support       | [wiki.ubuntu.com](https://wiki.ubuntu.com/Releases)
 RedHat Enterprise Linux      | Maintainance Support 2 | [access.redhat.com](https://access.redhat.com/support/policy/updates/errata#Life_Cycle_Dates)
 Fedora                       | Normal Maintenance     | [fedoraproject.org](https://fedoraproject.org/wiki/Fedora_Release_Life_Cycle#Maintenance_Schedule)
