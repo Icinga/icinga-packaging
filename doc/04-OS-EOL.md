@@ -35,15 +35,15 @@ Windows  | Server 2019  | approx. 2028
 
 ## Supported Release Cycles
 
-OS                           | Type                   | Documentation
------------------------------|------------------------|---------------------------------------------------------------------------------------------------
-Debian                       | Full Support and LTS   | [wiki.debian.org](https://wiki.debian.org/DebianReleases#Production_Releases)
-Ubuntu                       | LTS and Standard       | [wiki.ubuntu.com](https://wiki.ubuntu.com/Releases)
-RedHat Enterprise Linux      | Maintainance Support 2 | [access.redhat.com](https://access.redhat.com/support/policy/updates/errata#Life_Cycle_Dates)
-Fedora                       | Normal Maintenance     | [fedoraproject.org](https://fedoraproject.org/wiki/Fedora_Release_Life_Cycle#Maintenance_Schedule)
-SUSE Linux Enterprise Server | General Support        | [suse.com](https://www.suse.com/lifecycle/)
-openSUSE                     | Lifetime Support       | [opensuse.org](https://en.opensuse.org/Lifetime)
-Windows                      | Extended Support       | [support.microsoft.com](https://support.microsoft.com/en-us/lifecycle/search/1163)
+OS                           | Type                 | Documentation
+-----------------------------|----------------------|---------------------------------------------------------------------------------------------------
+Debian                       | LTS                  | [wiki.debian.org](https://wiki.debian.org/DebianReleases#Production_Releases)
+Ubuntu                       | Standard Support     | [wiki.ubuntu.com](https://wiki.ubuntu.com/Releases)
+RedHat Enterprise Linux      | Maintainance Support | [access.redhat.com](https://access.redhat.com/support/policy/updates/errata#Life_Cycle_Dates)
+Fedora                       | Normal Maintenance   | [fedoraproject.org](https://fedoraproject.org/wiki/Fedora_Release_Life_Cycle#Maintenance_Schedule)
+SUSE Linux Enterprise Server | General Support      | [suse.com](https://www.suse.com/lifecycle/)
+openSUSE                     | Lifetime Support     | [opensuse.org](https://en.opensuse.org/Lifetime)
+Windows                      | Extended Support     | [learn.microsoft.com](https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-release-info#windows-server-major-versions-by-servicing-option--)
 
 Explicitly not supported are:
 * [Ubuntu EMS](https://www.ubuntu.com/esm)
