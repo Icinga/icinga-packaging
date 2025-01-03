@@ -43,7 +43,7 @@ RedHat Enterprise Linux      | Maintainance Support | [access.redhat.com](https:
 Fedora                       | Normal Maintenance   | [fedoraproject.org](https://fedoraproject.org/wiki/Fedora_Release_Life_Cycle#Maintenance_Schedule)
 SUSE Linux Enterprise Server | General Support      | [suse.com](https://www.suse.com/lifecycle/)
 openSUSE                     | Lifetime Support     | [opensuse.org](https://en.opensuse.org/Lifetime)
-Windows                      | Extended Support     | [support.microsoft.com](https://support.microsoft.com/en-us/lifecycle/search/1163)
+Windows                      | Extended Support     | [learn.microsoft.com](https://learn.microsoft.com/en-us/windows-server/get-started/windows-server-release-info#windows-server-major-versions-by-servicing-option--)
 
 Explicitly not supported are:
 * [Ubuntu EMS](https://www.ubuntu.com/esm)
